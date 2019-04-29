@@ -7,7 +7,6 @@ package loan;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import persons.Borrower;
 import persons.Staff;
 
@@ -16,17 +15,23 @@ import persons.Staff;
  * @author annalangstrom
  */
 public class Loan {
+    
+    private int loanNo;
     private Borrower borrower;
     private Staff staff;
-    private LocalDate startDate = LocalDate.now();
+    private LocalDate startDate;
     private ArrayList<LoanItem> loanItems;
 
-    public Loan(Borrower borrower, Staff staff, ArrayList<LoanItem> loanItems) {
+    public Loan(int loanNo, Borrower borrower, Staff staff, ArrayList<LoanItem> loanItems) {
+        this.loanNo = loanNo;
         this.borrower = borrower;
         this.staff = staff;
+        this.startDate = LocalDate.now();
         this.loanItems = loanItems;
     }
 
+    public Loan(Borrower borrower){}
+    
     public Borrower getBorrower() {
         return borrower;
     }
@@ -59,4 +64,11 @@ public class Loan {
         this.loanItems = loanItems;
     }
     
+    public void addLoanItem(int barcode, int loanPeriod){}
+    
+    public ArrayList<Borrower> getLateBorrowers(){
+        ArrayList<Borrower> borrowers = new ArrayList<>();
+        
+        return borrowers;
+    }
 }

@@ -6,6 +6,9 @@
 package loan;
 
 import item.Copy;
+import item.Item;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -13,14 +16,15 @@ import java.util.Date;
  * @author annalangstrom
  */
 public class LoanItem {
+    
+    private int loanItemNo;
     private Copy copy;
     private Date lastReturnDate;
     private Date actualReturnDate = null;
 
-    public LoanItem(Copy copy, Date lastReturnDate) {
+    public LoanItem(int loanItemNo, Copy copy, Date lastReturnDate) {
+        this.loanItemNo = loanItemNo;
         this.copy = copy;
-        
-        
     }
 
     public Copy getCopy() {
@@ -50,5 +54,14 @@ public class LoanItem {
     public LoanItem setReturned(Copy copy){
         return this;
     }
-            
+     
+    public ArrayList<Item> getLateItems(){
+        ArrayList<Item> items = new ArrayList<>();
+        
+        return items;
+    }
+
+    public void searchAvailableCopies(Copy copy){
+        //sätt returtyp Copy
+    }
 }
