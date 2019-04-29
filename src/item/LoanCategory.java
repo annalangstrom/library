@@ -10,12 +10,19 @@ package item;
  * @author annalangstrom
  */
 public class LoanCategory {
+    
+    private int LoanCategoryNo;
     private LCname name;
     private int loanPeriod;
 
-    public LoanCategory(LCname name, int loanPeriod) {
+    public LoanCategory(int LoanCategoryNo, LCname name, int loanPeriod) {
+        this.LoanCategoryNo = LoanCategoryNo;
         this.name = name;
         this.loanPeriod = loanPeriod;
+    }
+    
+    public LoanCategory(int loanCategoryNo){
+        this.LoanCategoryNo = loanCategoryNo;
     }
 
     public LCname getName() {
@@ -34,5 +41,5 @@ public class LoanCategory {
         this.loanPeriod = loanPeriod;
     }
     
-    
+    public void setDBloanPeriod(){}
 }

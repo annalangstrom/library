@@ -5,7 +5,6 @@
  */
 package item;
 
-import item.itemCategories.Book;
 import java.time.Year;
 import java.util.ArrayList;
 
@@ -100,4 +99,5 @@ public abstract class Item {
         return book;
     }
     
+    public void setDBtitle(){}
 }

@@ -68,5 +68,12 @@ public class Copy {
         this.condition = condition;
     }
     
+    public void searchCopy(Item item){
+        //sätt returtyp Copy
+    }
+    
+    public void setDBitem(){}
+    
+    public void setDBloanCategory(){}
     
 }
