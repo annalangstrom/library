@@ -1,0 +1,17 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package item;
+
+/**
+ *
+ * @author annalangstrom
+ */
+public enum LCname {
+    MOVIE, 
+    COURSE_LITTERATURE, 
+    OTHER_LITTERATURE, 
+    REFERENCE_LITTERATUR
+}
