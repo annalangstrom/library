@@ -9,10 +9,9 @@ import item.AuthorArtist;
 import item.Copy;
 import item.*;
 import item.LoanCategory;
-import item.itemCategories.Book;
+import item.Book;
 import java.time.Year;
 import java.util.ArrayList;
-import loan.LoanItem;
 
 /**
  *
@@ -29,7 +28,7 @@ public class Library {
         ArrayList<String> genres = new ArrayList<>();
         ArrayList<AuthorArtist> aas = new ArrayList<>();
         Book book1 = new Book("Hej", "hej", "hallå", Year.now(), "hortlax", keywords, genres, aas);
-        LoanCategory lc = new LoanCategory(LCname.MOVIE, 5);
+        LoanCategory lc = new LoanCategory(1,LCname.MOVIE, 5);
         Copy copy1 = new Copy(1, book1, lc, LoanStatus.BORROWED, "fine");
         
         Copy copy2 = new Copy(1);
