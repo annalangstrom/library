@@ -5,17 +5,17 @@
  */
 package controlClasses;
 
-import item.*;
-import loan.LoanItem;
+import item.Item;
+import java.util.Date;
+import persons.*;
 
 /**
  *
  * @author annalangstrom
  */
-public class HanteraAterlamning {
+public class CreateReservation {
     
-    public void cancelLoan(int barcode){
-        Copy copy1 = new Copy(1);
+    public void createNewReservation(Borrower borrower, Item item, Staff staff, Date date){
+        
     }
-    
 }
