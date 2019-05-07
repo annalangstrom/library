@@ -27,7 +27,7 @@ public class HomePageGui extends javax.swing.JFrame {
    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
    private void initComponents() {
 
-      jLabel1 = new javax.swing.JLabel();
+      jLabelTheLibrary = new javax.swing.JLabel();
       txtSearch = new javax.swing.JTextField();
       btnSearch = new javax.swing.JButton();
       btnSignIn = new javax.swing.JButton();
@@ -37,9 +37,10 @@ public class HomePageGui extends javax.swing.JFrame {
 
       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-      jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
-      jLabel1.setText("The Library");
+      jLabelTheLibrary.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
+      jLabelTheLibrary.setText("The Library");
 
+      txtSearch.setForeground(new java.awt.Color(102, 102, 102));
       txtSearch.setText("Search items...");
       txtSearch.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,19 +82,19 @@ public class HomePageGui extends javax.swing.JFrame {
                            .addComponent(btnReturnItem, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)))))
                .addGroup(layout.createSequentialGroup()
                   .addGap(226, 226, 226)
-                  .addComponent(jLabel1)))
+                  .addComponent(jLabelTheLibrary)))
             .addContainerGap(188, Short.MAX_VALUE))
       );
       layout.setVerticalGroup(
          layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
          .addGroup(layout.createSequentialGroup()
             .addGap(68, 68, 68)
-            .addComponent(jLabel1)
+            .addComponent(jLabelTheLibrary)
             .addGap(48, 48, 48)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                .addComponent(btnSignIn)
                .addComponent(btnLoanItem))
@@ -153,7 +154,7 @@ public class HomePageGui extends javax.swing.JFrame {
    private javax.swing.JButton btnReturnItem;
    private javax.swing.JButton btnSearch;
    private javax.swing.JButton btnSignIn;
-   private javax.swing.JLabel jLabel1;
+   private javax.swing.JLabel jLabelTheLibrary;
    private javax.swing.JTextField txtSearch;
    // End of variables declaration//GEN-END:variables
 }
