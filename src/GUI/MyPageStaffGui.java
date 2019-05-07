@@ -27,21 +27,182 @@ public class MyPageStaffGui extends javax.swing.JFrame {
    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
    private void initComponents() {
 
+      jScrollPane1 = new javax.swing.JScrollPane();
+      txtAreaMyPersonalData = new javax.swing.JTextArea();
+      btnAddNewItem = new javax.swing.JButton();
+      btnSignOut = new javax.swing.JButton();
+      jLabel1 = new javax.swing.JLabel();
+      jLabel2 = new javax.swing.JLabel();
+      btnHomePage = new javax.swing.JButton();
+      btnUpdatePassword = new javax.swing.JButton();
+      btnUpdateItem = new javax.swing.JButton();
+      btnAddLoanToBorrower = new javax.swing.JButton();
+      btnAddReservationToBorrower = new javax.swing.JButton();
+      btnRemoveReservationFromBorrower = new javax.swing.JButton();
+
       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+      txtAreaMyPersonalData.setColumns(20);
+      txtAreaMyPersonalData.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+      txtAreaMyPersonalData.setRows(11);
+      txtAreaMyPersonalData.setTabSize(5);
+      txtAreaMyPersonalData.setText("Borrower ID:\t987654\nCategory:\tLibrarian\nFirst name:\tAgneta\nSurname:\tAndersson\nPassword:\t********");
+      jScrollPane1.setViewportView(txtAreaMyPersonalData);
+
+      btnAddNewItem.setText("Add new item");
+      btnAddNewItem.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnAddNewItemActionPerformed(evt);
+         }
+      });
+
+      btnSignOut.setText("Sign out");
+
+      jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+      jLabel1.setText("My staff page");
+
+      jLabel2.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+      jLabel2.setText("My Personal Data");
+
+      btnHomePage.setText("Home Page");
+      btnHomePage.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnHomePageActionPerformed(evt);
+         }
+      });
+
+      btnUpdatePassword.setText("Update password");
+      btnUpdatePassword.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnUpdatePasswordActionPerformed(evt);
+         }
+      });
+
+      btnUpdateItem.setText("Update item");
+      btnUpdateItem.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnUpdateItemActionPerformed(evt);
+         }
+      });
+
+      btnAddLoanToBorrower.setText("Add loan to borrower");
+      btnAddLoanToBorrower.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnAddLoanToBorrowerActionPerformed(evt);
+         }
+      });
+
+      btnAddReservationToBorrower.setText("Add Reservation To Borrower");
+      btnAddReservationToBorrower.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnAddReservationToBorrowerActionPerformed(evt);
+         }
+      });
+
+      btnRemoveReservationFromBorrower.setText("Remove reservation from borrower");
+      btnRemoveReservationFromBorrower.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnRemoveReservationFromBorrowerActionPerformed(evt);
+         }
+      });
 
       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
       getContentPane().setLayout(layout);
       layout.setHorizontalGroup(
          layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGap(0, 400, Short.MAX_VALUE)
+         .addGroup(layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(btnHomePage, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(68, 68, 68)
+            .addComponent(jLabel1)
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+         .addGroup(layout.createSequentialGroup()
+            .addGap(24, 24, 24)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+               .addComponent(btnSignOut, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(jLabel2)
+               .addGroup(layout.createSequentialGroup()
+                  .addGap(19, 19, 19)
+                  .addComponent(btnUpdatePassword, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+               .addComponent(btnRemoveReservationFromBorrower, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+               .addComponent(btnAddReservationToBorrower, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+               .addComponent(btnAddLoanToBorrower, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+               .addComponent(btnUpdateItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+               .addComponent(btnAddNewItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(59, 59, 59))
       );
+
+      layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btnAddLoanToBorrower, btnAddNewItem, btnAddReservationToBorrower, btnRemoveReservationFromBorrower, btnUpdateItem});
+
       layout.setVerticalGroup(
          layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGap(0, 300, Short.MAX_VALUE)
+         .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+               .addGroup(layout.createSequentialGroup()
+                  .addContainerGap()
+                  .addComponent(btnHomePage))
+               .addGroup(layout.createSequentialGroup()
+                  .addGap(30, 30, 30)
+                  .addComponent(jLabel1)))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+               .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                  .addComponent(btnAddNewItem, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                  .addGap(18, 18, 18)
+                  .addComponent(btnUpdateItem, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                  .addGap(18, 18, 18)
+                  .addComponent(btnAddLoanToBorrower, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                  .addGap(18, 18, 18)
+                  .addComponent(btnAddReservationToBorrower, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                  .addGap(18, 18, 18)
+                  .addComponent(btnRemoveReservationFromBorrower)
+                  .addGap(115, 115, 115))
+               .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                  .addComponent(jLabel2)
+                  .addGap(5, 5, 5)
+                  .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                  .addGap(18, 18, 18)
+                  .addComponent(btnUpdatePassword)
+                  .addGap(59, 59, 59)
+                  .addComponent(btnSignOut)
+                  .addGap(34, 34, 34))))
       );
+
+      layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAddLoanToBorrower, btnAddNewItem, btnAddReservationToBorrower, btnRemoveReservationFromBorrower, btnUpdateItem});
 
       pack();
    }// </editor-fold>//GEN-END:initComponents
+
+   private void btnAddNewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewItemActionPerformed
+      // TODO add your handling code here:
+   }//GEN-LAST:event_btnAddNewItemActionPerformed
+
+   private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
+      // TODO add your handling code here:
+   }//GEN-LAST:event_btnHomePageActionPerformed
+
+   private void btnUpdatePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatePasswordActionPerformed
+      // TODO add your handling code here:
+   }//GEN-LAST:event_btnUpdatePasswordActionPerformed
+
+   private void btnUpdateItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateItemActionPerformed
+      // TODO add your handling code here:
+   }//GEN-LAST:event_btnUpdateItemActionPerformed
+
+   private void btnAddLoanToBorrowerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddLoanToBorrowerActionPerformed
+      // TODO add your handling code here:
+   }//GEN-LAST:event_btnAddLoanToBorrowerActionPerformed
+
+   private void btnAddReservationToBorrowerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddReservationToBorrowerActionPerformed
+      // TODO add your handling code here:
+   }//GEN-LAST:event_btnAddReservationToBorrowerActionPerformed
+
+   private void btnRemoveReservationFromBorrowerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveReservationFromBorrowerActionPerformed
+      // TODO add your handling code here:
+   }//GEN-LAST:event_btnRemoveReservationFromBorrowerActionPerformed
 
    /**
     * @param args the command line arguments
@@ -79,5 +240,17 @@ public class MyPageStaffGui extends javax.swing.JFrame {
    }
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
+   private javax.swing.JButton btnAddLoanToBorrower;
+   private javax.swing.JButton btnAddNewItem;
+   private javax.swing.JButton btnAddReservationToBorrower;
+   private javax.swing.JButton btnHomePage;
+   private javax.swing.JButton btnRemoveReservationFromBorrower;
+   private javax.swing.JButton btnSignOut;
+   private javax.swing.JButton btnUpdateItem;
+   private javax.swing.JButton btnUpdatePassword;
+   private javax.swing.JLabel jLabel1;
+   private javax.swing.JLabel jLabel2;
+   private javax.swing.JScrollPane jScrollPane1;
+   private javax.swing.JTextArea txtAreaMyPersonalData;
    // End of variables declaration//GEN-END:variables
 }
