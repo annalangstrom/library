@@ -30,15 +30,22 @@ public class HomePageGui extends javax.swing.JFrame {
       jLabelTheLibrary = new javax.swing.JLabel();
       txtSearch = new javax.swing.JTextField();
       btnSearch = new javax.swing.JButton();
-      btnSignIn = new javax.swing.JButton();
-      btnCreateAccount = new javax.swing.JButton();
       btnLoanItem = new javax.swing.JButton();
       btnReturnItem = new javax.swing.JButton();
+      panelSignedIn = new javax.swing.JPanel();
+      btnSignIn = new javax.swing.JButton();
+      btnCreateAccount = new javax.swing.JButton();
+      panelNotSignedIn = new javax.swing.JPanel();
+      btnToMyAccount = new javax.swing.JButton();
+      btnSignOut = new javax.swing.JButton();
 
       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+      getContentPane().setLayout(null);
 
       jLabelTheLibrary.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
       jLabelTheLibrary.setText("The Library");
+      getContentPane().add(jLabelTheLibrary);
+      jLabelTheLibrary.setBounds(226, 68, 178, 47);
 
       txtSearch.setForeground(new java.awt.Color(102, 102, 102));
       txtSearch.setText("Search items...");
@@ -47,63 +54,79 @@ public class HomePageGui extends javax.swing.JFrame {
             txtSearchActionPerformed(evt);
          }
       });
+      getContentPane().add(txtSearch);
+      txtSearch.setBounds(120, 160, 300, 51);
 
       btnSearch.setText("SEARCH");
+      getContentPane().add(btnSearch);
+      btnSearch.setBounds(430, 160, 79, 51);
+
+      btnLoanItem.setText("Loan item");
+      btnLoanItem.setActionCommand("");
+      getContentPane().add(btnLoanItem);
+      btnLoanItem.setBounds(170, 240, 120, 25);
+
+      btnReturnItem.setText("Return item");
+      getContentPane().add(btnReturnItem);
+      btnReturnItem.setBounds(310, 240, 120, 25);
 
       btnSignIn.setText("Sign in");
 
       btnCreateAccount.setText("Create account");
 
-      btnLoanItem.setText("Loan item");
-      btnLoanItem.setActionCommand("");
-
-      btnReturnItem.setText("Return item");
-
-      javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-      getContentPane().setLayout(layout);
-      layout.setHorizontalGroup(
-         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGroup(layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-               .addGroup(layout.createSequentialGroup()
-                  .addGap(178, 178, 178)
-                  .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSearch))
-                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                           .addComponent(btnSignIn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                           .addComponent(btnCreateAccount, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                           .addComponent(btnLoanItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                           .addComponent(btnReturnItem, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)))))
-               .addGroup(layout.createSequentialGroup()
-                  .addGap(226, 226, 226)
-                  .addComponent(jLabelTheLibrary)))
-            .addContainerGap(188, Short.MAX_VALUE))
+      javax.swing.GroupLayout panelSignedInLayout = new javax.swing.GroupLayout(panelSignedIn);
+      panelSignedIn.setLayout(panelSignedInLayout);
+      panelSignedInLayout.setHorizontalGroup(
+         panelSignedInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+         .addGroup(panelSignedInLayout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(panelSignedInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+               .addComponent(btnSignIn, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+               .addComponent(btnCreateAccount))
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
       );
-      layout.setVerticalGroup(
-         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-         .addGroup(layout.createSequentialGroup()
-            .addGap(68, 68, 68)
-            .addComponent(jLabelTheLibrary)
-            .addGap(48, 48, 48)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-               .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-               .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-               .addComponent(btnSignIn)
-               .addComponent(btnLoanItem))
+      panelSignedInLayout.setVerticalGroup(
+         panelSignedInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+         .addGroup(panelSignedInLayout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(btnSignIn)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-               .addComponent(btnCreateAccount)
-               .addComponent(btnReturnItem))
-            .addGap(103, 103, 103))
+            .addComponent(btnCreateAccount)
+            .addContainerGap(20, Short.MAX_VALUE))
       );
+
+      getContentPane().add(panelSignedIn);
+      panelSignedIn.setBounds(300, 310, 140, 90);
+
+      btnToMyAccount.setText("To my account");
+
+      btnSignOut.setText("Sign out");
+
+      javax.swing.GroupLayout panelNotSignedInLayout = new javax.swing.GroupLayout(panelNotSignedIn);
+      panelNotSignedIn.setLayout(panelNotSignedInLayout);
+      panelNotSignedInLayout.setHorizontalGroup(
+         panelNotSignedInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+         .addGroup(panelNotSignedInLayout.createSequentialGroup()
+            .addContainerGap()
+            .addGroup(panelNotSignedInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+               .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelNotSignedInLayout.createSequentialGroup()
+                  .addGap(0, 0, Short.MAX_VALUE)
+                  .addComponent(btnToMyAccount))
+               .addComponent(btnSignOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addContainerGap())
+      );
+      panelNotSignedInLayout.setVerticalGroup(
+         panelNotSignedInLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+         .addGroup(panelNotSignedInLayout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(btnToMyAccount)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(btnSignOut)
+            .addContainerGap(20, Short.MAX_VALUE))
+      );
+
+      getContentPane().add(panelNotSignedIn);
+      panelNotSignedIn.setBounds(160, 310, 140, 90);
 
       pack();
    }// </editor-fold>//GEN-END:initComponents
@@ -154,7 +177,11 @@ public class HomePageGui extends javax.swing.JFrame {
    private javax.swing.JButton btnReturnItem;
    private javax.swing.JButton btnSearch;
    private javax.swing.JButton btnSignIn;
+   private javax.swing.JButton btnSignOut;
+   private javax.swing.JButton btnToMyAccount;
    private javax.swing.JLabel jLabelTheLibrary;
+   private javax.swing.JPanel panelNotSignedIn;
+   private javax.swing.JPanel panelSignedIn;
    private javax.swing.JTextField txtSearch;
    // End of variables declaration//GEN-END:variables
 }
