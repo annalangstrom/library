@@ -5,45 +5,48 @@
  */
 package JDBCconnection;
 
+import GUI.CreateAccount;
 import java.sql.*;
 /**
  *
  * @author annalangstrom
  */
-public class JDBCconnection {
-    public static void main(String []args) throws SQLException{
+public final class JDBCconnection {
+    
+    static final String DBURL = "jdbc:mysql://localhost:3306/library?autoReconnect=true&useSSL=false";
+    static final String USER = "root";
+    static final String PWD = "annasvea";
+    
+    private Connection con = null; //Hanterar uppkoppling
+    
+    //Konstruktor
+    public JDBCconnection(CreateAccount ca) throws ClassNotFoundException, 
+            SQLException{
+        this();
         
-        final String DATABASE_URL = "jdbc:mysql://localhost:3306/library?autoReconnect=true&useSSL=false";
-        final String SELECT_QUERY = "SELECT title, author FROM item";
-        final String user = "root";
-        final String pass = "annasvea";
-        
-        try(
-            Connection connection = DriverManager.getConnection(DATABASE_URL, user, pass);
-            
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(SELECT_QUERY))
-        {
-            ResultSetMetaData metaData = resultSet.getMetaData();
-            int numberOfColumns = metaData.getColumnCount();
-            
-            System.out.printf("Authors Table of Books Database:%n%n");
-            
-            for (int i = 1; i <= numberOfColumns; i++)
-                System.out.printf("%-8s\t", metaData.getColumnName(i));
-            System.out.println();
-            
-            while(resultSet.next()){
-                for (int i = 1; i <= numberOfColumns; i++)
-                    System.out.printf("%-8s\t", resultSet.getObject(i));
-                    
-                System.out.println();
-                
-            }
-        }
-        catch (SQLException sqlException){
-            sqlException.printStackTrace();
+    }
+    //Konstruktor
+    public JDBCconnection() throws ClassNotFoundException, 
+            SQLException{
+       //Koppla upp
+       this.con = connectToDb(con); 
+    }
+    
+    public Connection connectToDb(Connection con) throws ClassNotFoundException, SQLException{
+       //Koppla upp mot db
+        if (con == null){
+            con = DriverManager.getConnection(DBURL, USER, PWD);
+        } 
+        return con;
+    }
+    
+    public void closeDbConnection() throws SQLException{
+        //Stäng uppkoppling
+        if (con != null) {
+            con.close();
         }
     }
+    
+    
     
 }
