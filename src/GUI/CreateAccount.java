@@ -5,6 +5,12 @@
  */
 package GUI;
 
+import controlClasses.CreateAccountControl;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -83,6 +89,11 @@ public class CreateAccount extends javax.swing.JFrame {
         jLabel8.setText("Phone number:");
 
         btnCreateAccount.setText("Create account");
+        btnCreateAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateAccountActionPerformed(evt);
+            }
+        });
 
         btnCancel.setText("Cancel");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -237,20 +248,33 @@ public class CreateAccount extends javax.swing.JFrame {
 
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
         String[] args = null;
-        // TODO add your handling code here:
         SignIn.main(args);
     }//GEN-LAST:event_btnSignInActionPerformed
 
     private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
         String[] args = null;
-        // TODO add your handling code here:
         HomePage.main(args);
     }//GEN-LAST:event_btnHomePageActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        // TODO add your handling code here:
         super.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
+        try {
+            CreateAccountControl control = new CreateAccountControl();
+             
+            control.addBorrowerToDB(txtSsn.getText(), cmbCategory.getSelectedIndex(),
+                    txtFirstName.getText(), txtLastName.getText(), txtPassword.getText(),
+                    txtMail.getText(), txtPhoneNumber.getText(), txtStreet.getText(),
+                    txtPostcode.getText(), txtCity.getText());
+        } catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Something went wrong, " + ex.getMessage());
+            Logger.getLogger(CreateAccount.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        
+    }//GEN-LAST:event_btnCreateAccountActionPerformed
 
     /**
      * @param args the command line arguments
