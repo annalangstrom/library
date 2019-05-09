@@ -142,7 +142,9 @@ public class HomePageGui extends javax.swing.JFrame {
    }// </editor-fold>//GEN-END:initComponents
 
    private void btnLoanItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanItemActionPerformed
-      //  Ändra till rätt namn på sida
+      /*  Ändra till rätt namn på sida +
+      IF låntagare inloggad - gå till lånsidan
+      ELSE gå till inloggningssidan*/
       String[] args = null;
       Loan.main(args);
    }//GEN-LAST:event_btnLoanItemActionPerformed
@@ -150,7 +152,7 @@ public class HomePageGui extends javax.swing.JFrame {
    private void btnReturnItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnItemActionPerformed
       // Ändra till rätt namn på sida
       String[] args = null;
-      Reservation.main(args);
+      Return.main(args);
    }//GEN-LAST:event_btnReturnItemActionPerformed
 
    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
