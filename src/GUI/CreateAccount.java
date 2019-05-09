@@ -9,6 +9,7 @@ import controlClasses.CreateAccountControl;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 
@@ -261,15 +262,18 @@ public class CreateAccount extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
+        JFrame frame = new JFrame();
         try {
             CreateAccountControl control = new CreateAccountControl();
-             
+            
             control.addBorrowerToDB(txtSsn.getText(), cmbCategory.getSelectedIndex(),
                     txtFirstName.getText(), txtLastName.getText(), txtPassword.getText(),
                     txtMail.getText(), txtPhoneNumber.getText(), txtStreet.getText(),
                     txtPostcode.getText(), txtCity.getText());
+            
+            JOptionPane.showMessageDialog(frame, "Creation completed!");
         } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(this, "Something went wrong, " + ex.getMessage());
+            JOptionPane.showMessageDialog(frame, "Something went wrong, " + ex.getMessage());
             Logger.getLogger(CreateAccount.class.getName()).log(Level.SEVERE, null, ex);
         }
             

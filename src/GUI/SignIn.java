@@ -5,6 +5,10 @@
  */
 package GUI;
 
+import controlClasses.SignInControl;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author annalangstrom
@@ -32,12 +36,12 @@ public class SignIn extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtUserAccount = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JTextField();
         btnSignIn = new javax.swing.JButton();
         lblNoAccount = new javax.swing.JLabel();
         btnCreateAccount = new javax.swing.JButton();
         btnHomePage = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
+        txtPassword = new javax.swing.JPasswordField();
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         jLabel1.setText("Sign in");
@@ -49,6 +53,11 @@ public class SignIn extends javax.swing.JFrame {
         jLabel4.setText("Password:");
 
         btnSignIn.setText("Sign in");
+        btnSignIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignInActionPerformed(evt);
+            }
+        });
 
         lblNoAccount.setText("Haven't you got an account?");
 
@@ -95,12 +104,12 @@ public class SignIn extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addGap(168, 168, 168))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtUserAccount)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtUserAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(25, 25, 25)
-                                .addComponent(btnSignIn)))
+                                .addComponent(btnSignIn))
+                            .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(229, 229, 229))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -173,6 +182,16 @@ public class SignIn extends javax.swing.JFrame {
         super.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
+        try {
+            // TODO add your handling code here:
+            SignInControl control = new SignInControl();
+            control.signIn(txtUserAccount.getText(), txtPassword.getText());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSignInActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -218,7 +237,7 @@ public class SignIn extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblNoAccount;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUserAccount;
     // End of variables declaration//GEN-END:variables
 }
