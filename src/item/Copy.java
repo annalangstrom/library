@@ -15,6 +15,8 @@ public class Copy {
     private LoanCategory loanCategory;
     private LoanStatus loanStatus;
     private String condition;
+    private int category;
+    private String status;
 
     public Copy(int barcodeNo, Item item, LoanCategory loanCategory, LoanStatus loanStatus, String condition) {
         this.barcodeNo = barcodeNo;
@@ -22,6 +24,14 @@ public class Copy {
         this.loanCategory = loanCategory;
         this.loanStatus = loanStatus;
         this.condition = condition;
+    }
+    
+    public Copy(int barcode, String condition, int loanCategory, String loanStatus){
+        this.barcodeNo = barcode;
+        this.condition = condition;
+        this.category = loanCategory;
+        this.status = loanStatus;
+        
     }
     
     public Copy(int barcodeNo){
@@ -71,6 +81,16 @@ public class Copy {
     public void searchCopy(Item item){
         //sätt returtyp Copy
     }
+
+    public int getCategory() {
+        return category;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+    
+    
     
     public void setDBitem(){}
     

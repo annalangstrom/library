@@ -50,14 +50,14 @@ public class AddCopy extends javax.swing.JFrame {
         int rows = this.copyList.size();
         //håller data i en 2d array 
         //initierar storleken med rader & kolumner
-        this.data = new Object[rows][2];
+        this.data = new Object[rows][4];
         //läs in data från ArrayList till data arrayen
         int row=0; 
         for (Copy copy : this.copyList){
             data[row][0] = copy.getBarcodeNo();
             data[row][1] = copy.getCondition();
-            data[row][2] = copy.getLoanCategory();
-            data[row][3] = copy.getLoanStatus();
+            data[row][2] = copy.getCategory();
+            data[row][3] = copy.getStatus();
             row++;
         }
         this.initTable();
@@ -104,7 +104,7 @@ public class AddCopy extends javax.swing.JFrame {
 
         jLabel4.setText("Loan status:");
 
-        cmbLoanStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "On shelfe", "Borrowed", "Missing" }));
+        cmbLoanStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "On shelf", "Borrowed", "Missing" }));
 
         tblCopies.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -222,7 +222,7 @@ public class AddCopy extends javax.swing.JFrame {
             
             control = new CreateCopiesControl(this);
             control.addCopy(Integer.parseInt(txtBarcode.getText()), 1, cmbCategory.getSelectedIndex(), 
-                    cmbLoanStatus.getSelectedIndex(), txtCondition.getText());
+                    cmbLoanStatus.getSelectedItem().toString(), txtCondition.getText());
             //int barcode, int itemNo, int category, int loanStatus, String condition
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(this, "Something went wrong, "+ ex.getMessage());
