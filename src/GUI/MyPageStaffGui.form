@@ -28,7 +28,7 @@
               <Component id="btnHomePage" min="-2" pref="128" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="240" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
@@ -41,15 +41,12 @@
                       <Component id="btnUpdatePassword" min="-2" pref="201" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="94" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="btnRemoveReservationFromBorrower" linkSize="1" alignment="0" pref="245" max="32767" attributes="0"/>
-                  <Component id="btnAddReservationToBorrower" linkSize="1" max="32767" attributes="0"/>
-                  <Component id="btnAddLoanToBorrower" linkSize="1" max="32767" attributes="0"/>
-                  <Component id="btnUpdateItem" linkSize="1" max="32767" attributes="0"/>
-                  <Component id="btnAddNewItem" linkSize="1" max="32767" attributes="0"/>
+                  <Component id="btnAddNewItem" pref="207" max="32767" attributes="0"/>
+                  <Component id="btnUpdateItem" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -72,13 +69,7 @@
                       <Component id="btnAddNewItem" linkSize="2" min="-2" pref="25" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnUpdateItem" linkSize="2" min="-2" pref="25" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnAddLoanToBorrower" linkSize="2" min="-2" pref="25" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnAddReservationToBorrower" linkSize="2" min="-2" pref="25" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnRemoveReservationFromBorrower" linkSize="2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="244" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -167,30 +158,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateItemActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnAddLoanToBorrower">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Add loan to borrower"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddLoanToBorrowerActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnAddReservationToBorrower">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Add Reservation To Borrower"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddReservationToBorrowerActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnRemoveReservationFromBorrower">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Remove reservation from borrower"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoveReservationFromBorrowerActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
