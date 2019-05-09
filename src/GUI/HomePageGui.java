@@ -28,7 +28,6 @@ public class HomePageGui extends javax.swing.JFrame {
    private void initComponents() {
 
       jLabelTheLibrary = new javax.swing.JLabel();
-      txtSearch = new javax.swing.JTextField();
       btnSearch = new javax.swing.JButton();
       btnLoanItem = new javax.swing.JButton();
       btnReturnItem = new javax.swing.JButton();
@@ -38,6 +37,7 @@ public class HomePageGui extends javax.swing.JFrame {
       panelNotSignedIn = new javax.swing.JPanel();
       btnToMyAccount = new javax.swing.JButton();
       btnSignOut = new javax.swing.JButton();
+      txtSearch = new javax.swing.JTextField();
 
       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
       getContentPane().setLayout(null);
@@ -47,26 +47,31 @@ public class HomePageGui extends javax.swing.JFrame {
       getContentPane().add(jLabelTheLibrary);
       jLabelTheLibrary.setBounds(226, 68, 178, 47);
 
-      txtSearch.setForeground(new java.awt.Color(102, 102, 102));
-      txtSearch.setText("Search items...");
-      txtSearch.addActionListener(new java.awt.event.ActionListener() {
+      btnSearch.setText("SEARCH");
+      btnSearch.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
-            txtSearchActionPerformed(evt);
+            btnSearchActionPerformed(evt);
          }
       });
-      getContentPane().add(txtSearch);
-      txtSearch.setBounds(120, 160, 300, 51);
-
-      btnSearch.setText("SEARCH");
       getContentPane().add(btnSearch);
       btnSearch.setBounds(430, 160, 79, 51);
 
       btnLoanItem.setText("Loan item");
       btnLoanItem.setActionCommand("");
+      btnLoanItem.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnLoanItemActionPerformed(evt);
+         }
+      });
       getContentPane().add(btnLoanItem);
       btnLoanItem.setBounds(170, 240, 120, 25);
 
       btnReturnItem.setText("Return item");
+      btnReturnItem.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnReturnItemActionPerformed(evt);
+         }
+      });
       getContentPane().add(btnReturnItem);
       btnReturnItem.setBounds(310, 240, 120, 25);
 
@@ -128,12 +133,33 @@ public class HomePageGui extends javax.swing.JFrame {
       getContentPane().add(panelNotSignedIn);
       panelNotSignedIn.setBounds(160, 310, 140, 90);
 
+      txtSearch.setForeground(new java.awt.Color(102, 102, 102));
+      txtSearch.setText("Search items...");
+      getContentPane().add(txtSearch);
+      txtSearch.setBounds(120, 160, 300, 51);
+
       pack();
    }// </editor-fold>//GEN-END:initComponents
 
-    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchActionPerformed
+   private void btnLoanItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanItemActionPerformed
+      //  Ändra till rätt namn på sida
+      String[] args = null;
+      Loan.main(args);
+   }//GEN-LAST:event_btnLoanItemActionPerformed
+
+   private void btnReturnItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnItemActionPerformed
+      // Ändra till rätt namn på sida
+      String[] args = null;
+      Reservation.main(args);
+   }//GEN-LAST:event_btnReturnItemActionPerformed
+
+   private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+      /*Ta text från textrutan
+      Stoppa in i sökmetod
+      Dirigera om till Söksidan*/
+      String[] args = null;
+      Search.main(args);
+   }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
      * @param args the command line arguments
