@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import controlClasses.CreateObjectControl;
+
 /**
  *
  * @author annalangstrom
@@ -56,6 +58,9 @@ public class CreateObject extends javax.swing.JFrame {
         btnAddKeyword = new javax.swing.JButton();
         btnAddGenres = new javax.swing.JButton();
         addAutArt = new javax.swing.JButton();
+        btnAddCopy = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
 
         jLabel5.setText("Publish year*");
 
@@ -111,7 +116,7 @@ public class CreateObject extends javax.swing.JFrame {
 
         jLabel7.setText("Category*");
 
-        comBoxCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comBoxCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Book", "Movie", "Magazine" }));
 
         jLabel9.setText("Publisher");
 
@@ -137,6 +142,17 @@ public class CreateObject extends javax.swing.JFrame {
         addAutArt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addAutArtActionPerformed(evt);
+            }
+        });
+
+        btnAddCopy.setText("Add copy");
+
+        btnCancel.setText("Cancel");
+
+        btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
             }
         });
 
@@ -184,10 +200,17 @@ public class CreateObject extends javax.swing.JFrame {
                             .addComponent(txtAgeLimit, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))))
                 .addGap(72, 72, 72)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAddCopy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAddKeyword, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
                     .addComponent(btnAddGenres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(addAutArt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 172, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSave)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCancel)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,7 +241,9 @@ public class CreateObject extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(addAutArt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(68, 68, 68)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAddCopy, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -238,7 +263,11 @@ public class CreateObject extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(comBoxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addGap(73, 73, 73))
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancel)
+                    .addComponent(btnSave))
+                .addContainerGap())
         );
 
         pack();
@@ -263,6 +292,12 @@ public class CreateObject extends javax.swing.JFrame {
         // TODO add your handling code here:
         AddAutArt.main(args);
     }//GEN-LAST:event_addAutArtActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        CreateObjectControl control = new CreateObjectControl();
+        control.addObjectToDB();
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,9 +336,12 @@ public class CreateObject extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAutArt;
+    private javax.swing.JButton btnAddCopy;
     private javax.swing.JButton btnAddGenres;
     private javax.swing.JButton btnAddKeyword;
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnHomePage;
+    private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> comBoxCategory;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
