@@ -10,7 +10,7 @@ package item;
  * @author annalangstrom
  */
 public enum LoanStatus {
-    ON_SHELFE, 
+    ON_SHELF, 
     BORROWED, 
     MISSING
 }
