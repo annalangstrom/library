@@ -6,6 +6,7 @@
 package GUI;
 
 import controlClasses.SignInControl;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -185,9 +186,9 @@ public class SignIn extends javax.swing.JFrame {
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
         try {
             // TODO add your handling code here:
-            SignInControl control = new SignInControl();
+            SignInControl control = new SignInControl(this);
             control.signIn(txtUserAccount.getText(), txtPassword.getText());
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSignInActionPerformed
