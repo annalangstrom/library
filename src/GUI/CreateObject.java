@@ -6,13 +6,20 @@
 package GUI;
 
 import controlClasses.CreateObjectControl;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author annalangstrom
  */
 public class CreateObject extends javax.swing.JFrame {
-
+    AddAutArt addAutArts = new AddAutArt();
+    AddGenres addGenres = new AddGenres();
+    AddKeywords addKeywords = new AddKeywords();
     /**
      * Creates new form CreateObject
      */
@@ -48,7 +55,7 @@ public class CreateObject extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtLocation = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        comBoxCategory = new javax.swing.JComboBox<>();
+        cmbCategory = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         txtPublisher = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -116,7 +123,7 @@ public class CreateObject extends javax.swing.JFrame {
 
         jLabel7.setText("Category*");
 
-        comBoxCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Book", "Movie", "Magazine" }));
+        cmbCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Book", "Movie", "Magazine" }));
 
         jLabel9.setText("Publisher");
 
@@ -196,7 +203,7 @@ public class CreateObject extends javax.swing.JFrame {
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comBoxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtAgeLimit, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))))
                 .addGap(72, 72, 72)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -261,7 +268,7 @@ public class CreateObject extends javax.swing.JFrame {
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comBoxCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -275,6 +282,7 @@ public class CreateObject extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddKeywordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddKeywordActionPerformed
+        
         String[] args = null;
         // TODO add your handling code here:
         AddKeywords.main(args);
@@ -284,6 +292,7 @@ public class CreateObject extends javax.swing.JFrame {
     private void btnAddGenresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddGenresActionPerformed
         String[] args = null;
         // TODO add your handling code here:
+        
         AddGenres.main(args);
     }//GEN-LAST:event_btnAddGenresActionPerformed
 
@@ -294,9 +303,31 @@ public class CreateObject extends javax.swing.JFrame {
     }//GEN-LAST:event_addAutArtActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // TODO add your handling code here:
-        CreateObjectControl control = new CreateObjectControl();
-        control.addObjectToDB();
+        JFrame frame = new JFrame();
+        try {
+            // TODO add your handling code here:
+            CreateObjectControl control = new CreateObjectControl();
+            if(cmbCategory.getSelectedItem().equals("Book"))
+                control.addBookToDB(txtIsbn.getText(), txtPublisher.getText(), txtTitle.getText(),
+                        Integer.parseInt(txtPubYear.getText()), txtLocation.getText(), addKeywords.things,
+                        addGenres.things, addAutArts.things);
+            
+            else if(cmbCategory.getSelectedItem().equals("Movie"))
+                control.addMovieToDB(Integer.parseInt(txtAgeLimit.getText()), txtPCountry.getText(), 
+                        txtTitle.getText(), Integer.parseInt(txtPubYear.getText()), txtLocation.getText(), 
+                        addKeywords.things, addGenres.things, addAutArts.things);
+           
+            else if(cmbCategory.getSelectedItem().equals("Magazine"))
+                control.addMagazineToDB(txtPublisher.getText(), txtTitle.getText(), 
+                        Integer.parseInt(txtPubYear.getText()), txtLocation.getText(), 
+                        addKeywords.things, addGenres.things, addAutArts.things);
+            
+            
+            JOptionPane.showMessageDialog(frame, "Saved!");
+        } catch (ClassNotFoundException | SQLException ex) {
+            JOptionPane.showMessageDialog(frame, "Something went wrong, " + ex.getMessage());
+            Logger.getLogger(CreateObject.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
@@ -342,7 +373,7 @@ public class CreateObject extends javax.swing.JFrame {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnHomePage;
     private javax.swing.JButton btnSave;
-    private javax.swing.JComboBox<String> comBoxCategory;
+    private javax.swing.JComboBox<String> cmbCategory;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JDialog jDialog2;
     private javax.swing.JFrame jFrame1;
