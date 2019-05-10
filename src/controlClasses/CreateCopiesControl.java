@@ -20,8 +20,8 @@ import java.util.List;
  * @author annalangstrom
  */
 public class CreateCopiesControl {
-    private final String COPY_INSERT = "INSERT INTO Copy (itemNo, lcNo, loanStatus, title) "
-            + "VALUES (?, ?, ?, ?)";
+    private final String COPY_INSERT = "INSERT INTO Copy (barcodeNo, itemNo, lcNo, loanStatus, condition, title) "
+            + "VALUES (?, ?, ?, ?, ?, ?)";
     private final String COPY_SELECT = "SELECT * FROM Copy";
     
     private Connection con = null;
@@ -53,12 +53,12 @@ public class CreateCopiesControl {
     public void addCopy(int barcode, int itemNo, int category, String loanStatus, String condition) throws SQLException, ClassNotFoundException{
         String title = "title";
         
-        //insertCopy.setInt(1, barcode);
-        insertCopy.setInt(1, itemNo);
-        insertCopy.setInt(2, category + 1);
-        insertCopy.setString(3, loanStatus);
-        //insertCopy.setString(4, condition);
-        insertCopy.setString(4, title);
+        insertCopy.setInt(1, barcode);
+        insertCopy.setInt(2, itemNo);
+        insertCopy.setInt(3, category + 1);
+        insertCopy.setString(4, loanStatus);
+        insertCopy.setString(5, condition);
+        insertCopy.setString(6, title);
         
         insertCopy.executeUpdate();
         this.loadCopies();
