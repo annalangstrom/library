@@ -10,8 +10,6 @@ import JDBCconnection.JDBCconnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,7 +26,6 @@ public class CreateAccountControl {
     private Connection con = null;
 
     private CreateAccount ca = null;
-//    List<Message> lstMessages; 
     
     //Konstruktor
     public CreateAccountControl(CreateAccount ca) throws ClassNotFoundException, 

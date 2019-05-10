@@ -12,14 +12,19 @@ import java.util.ArrayList;
  * @author annalangstrom
  */
 public class AuthorArtist {
+    private int aNo;
     private String fname;
     private String sname;
     private ArrayList<Item> items;
 
-    public AuthorArtist(String fname, String sname, ArrayList<Item> items) {
+    public AuthorArtist(String fname, String sname, Item item) {
         this.fname = fname;
         this.sname = sname;
-        this.items = items;
+        items.add(item);
+    }
+
+    public int getaNo() {
+        return aNo;
     }
 
     public String getFname() {

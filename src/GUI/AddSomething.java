@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 
 /**
@@ -13,6 +14,7 @@ import javax.swing.DefaultListModel;
  */ abstract class AddSomething extends javax.swing.JFrame {
 
      DefaultListModel model;
+     ArrayList<String> things = new ArrayList<>();
     
     /**
      * Creates new form AddGenres
@@ -119,6 +121,7 @@ import javax.swing.DefaultListModel;
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         model.addElement(txtAdd.getText());
+        txtAdd.setText("");
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
@@ -134,6 +137,11 @@ import javax.swing.DefaultListModel;
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
+        
+        for(int i = 0; i < model.size(); i++){
+            things.add(model.elementAt(i).toString());
+        }
+        
         super.dispose();
     }//GEN-LAST:event_btnSaveActionPerformed
 

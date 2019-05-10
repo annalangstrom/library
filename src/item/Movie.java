@@ -18,7 +18,9 @@ public class Movie extends Item {
     private int ageLimit;
     private String pCountry;
 
-    public Movie(int ageLimit, String pCountry, String title, Year publishYear, String location, ArrayList<String> keywords, ArrayList<String> genres, ArrayList<AuthorArtist> authorArtist) {
+    public Movie(int ageLimit, String pCountry, String title, int publishYear, 
+            String location, ArrayList<String> keywords, ArrayList<String> genres, 
+            ArrayList<AuthorArtist> authorArtist) {
         super(title, publishYear, location, keywords, genres, authorArtist);
         this.ageLimit = ageLimit;
         this.pCountry = pCountry;

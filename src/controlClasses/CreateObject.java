@@ -5,7 +5,6 @@
  */
 package controlClasses;
 
-import java.time.Year;
 import item.*;
 import java.util.ArrayList;
 
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 public class CreateObject {
     
     public Book createBook(String title, String isbn, String publisher, 
-            Year publishYear, String location){
+            int publishYear, String location){
         
         ArrayList<String> keywords = new ArrayList<>();
         ArrayList<String> genres = new ArrayList<>();
@@ -28,13 +27,13 @@ public class CreateObject {
         return book;
     }
     
-    public void createMovie(String title, Year publishYear, int ageLimit, 
+    public void createMovie(String title, int publishYear, int ageLimit, 
             String pCountry, String location){
         //same as for book
     }
     
     public void createMagazine(String title, String publisher, 
-            Year publishYear, String location){
+            int publishYear, String location){
         //same as for book
     }
     

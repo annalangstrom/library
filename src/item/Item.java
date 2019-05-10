@@ -13,15 +13,16 @@ import java.util.ArrayList;
  * @author annalangstrom
  */
 public abstract class Item {
+    private int itemNo;
     private String title;
-    private Year publishYear;
+    private int publishYear;
     private String location;
     private ArrayList<String> keywords;
     private ArrayList<String> genres;
     private ArrayList<AuthorArtist> authorArtist;
     private boolean active = true;
 
-    public Item(String title, Year publishYear, String location, ArrayList<String> keywords, ArrayList<String> genres, ArrayList<AuthorArtist> authorArtist) {
+    public Item(String title, int publishYear, String location, ArrayList<String> keywords, ArrayList<String> genres, ArrayList<AuthorArtist> authorArtist) {
         this.title = title;
         this.publishYear = publishYear;
         this.location = location;
@@ -32,6 +33,10 @@ public abstract class Item {
     
     public Item (){}
 
+    public int getItemNo() {
+        return itemNo;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -40,11 +45,11 @@ public abstract class Item {
         this.title = title;
     }
 
-    public Year getPublishYear() {
+    public int getPublishYear() {
         return publishYear;
     }
 
-    public void setPublishYear(Year publishYear) {
+    public void setPublishYear(int publishYear) {
         this.publishYear = publishYear;
     }
 

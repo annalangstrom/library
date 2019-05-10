@@ -16,7 +16,7 @@ public class Book extends Item{
     private String isbn;
     private String publisher;
 
-    public Book(String isbn, String publisher, String title, Year publishYear, 
+    public Book(String isbn, String publisher, String title, int publishYear, 
             String location, ArrayList<String> keywords, ArrayList<String> genres, 
             ArrayList<AuthorArtist> authorArtist) {
         super(title, publishYear, location, keywords, genres, authorArtist);

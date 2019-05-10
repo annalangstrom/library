@@ -5,13 +5,7 @@
  */
 package library;
 
-import item.AuthorArtist;
-import item.Copy;
-import item.*;
-import item.LoanCategory;
-import item.Book;
-import java.time.Year;
-import java.util.ArrayList;
+import GUI.HomePage;
 
 /**
  *
@@ -24,15 +18,7 @@ public class Library {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        ArrayList<String> keywords = new ArrayList<>();
-        ArrayList<String> genres = new ArrayList<>();
-        ArrayList<AuthorArtist> aas = new ArrayList<>();
-        Book book1 = new Book("Hej", "hej", "hallå", Year.now(), "hortlax", keywords, genres, aas);
-        LoanCategory lc = new LoanCategory(1,LCname.MOVIE, 5);
-        Copy copy1 = new Copy(1, book1, lc, LoanStatus.BORROWED, "fine");
-        
-        Copy copy2 = new Copy(1);
-        
+       HomePage.main(args);
         
     }
     

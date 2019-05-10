@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class Magazine extends Item{
     private String publisher;
 
-    public Magazine(String publisher, String title, Year publishYear, 
+    public Magazine(String publisher, String title, int publishYear, 
             String location, ArrayList<String> keywords, ArrayList<String> genres, 
             ArrayList<AuthorArtist> authorArtist) {
         super(title, publishYear, location, keywords, genres, authorArtist);
