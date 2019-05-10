@@ -29,6 +29,7 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
 
       btnHomePage1 = new javax.swing.JButton();
       list1 = new java.awt.List();
+      jButton1 = new javax.swing.JButton();
       btnSignOut = new javax.swing.JButton();
       jLabel1 = new javax.swing.JLabel();
       jLabel2 = new javax.swing.JLabel();
@@ -44,6 +45,7 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
       scrollMyReservations = new javax.swing.JScrollBar();
       jScrollPane3 = new javax.swing.JScrollPane();
       lstMyReservations = new javax.swing.JList<>();
+      btnEraseMyAcount = new javax.swing.JButton();
 
       btnHomePage1.setText("Home Page");
       btnHomePage1.addActionListener(new java.awt.event.ActionListener() {
@@ -51,6 +53,8 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
             btnHomePage1ActionPerformed(evt);
          }
       });
+
+      jButton1.setText("jButton1");
 
       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
       setPreferredSize(new java.awt.Dimension(663, 437));
@@ -104,6 +108,8 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
       });
       jScrollPane3.setViewportView(lstMyReservations);
 
+      btnEraseMyAcount.setText("Erase my acount");
+
       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
       getContentPane().setLayout(layout);
       layout.setHorizontalGroup(
@@ -122,7 +128,9 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
                .addComponent(btnSignOut, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                .addGroup(layout.createSequentialGroup()
                   .addGap(30, 30, 30)
-                  .addComponent(btnUpdatePersonalData, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                  .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                     .addComponent(btnUpdatePersonalData, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                     .addComponent(btnEraseMyAcount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                .addComponent(jLabel4)
@@ -169,6 +177,8 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
                      .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(btnUpdatePersonalData)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEraseMyAcount)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSignOut)
                         .addGap(24, 24, 24))))
@@ -228,10 +238,12 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
    }
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
+   private javax.swing.JButton btnEraseMyAcount;
    private javax.swing.JButton btnHomePage;
    private javax.swing.JButton btnHomePage1;
    private javax.swing.JButton btnSignOut;
    private javax.swing.JButton btnUpdatePersonalData;
+   private javax.swing.JButton jButton1;
    private javax.swing.JLabel jLabel1;
    private javax.swing.JLabel jLabel2;
    private javax.swing.JLabel jLabel3;
