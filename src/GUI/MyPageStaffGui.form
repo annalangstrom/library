@@ -45,6 +45,7 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="btnAddNewItem" pref="207" max="32767" attributes="0"/>
                   <Component id="btnUpdateItem" max="32767" attributes="0"/>
+                  <Component id="btnShowLateObjects" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
@@ -69,7 +70,9 @@
                       <Component id="btnAddNewItem" linkSize="2" min="-2" pref="25" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnUpdateItem" linkSize="2" min="-2" pref="25" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="244" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnShowLateObjects" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="201" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -159,6 +162,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateItemActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JToggleButton" name="btnShowLateObjects">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Show late objects"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

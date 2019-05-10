@@ -36,6 +36,7 @@ public class MyPageStaffGui extends javax.swing.JFrame {
       btnHomePage = new javax.swing.JButton();
       btnUpdatePassword = new javax.swing.JButton();
       btnUpdateItem = new javax.swing.JButton();
+      btnShowLateObjects = new javax.swing.JToggleButton();
 
       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,6 +83,8 @@ public class MyPageStaffGui extends javax.swing.JFrame {
          }
       });
 
+      btnShowLateObjects.setText("Show late objects");
+
       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
       getContentPane().setLayout(layout);
       layout.setHorizontalGroup(
@@ -104,7 +107,8 @@ public class MyPageStaffGui extends javax.swing.JFrame {
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                .addComponent(btnAddNewItem, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-               .addComponent(btnUpdateItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+               .addComponent(btnUpdateItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+               .addComponent(btnShowLateObjects, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGap(0, 0, Short.MAX_VALUE))
       );
       layout.setVerticalGroup(
@@ -123,7 +127,9 @@ public class MyPageStaffGui extends javax.swing.JFrame {
                   .addComponent(btnAddNewItem, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                   .addGap(18, 18, 18)
                   .addComponent(btnUpdateItem, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addGap(244, 244, 244))
+                  .addGap(18, 18, 18)
+                  .addComponent(btnShowLateObjects)
+                  .addGap(201, 201, 201))
                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                   .addComponent(jLabel2)
                   .addGap(5, 5, 5)
@@ -194,6 +200,7 @@ public class MyPageStaffGui extends javax.swing.JFrame {
    // Variables declaration - do not modify//GEN-BEGIN:variables
    private javax.swing.JButton btnAddNewItem;
    private javax.swing.JButton btnHomePage;
+   private javax.swing.JToggleButton btnShowLateObjects;
    private javax.swing.JButton btnSignOut;
    private javax.swing.JButton btnUpdateItem;
    private javax.swing.JButton btnUpdatePassword;
