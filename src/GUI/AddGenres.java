@@ -21,6 +21,7 @@ public class AddGenres extends javax.swing.JFrame {
      * Creates new form AddGenres
      */
     public AddGenres() {
+        super("Add genres");
         model = new DefaultListModel();
         initComponents();
         initList();
