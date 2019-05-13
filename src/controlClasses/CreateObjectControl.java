@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -88,8 +90,7 @@ public class CreateObjectControl {
     public Movie createMovie(String title, int publishYear, int ageLimit, 
             String pCountry, String location, ArrayList<String> keywords, 
             ArrayList<String> genres, ArrayList<AuthorArtist> authorArtist){
-        
-//        Year pubYear = parse(publishYear);
+      
         
         Movie movie = new Movie(ageLimit, pCountry, title, publishYear, location, keywords, 
                 genres, authorArtist);
@@ -107,8 +108,9 @@ public class CreateObjectControl {
         return magazine;
     }
     
-    public String confirmSaving(){
-        return "Creation completed!";
+    public void confirmSaving(){
+        JFrame frame = new JFrame();
+        JOptionPane.showMessageDialog(frame, "Saved!");
     }
     
     public void finish(){}
