@@ -323,8 +323,8 @@ public class CreateObject extends javax.swing.JFrame {
                         Integer.parseInt(txtPubYear.getText()), txtLocation.getText(), 
                         addKeywords.things, addGenres.things, addAutArts.things);
             
+            control.confirmSaving();
             
-            JOptionPane.showMessageDialog(frame, "Saved!");
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(frame, "Something went wrong, " + ex.getMessage());
             Logger.getLogger(CreateObject.class.getName()).log(Level.SEVERE, null, ex);
