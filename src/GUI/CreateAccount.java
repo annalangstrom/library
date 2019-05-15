@@ -6,6 +6,7 @@
 package GUI;
 
 import controlClasses.CreateAccountControl;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,7 +41,6 @@ public class CreateAccount extends javax.swing.JFrame {
         txtSsn = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtFirstName = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -62,6 +62,7 @@ public class CreateAccount extends javax.swing.JFrame {
         txtCity = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         btnSignIn = new javax.swing.JButton();
+        txtPassword = new javax.swing.JPasswordField();
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         jLabel1.setText("Create account");
@@ -70,6 +71,19 @@ public class CreateAccount extends javax.swing.JFrame {
         btnHomePage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHomePageActionPerformed(evt);
+            }
+        });
+
+        txtSsn.setForeground(new java.awt.Color(204, 204, 204));
+        txtSsn.setText("YYYYMMDDXXXX");
+        txtSsn.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtSsnFocusGained(evt);
+            }
+        });
+        txtSsn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSsnActionPerformed(evt);
             }
         });
 
@@ -86,6 +100,14 @@ public class CreateAccount extends javax.swing.JFrame {
         cmbCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Public", "Student", "Teacher", "Reasercher" }));
 
         jLabel7.setText("Email:");
+
+        txtMail.setForeground(new java.awt.Color(204, 204, 204));
+        txtMail.setText("example@gmail.com");
+        txtMail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtMailFocusGained(evt);
+            }
+        });
 
         jLabel8.setText("Phone number:");
 
@@ -118,12 +140,21 @@ public class CreateAccount extends javax.swing.JFrame {
             }
         });
 
+        txtPassword.setForeground(new java.awt.Color(204, 204, 204));
+        txtPassword.setText("123456");
+        txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtPasswordFocusGained(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnSignIn)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -134,7 +165,6 @@ public class CreateAccount extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addComponent(jLabel2))
-                            .addComponent(txtPassword)
                             .addComponent(txtFirstName)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
@@ -143,8 +173,8 @@ public class CreateAccount extends javax.swing.JFrame {
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel5)))
                             .addComponent(txtLastName)
-                            .addComponent(cmbCategory, 0, 163, Short.MAX_VALUE)))
-                    .addComponent(btnSignIn))
+                            .addComponent(cmbCategory, 0, 163, Short.MAX_VALUE)
+                            .addComponent(txtPassword))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(66, 66, 66)
@@ -207,8 +237,8 @@ public class CreateAccount extends javax.swing.JFrame {
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -263,6 +293,13 @@ public class CreateAccount extends javax.swing.JFrame {
 
     private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
         JFrame frame = new JFrame();
+        
+        if(!luhn(txtSsn.getText())){
+            JOptionPane.showMessageDialog(frame, "Invalid social security number.");
+        }
+        while(!passwordCheck(txtPassword.getText())){
+            JOptionPane.showMessageDialog(frame, "Incorrect password.");
+        }
         try {
             CreateAccountControl control = new CreateAccountControl();
             
@@ -280,6 +317,79 @@ public class CreateAccount extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnCreateAccountActionPerformed
 
+    private void txtSsnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSsnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSsnActionPerformed
+
+    private void txtSsnFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSsnFocusGained
+        // TODO add your handling code here:
+        txtSsn.setText("");
+        txtSsn.setForeground(Color.black);
+    }//GEN-LAST:event_txtSsnFocusGained
+
+    private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
+        // TODO add your handling code here:
+        txtPassword.setText("");
+        txtPassword.setForeground(Color.black);
+    }//GEN-LAST:event_txtPasswordFocusGained
+
+    private void txtMailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMailFocusGained
+        // TODO add your handling code here:
+        txtMail.setText("");
+        txtMail.setForeground(Color.black);
+    }//GEN-LAST:event_txtMailFocusGained
+
+    
+    private boolean luhn(String pnr){
+        JFrame frame = new JFrame();
+        //ifall angivet personnummer är längre än 10 anges antalet extrasiffror i "extra"
+        int extra = pnr.length() - 10; 
+
+        //ifall extrasiffrorna är färre än noll så innebär det att personnumret var 
+        //färre än 10 siffror, vilket ett giltigt persnr måste vara, därför skrivs
+        //ett felmeddelande ut och resultatet blir false och går tillbaka till "fillPnr"-metoden
+        if (extra < 0) {
+            JOptionPane.showMessageDialog(frame, "Social security number needs to contain of at least 10 numbers.");
+            
+            return false;
+        }
+
+        pnr = pnr.substring(extra, 10 + extra);
+        int sum = 0;
+
+        for (int i = 0; i < pnr.length(); i++){
+
+            char c = pnr.charAt(i); 
+
+            int num = c - '0'; 
+
+            int product;
+            if (i % 2 != 0){
+                product = num * 1;
+            }else{
+                product = num * 2;
+            }
+
+            if (product > 9){
+            product -= 9;
+            }
+            sum += product;              
+        }
+    
+        //metoden returnerar sant ifall att "remaindern" av 10 är 0, 
+        //alltså att summan gick att dela med 10 utan rester, i annat fall returneras false
+        return (sum % 10 == 0);
+    }
+    private boolean passwordCheck(String password){
+        if (password.length() < 6){
+            JFrame frame = new JFrame();
+            JOptionPane.showMessageDialog(frame, "Password is too short, need to be at least 6 characters.");
+            return false;
+        }
+        else 
+            return true;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -338,7 +448,7 @@ public class CreateAccount extends javax.swing.JFrame {
     private javax.swing.JTextField txtFirstName;
     private javax.swing.JTextField txtLastName;
     private javax.swing.JTextField txtMail;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtPhoneNumber;
     private javax.swing.JTextField txtPostcode;
     private javax.swing.JTextField txtSsn;
