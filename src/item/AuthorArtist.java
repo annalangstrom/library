@@ -15,13 +15,19 @@ public class AuthorArtist {
     private int aNo;
     private String fname;
     private String sname;
-    private ArrayList<Item> items;
+    private ArrayList<Item> items = new ArrayList<>();
 
     public AuthorArtist(String fname, String sname, Item item) {
         this.fname = fname;
         this.sname = sname;
         items.add(item);
     }
+
+    public void setaNo(int aNo) {
+        this.aNo = aNo;
+    }
+    
+    
 
     public int getaNo() {
         return aNo;
