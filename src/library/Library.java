@@ -5,7 +5,8 @@
  */
 package library;
 
-import GUI.HomePage;
+import GUI.CreateObjectGui;
+
 
 /**
  *
@@ -18,8 +19,7 @@ public class Library {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-       HomePage.main(args);
-        
+        CreateObjectGui.main(args);
     }
     
 }
