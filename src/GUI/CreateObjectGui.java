@@ -18,15 +18,18 @@ import javax.swing.JOptionPane;
  */
 public class CreateObjectGui extends javax.swing.JFrame {
     
-    AddKeywordsGui addKeys;
-    AddGenres addGenres;
-    AddAutArtGui addAutArts;
+    private final AddKeywordsGui addKeys;
+    private final AddGenres addGenres;
+    private final AddAutArtGui addAutArts;
     /**
      * Creates new form CreateObject
      */
     public CreateObjectGui() {
         super("New item");
         initComponents();
+        addKeys = new AddKeywordsGui();
+        addGenres = new AddGenres();
+        addAutArts = new AddAutArtGui();
     }
 
     /**
@@ -278,19 +281,14 @@ public class CreateObjectGui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddKeywordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddKeywordActionPerformed
-        
-        addKeys = new AddKeywordsGui();
         addKeys.setVisible(true);
-        
     }//GEN-LAST:event_btnAddKeywordActionPerformed
 
     private void btnAddGenresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddGenresActionPerformed
-        addGenres = new AddGenres();
         addGenres.setVisible(true);
     }//GEN-LAST:event_btnAddGenresActionPerformed
 
     private void addAutArtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAutArtActionPerformed
-        addAutArts = new AddAutArtGui();
         addAutArts.setVisible(true);
     }//GEN-LAST:event_addAutArtActionPerformed
 
