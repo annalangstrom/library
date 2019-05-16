@@ -5,6 +5,7 @@
  */
 package item;
 
+import java.sql.SQLException;
 import java.time.Year;
 import java.util.ArrayList;
 
@@ -17,7 +18,7 @@ public class Magazine extends Item{
 
     public Magazine(String publisher, String title, int publishYear, 
             String location, ArrayList<String> keywords, ArrayList<String> genres, 
-            ArrayList<AuthorArtist> authorArtist) {
+            ArrayList<AuthorArtist> authorArtist) throws ClassNotFoundException, SQLException {
         super(title, publishYear, location, keywords, genres, authorArtist);
         this.publisher = publisher;
     }

@@ -7,6 +7,7 @@ package item;
 
 import item.AuthorArtist;
 import item.Item;
+import java.sql.SQLException;
 import java.time.Year;
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ public class Movie extends Item {
 
     public Movie(int ageLimit, String pCountry, String title, int publishYear, 
             String location, ArrayList<String> keywords, ArrayList<String> genres, 
-            ArrayList<AuthorArtist> authorArtist) {
+            ArrayList<AuthorArtist> authorArtist) throws ClassNotFoundException, SQLException {
         super(title, publishYear, location, keywords, genres, authorArtist);
         this.ageLimit = ageLimit;
         this.pCountry = pCountry;

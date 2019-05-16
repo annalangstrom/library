@@ -17,9 +17,10 @@ import javax.swing.JOptionPane;
  * @author annalangstrom
  */
 public class CreateObject extends javax.swing.JFrame {
-    AddAutArt addAutArts = new AddAutArt();
-    AddGenres addGenres = new AddGenres();
-    AddKeywords addKeywords = new AddKeywords();
+    
+    AddKeywords addKeys;
+    AddGenres addGenres;
+    AddAutArt addAutArts;
     /**
      * Creates new form CreateObject
      */
@@ -284,23 +285,19 @@ public class CreateObject extends javax.swing.JFrame {
 
     private void btnAddKeywordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddKeywordActionPerformed
         
-        String[] args = null;
-        // TODO add your handling code here:
-        AddKeywords.main(args);
+        addKeys = new AddKeywords();
+        addKeys.setVisible(true);
         
     }//GEN-LAST:event_btnAddKeywordActionPerformed
 
     private void btnAddGenresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddGenresActionPerformed
-        String[] args = null;
-        // TODO add your handling code here:
-        
-        AddGenres.main(args);
+        addGenres = new AddGenres();
+        addGenres.setVisible(true);
     }//GEN-LAST:event_btnAddGenresActionPerformed
 
     private void addAutArtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAutArtActionPerformed
-        String[] args = null;
-        // TODO add your handling code here:
-        AddAutArt.main(args);
+        addAutArts = new AddAutArt();
+        addAutArts.setVisible(true);
     }//GEN-LAST:event_addAutArtActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
@@ -310,18 +307,18 @@ public class CreateObject extends javax.swing.JFrame {
             CreateObjectControl control = new CreateObjectControl();
             if(cmbCategory.getSelectedItem().equals("Book"))
                 control.addBookToDB(txtIsbn.getText(), txtPublisher.getText(), txtTitle.getText(),
-                        Integer.parseInt(txtPubYear.getText()), txtLocation.getText(), addKeywords.things,
-                        addGenres.things, addAutArts.things);
+                        Integer.parseInt(txtPubYear.getText()), txtLocation.getText(), addKeys.getThings(),
+                        addGenres.getThings(), addAutArts.getThings());
             
             else if(cmbCategory.getSelectedItem().equals("Movie"))
                 control.addMovieToDB(Integer.parseInt(txtAgeLimit.getText()), txtPCountry.getText(), 
                         txtTitle.getText(), Integer.parseInt(txtPubYear.getText()), txtLocation.getText(), 
-                        addKeywords.things, addGenres.things, addAutArts.things);
+                        addKeys.getThings(), addGenres.getThings(), addAutArts.getThings());
            
             else if(cmbCategory.getSelectedItem().equals("Magazine"))
                 control.addMagazineToDB(txtPublisher.getText(), txtTitle.getText(), 
                         Integer.parseInt(txtPubYear.getText()), txtLocation.getText(), 
-                        addKeywords.things, addGenres.things, addAutArts.things);
+                        addKeys.getThings(), addGenres.getThings(), addAutArts.getThings());
             
             control.confirmSaving();
             
