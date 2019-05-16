@@ -9,12 +9,12 @@ package GUI;
  *
  * @author Rebec
  */
-public class Loan extends javax.swing.JFrame {
+public class LoanGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form Loan
      */
-    public Loan() {
+    public LoanGUI() {
         initComponents();
     }
 
@@ -30,7 +30,7 @@ public class Loan extends javax.swing.JFrame {
         panelLoanConfirm = new javax.swing.JPanel();
         labelLoanConfirm = new javax.swing.JLabel();
         btnLoanConfMyPage = new javax.swing.JButton();
-        btnLoanConfSignout = new javax.swing.JButton();
+        btnLoanConfSearch = new javax.swing.JButton();
         btnLoanHomePage = new javax.swing.JButton();
         btnLoanToSearch = new javax.swing.JButton();
         labelLoan = new javax.swing.JLabel();
@@ -44,7 +44,7 @@ public class Loan extends javax.swing.JFrame {
 
         btnLoanConfMyPage.setText("Go to My Page");
 
-        btnLoanConfSignout.setText("Sign out");
+        btnLoanConfSearch.setText("Go to Search");
 
         javax.swing.GroupLayout panelLoanConfirmLayout = new javax.swing.GroupLayout(panelLoanConfirm);
         panelLoanConfirm.setLayout(panelLoanConfirmLayout);
@@ -56,19 +56,19 @@ public class Loan extends javax.swing.JFrame {
                     .addGroup(panelLoanConfirmLayout.createSequentialGroup()
                         .addComponent(btnLoanConfMyPage)
                         .addGap(494, 494, 494)
-                        .addComponent(btnLoanConfSignout))
+                        .addComponent(btnLoanConfSearch))
                     .addComponent(labelLoanConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         panelLoanConfirmLayout.setVerticalGroup(
             panelLoanConfirmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelLoanConfirmLayout.createSequentialGroup()
-                .addContainerGap(57, Short.MAX_VALUE)
+                .addContainerGap(56, Short.MAX_VALUE)
                 .addComponent(labelLoanConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addGroup(panelLoanConfirmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLoanConfMyPage)
-                    .addComponent(btnLoanConfSignout))
+                    .addComponent(btnLoanConfSearch))
                 .addGap(44, 44, 44))
         );
 
@@ -154,27 +154,28 @@ public class Loan extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Loan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoanGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Loan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoanGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Loan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoanGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Loan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoanGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Loan().setVisible(true);
+                new LoanGUI().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLoanConfMyPage;
-    private javax.swing.JButton btnLoanConfSignout;
+    private javax.swing.JButton btnLoanConfSearch;
     private javax.swing.JButton btnLoanHomePage;
     private javax.swing.JButton btnLoanLoan;
     private javax.swing.JButton btnLoanSignOut;
