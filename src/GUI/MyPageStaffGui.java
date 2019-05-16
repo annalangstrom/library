@@ -174,7 +174,7 @@ public class MyPageStaffGui extends javax.swing.JFrame {
     private void btnAddCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCopyActionPerformed
         // TODO add your handling code here:
         String itemNo = JOptionPane.showInputDialog(rootPane, "Which itemnumber do you wanna add copies to?");
-        AddCopy addCopy = new AddCopy();
+        AddCopyGui addCopy = new AddCopyGui();
         addCopy.setItemNo(Integer.parseInt(itemNo));
         addCopy.setVisible(true);
     }//GEN-LAST:event_btnAddCopyActionPerformed
