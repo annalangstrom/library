@@ -83,6 +83,11 @@ public class HomePageGui extends javax.swing.JFrame {
       });
 
       btnCreateAccount.setText("Create account");
+      btnCreateAccount.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnCreateAccountActionPerformed(evt);
+         }
+      });
 
       javax.swing.GroupLayout panelSignedInLayout = new javax.swing.GroupLayout(panelSignedIn);
       panelSignedIn.setLayout(panelSignedInLayout);
@@ -175,6 +180,12 @@ public class HomePageGui extends javax.swing.JFrame {
       SignIn signIn = new SignIn();
       signIn.setVisible(true);
    }//GEN-LAST:event_btnSignInActionPerformed
+
+   private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
+      // TODO add your handling code here:
+      CreateAccount createAccount = new CreateAccount();
+      createAccount.setVisible(true);
+   }//GEN-LAST:event_btnCreateAccountActionPerformed
 
 //    /**
 //     * @param args the command line arguments
