@@ -18,8 +18,10 @@ public class Library {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-       HomePageGui homepage = new HomePageGui();
-       homepage.setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new HomePageGui().setVisible(true);
+            }
         
     }
     
