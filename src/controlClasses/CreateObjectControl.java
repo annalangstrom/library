@@ -5,21 +5,14 @@
  */
 package controlClasses;
 
-import GUI.CreateAccount;
-import GUI.CreateObject;
 import JDBCconnection.JDBCconnection;
-import java.time.Year;
 import item.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import static java.time.Year.parse;
+import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -41,71 +34,30 @@ public class CreateObjectControl {
     private final String AA_ITEM_INSERT = "insert into AAitem (itemNo, aNo) values (?, ?)";
     
     
-    private PreparedStatement insertBook;
-    private PreparedStatement insertMagazine;
-    private PreparedStatement insertMovie;
-    private PreparedStatement insertKeyword;
-    private PreparedStatement insertGenre;
-    private PreparedStatement insertAutArt;
-    private PreparedStatement insertAAitem;
+    private final PreparedStatement insertBook;
+    private final PreparedStatement insertMagazine;
+    private final PreparedStatement insertMovie;
+    private final PreparedStatement insertKeyword;
+    private final PreparedStatement insertGenre;
+    private final PreparedStatement insertAutArt;
+    private final PreparedStatement insertAAitem;
     
     JDBCconnection connection = new JDBCconnection();
     private Connection con = null;
 
-    private CreateObject co = null;
-    
-    //Konstruktor
-    public CreateObjectControl(CreateObject co) throws ClassNotFoundException, 
-            SQLException{
-        this();
-        this.co = co;
-        
-    }
     //Konstruktor
     public CreateObjectControl() throws ClassNotFoundException, 
             SQLException{
        //Koppla upp
+       
        con = connection.connectToDb(con); 
-       insertBook = con.prepareStatement(BOOK_INSERT);
+       insertBook = con.prepareStatement(BOOK_INSERT, Statement.RETURN_GENERATED_KEYS);
        insertMagazine = con.prepareStatement(MAGAZINE_INSERT);
        insertMovie = con.prepareStatement(MOVIE_INSERT);
        insertKeyword = con.prepareStatement(KEYWORD_INSERT);
        insertGenre = con.prepareStatement(GENRE_INSERT);
        insertAutArt = con.prepareStatement(AUTHOR_ARTIST_INSERT);
        insertAAitem = con.prepareStatement(AA_ITEM_INSERT);
-    }
-    
-    public Book createBook(String title, String isbn, String publisher, 
-            int publishYear, String location, ArrayList<String> keywords, 
-            ArrayList<String> genres, ArrayList<AuthorArtist> authorArtist){
-        
-//        Year pubYear = parse(publishYear);
-        
-        Book book = new Book(isbn, publisher, title, publishYear, location, keywords, 
-                genres, authorArtist);
-        
-        return book;
-    }
-    
-    public Movie createMovie(String title, int publishYear, int ageLimit, 
-            String pCountry, String location, ArrayList<String> keywords, 
-            ArrayList<String> genres, ArrayList<AuthorArtist> authorArtist){
-      
-        
-        Movie movie = new Movie(ageLimit, pCountry, title, publishYear, location, keywords, 
-                genres, authorArtist);
-        
-        return movie;
-    }
-    
-    public Magazine createMagazine(String title, String publisher, 
-            int publishYear, String location, ArrayList<String> keywords, 
-            ArrayList<String> genres, ArrayList<AuthorArtist> authorArtist){
-        
-        Magazine magazine = new Magazine(publisher, title, publishYear, location, 
-        keywords, genres, authorArtist);
-        
-        return magazine;
     }
     
     public void confirmSaving(){
@@ -117,11 +69,12 @@ public class CreateObjectControl {
     
     public void addBookToDB(String isbn, String publisher, String title, 
             int publishYear, String location, ArrayList<String> keywords, 
-            ArrayList<String> genres, ArrayList<String> authorArtist) throws SQLException{
+            ArrayList<String> genres, ArrayList<String> authorArtist) throws SQLException, ClassNotFoundException{
         
         ArrayList<AuthorArtist> authorArtists = new ArrayList<>();
-        Book book = createBook(title, isbn, publisher, 
-            publishYear, location, keywords, genres, authorArtists);
+        
+        Book book = new Book(isbn, publisher, title, publishYear, location, keywords, 
+                genres, authorArtists);
         
         //insert into Item (isbn, title, publisher, publishYear, location) values (?,?,?,?,?)
         insertBook.setString(1, isbn);
@@ -130,6 +83,15 @@ public class CreateObjectControl {
         insertBook.setInt(4, publishYear);
         insertBook.setString(5, location);
         insertBook.executeUpdate();
+        
+        try (ResultSet generatedKeys = insertBook.getGeneratedKeys()) {
+            if (generatedKeys.next()) {
+                book.setItemNo(generatedKeys.getInt(1));
+            }
+            else {
+                throw new SQLException("Creating item failed, no ID obtained.");
+            }
+        }
         
         if(!keywords.isEmpty())
             insertIntoKeyword(keywords, book);
@@ -140,25 +102,40 @@ public class CreateObjectControl {
         
         //uppdatera arraylisten med de ifyllda posterna
         book.setAuthorArtist(authorArtists);
+        
     }
     
     public void addMagazineToDB(String publisher, String title, int publishYear, 
             String location, ArrayList<String> keywords, ArrayList<String> genres, 
-            ArrayList<String> authorArtist) throws SQLException{
+            ArrayList<String> authorArtist) throws SQLException, ClassNotFoundException{
         
         ArrayList<AuthorArtist> authorArtists = new ArrayList<>();
-        Magazine magazine = createMagazine(title, publisher, publishYear, location, 
-                keywords, genres, authorArtists);
+        
+        Magazine magazine = new Magazine(publisher, title, publishYear, location, 
+        keywords, genres, authorArtists);
         
         //insert into item (title, publisher, publishYear, location) values (?, ?, ?, ?)
         insertMagazine.setString(1, title);
         insertMagazine.setString(2, publisher);
         insertMagazine.setInt(3, publishYear);
         insertMagazine.setString(4, location);
+        insertMagazine.close();
         
-        insertIntoKeyword(keywords, magazine);
-        insertIntoGenre(genres, magazine);
-        insertIntoAuthorArtist(authorArtist, magazine, authorArtists);
+        try (ResultSet generatedKeys = insertBook.getGeneratedKeys()) {
+            if (generatedKeys.next()) {
+                magazine.setItemNo(generatedKeys.getInt(1));
+            }
+            else {
+                throw new SQLException("Creating item failed, no ID obtained.");
+            }
+        }
+        
+        if(!keywords.isEmpty())
+            insertIntoKeyword(keywords, magazine);
+        if(!genres.isEmpty())
+            insertIntoGenre(genres, magazine);
+        if(!authorArtist.isEmpty())
+            insertIntoAuthorArtist(authorArtist, magazine, authorArtists);
         
         //uppdatera arraylisten med de ifyllda posterna
         magazine.setAuthorArtist(authorArtists);
@@ -166,10 +143,10 @@ public class CreateObjectControl {
     
     public void addMovieToDB(int ageLimit, String pCountry, String title, 
             int publishYear, String location, ArrayList<String> keywords, 
-            ArrayList<String> genres, ArrayList<String> authorArtist) throws SQLException{
+            ArrayList<String> genres, ArrayList<String> authorArtist) throws SQLException, ClassNotFoundException{
         
         ArrayList<AuthorArtist> authorArtists = new ArrayList<>();
-        Movie movie = createMovie(title, publishYear, ageLimit, pCountry, location, keywords, 
+        Movie movie = new Movie(ageLimit, pCountry, title, publishYear, location, keywords, 
                 genres, authorArtists);
         
         //insert into item (title, ageLimit, pCountry, publishYear, location) values (?, ?, ?, ?, ?)
@@ -179,10 +156,23 @@ public class CreateObjectControl {
         insertMovie.setInt(4, publishYear);
         insertMovie.setString(5, location);
         insertMovie.executeUpdate();
+        insertMovie.close();
         
-        insertIntoKeyword(keywords, movie);
-        insertIntoGenre(genres, movie);
-        insertIntoAuthorArtist(authorArtist, movie, authorArtists);
+        try (ResultSet generatedKeys = insertBook.getGeneratedKeys()) {
+            if (generatedKeys.next()) {
+                movie.setItemNo(generatedKeys.getInt(1));
+            }
+            else {
+                throw new SQLException("Creating item failed, no ID obtained.");
+            }
+        }
+        
+        if(!keywords.isEmpty())
+            insertIntoKeyword(keywords, movie);
+        if(!genres.isEmpty())
+            insertIntoGenre(genres, movie);
+        if(!authorArtist.isEmpty())
+            insertIntoAuthorArtist(authorArtist, movie, authorArtists);
         
         //uppdatera arraylisten med de ifyllda posterna
         movie.setAuthorArtist(authorArtists);
@@ -194,8 +184,9 @@ public class CreateObjectControl {
             //Hur få tag i itemNo?
             insertKeyword.setInt(1, item.getItemNo());
             insertKeyword.setString(2, keywords.get(i));
+            insertKeyword.executeUpdate();
         }
-        insertKeyword.executeUpdate();
+        insertKeyword.close();
     }
     
     private void insertIntoGenre(ArrayList<String> genres, Item item) throws SQLException{
@@ -204,8 +195,10 @@ public class CreateObjectControl {
             //hur få tag i itemNo?
             insertGenre.setInt(1, item.getItemNo());
             insertGenre.setString(2, genres.get(i));
+            insertGenre.executeUpdate();
         }
-        insertGenre.executeUpdate();
+        
+        insertGenre.close();
     }
     
     private ArrayList<AuthorArtist> insertIntoAuthorArtist(ArrayList<String> authorArtist, 
@@ -220,6 +213,7 @@ public class CreateObjectControl {
             lname = fullname.substring(fullname.indexOf(" "));
             insertAutArt.setString(1, fname);
             insertAutArt.setString(2, lname);
+            insertAutArt.executeUpdate();
             
             autArt = new AuthorArtist(fname, lname, item);
             authorArtists.add(autArt);
@@ -227,9 +221,10 @@ public class CreateObjectControl {
             //insert into AAitem (itemNo, aNo) values (?, ?)
             insertAAitem.setInt(1, item.getItemNo());
             insertAAitem.setInt(2, autArt.getaNo());
+            insertAAitem.executeUpdate();
         }
-        insertAutArt.executeUpdate();
-        insertAAitem.executeUpdate();
+        insertAutArt.close();
+        insertAAitem.close();
         
         return authorArtists;
     }

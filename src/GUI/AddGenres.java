@@ -14,8 +14,12 @@ import javax.swing.DefaultListModel;
  */
 public class AddGenres extends javax.swing.JFrame {
     
-    DefaultListModel model;
-    ArrayList<String> things = new ArrayList<>();
+    private final DefaultListModel model;
+    private final ArrayList<String> things = new ArrayList<>();
+
+    public ArrayList<String> getThings() {
+        return things;
+    }
 
     /**
      * Creates new form AddGenres
@@ -48,7 +52,7 @@ public class AddGenres extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         lstThings = new javax.swing.JList<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -119,17 +123,20 @@ public class AddGenres extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         model.addElement(txtAdd.getText());
+        things.add(txtAdd.getText());
         txtAdd.setText("");
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         // TODO add your handling code here:
         int index = lstThings.getSelectedIndex();
+        things.remove(index);
         model.remove(index);
     }//GEN-LAST:event_btnRemoveActionPerformed
 
@@ -140,10 +147,10 @@ public class AddGenres extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        for(int i = 0; i < model.size(); i++){
-            things.add(model.elementAt(i).toString());
-        }
-        
+//        for(int i = 0; i < model.size(); i++){
+//            things.add(model.elementAt(i).toString());
+//        }
+//        
         super.dispose();
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -175,11 +182,11 @@ public class AddGenres extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AddGenres().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new AddGenres().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

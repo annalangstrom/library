@@ -5,6 +5,10 @@
  */
 package item;
 
+import JDBCconnection.JDBCconnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.Year;
 import java.util.ArrayList;
 
@@ -21,14 +25,34 @@ public abstract class Item {
     private ArrayList<String> genres;
     private ArrayList<AuthorArtist> authorArtist;
     private boolean active = true;
+    
+//    private final String ITEM_SELECT = "SELECT itemNo FROM Item";
+//    
+//    private PreparedStatement selectItem = null;
+//    
+//    JDBCconnection connection;
+//    private Connection con = null;
+//
+//    //Konstruktor
+//    public CreateObjectControl() throws ClassNotFoundException, 
+//            SQLException{
+//       //Koppla upp
+//       
+//       con = connection.connectToDb(con); 
+//       insertBook = con.prepareStatement(BOOK_INSERT);
 
-    public Item(String title, int publishYear, String location, ArrayList<String> keywords, ArrayList<String> genres, ArrayList<AuthorArtist> authorArtist) {
+    public Item(String title, int publishYear, String location, ArrayList<String> keywords, 
+            ArrayList<String> genres, ArrayList<AuthorArtist> authorArtist){
         this.title = title;
         this.publishYear = publishYear;
         this.location = location;
         this.keywords = keywords;
         this.genres = genres;
         this.authorArtist = authorArtist;
+        
+//        connection = new JDBCconnection();
+//        con = connection.connectToDb(con); 
+//        selectItem = con.prepareStatement(ITEM_SELECT);
     }
     
     public Item (){}
@@ -36,6 +60,11 @@ public abstract class Item {
     public int getItemNo() {
         return itemNo;
     }
+
+    public void setItemNo(int itemNo) {
+        this.itemNo = itemNo;
+    }
+    
 
     public String getTitle() {
         return title;

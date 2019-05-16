@@ -156,6 +156,7 @@ public class HomePageGui extends javax.swing.JFrame {
       IF låntagare inloggad - gå till lånsidan
       ELSE gå till inloggningssidan*/
       String[] args = null;
+//      Loan.main(args);
       //Loan.main(args);
    }//GEN-LAST:event_btnLoanItemActionPerformed
 
@@ -164,6 +165,7 @@ public class HomePageGui extends javax.swing.JFrame {
       IF låntagare inloggad - gå till återlämningssidan
       ELSE gå till inloggningssidan*/
       String[] args = null;
+//      Return.main(args);
       //Return.main(args);
    }//GEN-LAST:event_btnReturnItemActionPerformed
 
@@ -172,6 +174,7 @@ public class HomePageGui extends javax.swing.JFrame {
       Stoppa in i sökmetod
       Dirigera om till Söksidan*/
       String[] args = null;
+//      Search.main(args);
       //Search.main(args);
    }//GEN-LAST:event_btnSearchActionPerformed
 
