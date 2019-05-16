@@ -5,7 +5,7 @@
  */
 package library;
 
-import GUI.CreateObjectGui;
+import GUI.HomePageGui;
 
 
 /**
@@ -19,7 +19,12 @@ public class Library {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        CreateObjectGui.main(args);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new HomePageGui().setVisible(true);
+            }
+        });
+                
     }
     
 }
