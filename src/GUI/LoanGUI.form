@@ -13,23 +13,23 @@
                       <Group type="102" attributes="0">
                           <Component id="btnLoanConfMyPage" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="494" max="-2" attributes="0"/>
-                          <Component id="btnLoanConfSignout" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnLoanConfSearch" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="labelLoanConfirm" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="68" max="32767" attributes="0"/>
+                  <EmptySpace pref="36" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace pref="57" max="32767" attributes="0"/>
+                  <EmptySpace pref="56" max="32767" attributes="0"/>
                   <Component id="labelLoanConfirm" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnLoanConfMyPage" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnLoanConfSignout" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnLoanConfSearch" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               </Group>
@@ -50,9 +50,9 @@
             <Property name="text" type="java.lang.String" value="Go to My Page"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="btnLoanConfSignout">
+        <Component class="javax.swing.JButton" name="btnLoanConfSearch">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Sign out"/>
+            <Property name="text" type="java.lang.String" value="Go to Search"/>
           </Properties>
         </Component>
       </SubComponents>
