@@ -5,7 +5,7 @@
  */
 package library;
 
-import GUI.HomePage;
+import GUI.HomePageGui;
 
 /**
  *
@@ -18,7 +18,8 @@ public class Library {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-       HomePage.main(args);
+       HomePageGui homepage = new HomePageGui();
+       homepage.setVisible(true);
         
     }
     
