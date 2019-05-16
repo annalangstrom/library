@@ -9,12 +9,12 @@ package GUI;
  *
  * @author Rebec
  */
-public class Search extends javax.swing.JFrame {
+public class SearchGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form Search
      */
-    public Search() {
+    public SearchGUI() {
         initComponents();
     }
 
@@ -27,6 +27,10 @@ public class Search extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelSearchConfirm = new javax.swing.JPanel();
+        btnSearchSearch = new javax.swing.JButton();
+        btnSearchMyPage = new javax.swing.JButton();
+        panelReservationConfirm = new javax.swing.JLabel();
         labelSearch = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
@@ -34,6 +38,39 @@ public class Search extends javax.swing.JFrame {
         btnSearchReserve = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listSearchResults = new javax.swing.JList<>();
+
+        btnSearchSearch.setText("Go to Search");
+
+        btnSearchMyPage.setText("Go to My Page");
+
+        panelReservationConfirm.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        panelReservationConfirm.setText("<html>\n<body>\n<p>\n<center>The reservation successful!</center>\n<br><center>You can see an overview of your reservations under \"My Page\".</center>\n</p>\n</body>");
+
+        javax.swing.GroupLayout panelSearchConfirmLayout = new javax.swing.GroupLayout(panelSearchConfirm);
+        panelSearchConfirm.setLayout(panelSearchConfirmLayout);
+        panelSearchConfirmLayout.setHorizontalGroup(
+            panelSearchConfirmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSearchConfirmLayout.createSequentialGroup()
+                .addContainerGap(108, Short.MAX_VALUE)
+                .addGroup(panelSearchConfirmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelSearchConfirmLayout.createSequentialGroup()
+                        .addComponent(btnSearchMyPage)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSearchSearch))
+                    .addComponent(panelReservationConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(99, 99, 99))
+        );
+        panelSearchConfirmLayout.setVerticalGroup(
+            panelSearchConfirmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSearchConfirmLayout.createSequentialGroup()
+                .addContainerGap(73, Short.MAX_VALUE)
+                .addComponent(panelReservationConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addGroup(panelSearchConfirmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSearchSearch)
+                    .addComponent(btnSearchMyPage))
+                .addGap(30, 30, 30))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,31 +149,36 @@ public class Search extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Search.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Search().setVisible(true);
+                new SearchGUI().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnSearchMyPage;
     private javax.swing.JButton btnSearchReserve;
+    private javax.swing.JButton btnSearchSearch;
     private javax.swing.JButton btnSearchSignOut;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelSearch;
     private javax.swing.JList<String> listSearchResults;
+    private javax.swing.JLabel panelReservationConfirm;
+    private javax.swing.JPanel panelSearchConfirm;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
