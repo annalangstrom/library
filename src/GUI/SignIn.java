@@ -173,9 +173,8 @@ public class SignIn extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCreateAccountActionPerformed
 
     private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
-        String[] args = null;
-        // TODO add your handling code here:
-        HomePageGui.main(args);
+        HomePageGui homePage = new HomePageGui();
+        homePage.setVisible(true);
     }//GEN-LAST:event_btnHomePageActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
