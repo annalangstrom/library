@@ -6,6 +6,7 @@
 package GUI;
 
 import javax.swing.JOptionPane;
+import controlClasses.Search;
 
 /**
  *
@@ -182,12 +183,12 @@ public class HomePageGui extends javax.swing.JFrame {
    }//GEN-LAST:event_btnReturnItemActionPerformed
 
    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-      /*Ta text från textrutan
-      Stoppa in i sökmetod
-      Dirigera om till Söksidan*/
-      String[] args = null;
-//      Search.main(args);
-      //Search.main(args);
+      //Ta text från textrutan & Stoppa in i sökmetod
+      Search input = new Search();
+      input.searchItem(txtSearch.getText());
+      //Dirigera om till Söksidan:
+      SearchGUI search = new SearchGUI();
+      search.setVisible(true);
    }//GEN-LAST:event_btnSearchActionPerformed
 
    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
