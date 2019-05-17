@@ -215,7 +215,7 @@ public class CreateObjectControl {
             insertAutArt.setString(2, lname);
             insertAutArt.executeUpdate();
             
-            autArt = new AuthorArtist(fname, lname, item);
+            autArt = new AuthorArtist(fname, lname, item.getItemNo());
             authorArtists.add(autArt);
             
             try (ResultSet generatedKeys = insertAutArt.getGeneratedKeys()) {

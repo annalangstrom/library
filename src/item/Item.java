@@ -65,7 +65,7 @@ public abstract class Item {
         this.itemNo = itemNo;
     }
     
-
+    
     public String getTitle() {
         return title;
     }
