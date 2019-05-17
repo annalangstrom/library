@@ -114,6 +114,11 @@ public class HomePageGui extends javax.swing.JFrame {
       panelSignedIn.setBounds(300, 310, 140, 90);
 
       btnToMyAccount.setText("To my account");
+      btnToMyAccount.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnToMyAccountActionPerformed(evt);
+         }
+      });
 
       btnSignOut.setText("Sign out");
 
@@ -189,6 +194,12 @@ public class HomePageGui extends javax.swing.JFrame {
       CreateAccount createAccount = new CreateAccount();
       createAccount.setVisible(true);
    }//GEN-LAST:event_btnCreateAccountActionPerformed
+
+   private void btnToMyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMyAccountActionPerformed
+      // TODO add your handling code here:
+      MyPageBorrowerGui MyPage = new MyPageBorrowerGui();
+      MyPage.setVisible(true);
+   }//GEN-LAST:event_btnToMyAccountActionPerformed
 
 //    /**
 //     * @param args the command line arguments
