@@ -5,7 +5,7 @@
  */
 package JDBCconnection;
 
-import GUI.CreateAccount;
+import GUI.CreateAccountGui;
 import java.sql.*;
 /**
  *
@@ -21,7 +21,7 @@ public final class JDBCconnection {
     private Connection con = null; //Hanterar uppkoppling
     
     //Konstruktor
-    public JDBCconnection(CreateAccount ca) throws ClassNotFoundException, 
+    public JDBCconnection(CreateAccountGui ca) throws ClassNotFoundException, 
             SQLException{
         this();
         
