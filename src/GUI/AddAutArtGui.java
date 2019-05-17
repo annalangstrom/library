@@ -15,12 +15,17 @@ import javax.swing.DefaultListModel;
 public class AddAutArtGui extends javax.swing.JFrame {
 
     private final DefaultListModel model;
-    private final ArrayList<String> things = new ArrayList<>();
+    private ArrayList<String> things = new ArrayList<>();
 
     public ArrayList<String> getThings() {
         return things;
     }
+
+    public void setThings(ArrayList<String> things) {
+        this.things = things;
+    }
      
+    
     /**
      * Creates new form AddAutArt
      */
