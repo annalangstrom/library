@@ -75,7 +75,7 @@ public class CreateAccountGui extends javax.swing.JFrame {
       });
 
       txtSsn.setForeground(new java.awt.Color(204, 204, 204));
-      txtSsn.setText("YYYYMMDDXXXX");
+      txtSsn.setText("YYMMDDXXXX");
       txtSsn.addFocusListener(new java.awt.event.FocusAdapter() {
          public void focusGained(java.awt.event.FocusEvent evt) {
             txtSsnFocusGained(evt);
