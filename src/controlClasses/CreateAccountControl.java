@@ -5,7 +5,7 @@
  */
 package controlClasses;
 
-import GUI.CreateAccount;
+import GUI.CreateAccountGui;
 import JDBCconnection.JDBCconnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,10 +25,10 @@ public class CreateAccountControl {
     JDBCconnection connection = new JDBCconnection();
     private Connection con = null;
 
-    private CreateAccount ca = null;
+    private CreateAccountGui ca = null;
     
     //Konstruktor
-    public CreateAccountControl(CreateAccount ca) throws ClassNotFoundException, 
+    public CreateAccountControl(CreateAccountGui ca) throws ClassNotFoundException, 
             SQLException{
         this();
         this.ca = ca;

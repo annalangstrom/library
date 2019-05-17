@@ -5,8 +5,8 @@
  */
 package controlClasses;
 
-import GUI.CreateAccount;
-import GUI.SignIn;
+import GUI.CreateAccountGui;
+import GUI.SignInGui;
 import JDBCconnection.JDBCconnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,11 +29,11 @@ public class SignInControl {
     JDBCconnection connection = new JDBCconnection();
     private Connection con = null;
 
-    private SignIn si = null;
+    private SignInGui si = null;
 //    List<Message> lstMessages; 
     
     //Konstruktor
-    public SignInControl(SignIn si) throws ClassNotFoundException, 
+    public SignInControl(SignInGui si) throws ClassNotFoundException, 
             SQLException{
         this();
         this.si = si;
@@ -59,7 +59,7 @@ public class SignInControl {
             printSignInResult(rs);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(frame, "Something went wrong.", "Error message", JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(SignIn.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
