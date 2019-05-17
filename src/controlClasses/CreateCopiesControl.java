@@ -5,7 +5,7 @@
  */
 package controlClasses;
 
-import GUI.AddCopy;
+import GUI.AddCopyGui;
 import JDBCconnection.JDBCconnection;
 import item.Copy;
 import java.sql.Connection;
@@ -20,20 +20,22 @@ import java.util.List;
  * @author annalangstrom
  */
 public class CreateCopiesControl {
-    private final String COPY_INSERT = "INSERT INTO Copy (barcodeNo, itemNo, lcNo, loanStatus, condition, title) "
+    private final String COPY_INSERT = "INSERT INTO Copy (barcodeNo, itemNo, lcNo, loanStatus, item_condition, title) "
             + "VALUES (?, ?, ?, ?, ?, ?)";
-    private final String COPY_SELECT = "SELECT * FROM Copy";
+    private final String COPY_SELECT = "SELECT * FROM Copy ORDER BY copyNo DESC";
+    private final String COPY_DELETE = "DELETE FROM Copy WHERE barcodeNo = ?";
     
     private Connection con = null;
     private final PreparedStatement insertCopy;
     private final PreparedStatement selectAllCopies;
+    private final PreparedStatement deleteCopy;
     
     List<Copy> lstCopies; 
     JDBCconnection connection;
-    private AddCopy addCopy = null;
+    private AddCopyGui addCopy = null;
     
     //Konstruktor
-    public CreateCopiesControl(AddCopy addCopy) throws ClassNotFoundException, 
+    public CreateCopiesControl(AddCopyGui addCopy) throws ClassNotFoundException, 
             SQLException{
         this();
         this.addCopy = addCopy;
@@ -48,6 +50,7 @@ public class CreateCopiesControl {
        con = connection.connectToDb(con); 
        insertCopy = con.prepareStatement(COPY_INSERT);
        selectAllCopies = con.prepareStatement(COPY_SELECT);
+       deleteCopy = con.prepareStatement(COPY_DELETE);
     }
     
     public void addCopy(int barcode, int itemNo, int category, String loanStatus, String condition) throws SQLException, ClassNotFoundException{
@@ -73,7 +76,7 @@ public class CreateCopiesControl {
             //Skapa nytt Message-objekt för varje post som returneras, 
             //data från resultset som inparametrar till konstruktorn i Message
             this.lstCopies.add(new Copy(
-                rs.getInt(1), rs.getString(5), rs.getInt(3), rs.getString(4)));
+                rs.getInt("barcodeNo"), rs.getString("item_condition"), rs.getInt("lcNo"), rs.getString("loanStatus")));
             //barcode, condition, loanCategory, loanStatus
         } 
         this.addCopy.setCopyList(lstCopies);
@@ -82,6 +85,13 @@ public class CreateCopiesControl {
         connection.closeDbConnection(); 
     }
     
+    public void deleteCopy(int barcodeNo) throws SQLException, ClassNotFoundException{
+        deleteCopy.setInt(1, barcodeNo);
+        deleteCopy.executeUpdate();
+        deleteCopy.close();
+        
+        this.loadCopies();
+    }
     
 
     

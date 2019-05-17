@@ -52,11 +52,11 @@ public class CreateObjectControl {
        
        con = connection.connectToDb(con); 
        insertBook = con.prepareStatement(BOOK_INSERT, Statement.RETURN_GENERATED_KEYS);
-       insertMagazine = con.prepareStatement(MAGAZINE_INSERT);
-       insertMovie = con.prepareStatement(MOVIE_INSERT);
+       insertMagazine = con.prepareStatement(MAGAZINE_INSERT, Statement.RETURN_GENERATED_KEYS);
+       insertMovie = con.prepareStatement(MOVIE_INSERT, Statement.RETURN_GENERATED_KEYS);
        insertKeyword = con.prepareStatement(KEYWORD_INSERT);
        insertGenre = con.prepareStatement(GENRE_INSERT);
-       insertAutArt = con.prepareStatement(AUTHOR_ARTIST_INSERT);
+       insertAutArt = con.prepareStatement(AUTHOR_ARTIST_INSERT, Statement.RETURN_GENERATED_KEYS);
        insertAAitem = con.prepareStatement(AA_ITEM_INSERT);
     }
     
@@ -215,8 +215,19 @@ public class CreateObjectControl {
             insertAutArt.setString(2, lname);
             insertAutArt.executeUpdate();
             
-            autArt = new AuthorArtist(fname, lname, item);
+            autArt = new AuthorArtist(fname, lname, item.getItemNo());
             authorArtists.add(autArt);
+            
+            try (ResultSet generatedKeys = insertAutArt.getGeneratedKeys()) {
+            if (generatedKeys.next()) {
+                autArt.setaNo(generatedKeys.getInt(1));
+            }
+            else {
+                throw new SQLException("Creating item failed, no ID obtained.");
+            }
+        }
+            
+            
             
             //insert into AAitem (itemNo, aNo) values (?, ?)
             insertAAitem.setInt(1, item.getItemNo());
