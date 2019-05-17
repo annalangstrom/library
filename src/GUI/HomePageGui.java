@@ -177,12 +177,8 @@ public class HomePageGui extends javax.swing.JFrame {
    }//GEN-LAST:event_btnLoanItemActionPerformed
 
    private void btnReturnItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnItemActionPerformed
-      /*  Ändra till rätt namn på sida +
-      IF låntagare inloggad - gå till återlämningssidan
-      ELSE gå till inloggningssidan*/
-      String[] args = null;
-//      Return.main(args);
-      //Return.main(args);
+      ReturnGui returnItem = new ReturnGui();
+      returnItem.setVisible(true);
    }//GEN-LAST:event_btnReturnItemActionPerformed
 
    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
