@@ -217,7 +217,7 @@ public class HomePageGui extends javax.swing.JFrame {
 
    private void btnSignOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignOutActionPerformed
       // TODO add your handling code here:
-      //Sett inloggad till false
+      signedIn = false;
    }//GEN-LAST:event_btnSignOutActionPerformed
 
 //    /**
