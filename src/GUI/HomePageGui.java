@@ -195,13 +195,13 @@ public class HomePageGui extends javax.swing.JFrame {
 
    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
       // TODO add your handling code here:
-      SignIn signIn = new SignIn();
+      SignInGui signIn = new SignInGui();
       signIn.setVisible(true);
    }//GEN-LAST:event_btnSignInActionPerformed
 
    private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
       // TODO add your handling code here:
-      CreateAccount createAccount = new CreateAccount();
+      CreateAccountGui createAccount = new CreateAccountGui();
       createAccount.setVisible(true);
    }//GEN-LAST:event_btnCreateAccountActionPerformed
 
