@@ -22,30 +22,35 @@ import javax.swing.JOptionPane;
  */
 public class ChangeObjectGui extends javax.swing.JFrame {
     
-    private AddKeywordsGui addKeys;
-    private AddGenres addGenres;
-    private AddAutArtGui addAutArts;
+    private final AddKeywordsGui addKeys;
+    private final AddGenres addGenres;
+    private final AddAutArtGui addAutArts;
+    private int itemNo;
     /**
      * Creates new form CreateObject
-     * @param itemNo
      */
-    public ChangeObjectGui(int itemNo) {
+    public ChangeObjectGui() {
         super("New item");
         initComponents();
         addKeys = new AddKeywordsGui();
         addGenres = new AddGenres();
         addAutArts = new AddAutArtGui();
         
-        try {
-            setTextInFields(itemNo);
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ChangeObjectGui.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    }
+
+    public int getItemNo() {
+        return itemNo;
+    }
+
+    public void setItemNo(int itemNo) {
+        this.itemNo = itemNo;
     }
     
-    private void setTextInFields(int itemNo) throws SQLException, ClassNotFoundException{
+    public void setTextInFields(int itemNo) throws SQLException, ClassNotFoundException{
         ChangeObjectControl control = new ChangeObjectControl();
-        Book book = null;
+        Book book;
+        Movie movie;
+        Magazine magazine;
         Item item;
         
         item = control.getItemFromDB(itemNo);
@@ -64,9 +69,21 @@ public class ChangeObjectGui extends javax.swing.JFrame {
             txtPublisher.setText(book.getPublisher());
             cmbCategory.setSelectedItem("Book");
         }
+        
+        if(item instanceof Movie){
+            movie = (Movie)item;
+            
+            txtAgeLimit.setText(Integer.toString(movie.getAgeLimit()));
+            txtPCountry.setText(movie.getpCountry());
+        }
+        
+        if(item instanceof Magazine){
+            magazine = (Magazine)item;
+            
+            txtPublisher.setText(magazine.getPublisher());
+        }
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

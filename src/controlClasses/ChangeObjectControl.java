@@ -3,12 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+//caroline håller på i homepageGui och returnGui, kolla i signincontrol och signin
+//rebecca jobbar search 
 package controlClasses;
 
 import JDBCconnection.JDBCconnection;
 import item.AuthorArtist;
 import item.Book;
 import item.Item;
+import item.Magazine;
+import item.Movie;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +25,7 @@ import java.util.ArrayList;
  * @author annalangstrom
  */
 public class ChangeObjectControl {
-    private final String ITEM_SELECT = "SELECT * FROM Item WHERE ItemNo = ?";
+    private final String ITEM_SELECT = "SELECT * FROM Item WHERE itemNo = ?";
     private final String KEYWORD_SELECT = "SELECT * FROM Keyword WHERE itemNo = ?";
     private final String GENRE_SELECT = "SELECT * FROM Genre WHERE itemNo = ?";
     private final String AA_ITEM_SELECT = "SELECT * FROM AAitem WHERE itemNo = ?";
@@ -65,9 +70,14 @@ public class ChangeObjectControl {
         String title = null;
         int publishYear = 0;
         String location = null;
+        int ageLimit = 0;
+        String pCountry = null;
         ArrayList<String> keywords = new ArrayList<>();
         ArrayList<String> genres = new ArrayList<>();
         ArrayList<AuthorArtist> authorArtists = new ArrayList<>();
+        Book book;
+        Movie movie;
+        Magazine magazine;
         
         selectItem.setInt(1, itemNo);
         rs = selectItem.executeQuery();
@@ -77,6 +87,8 @@ public class ChangeObjectControl {
             title = rs.getString("title");
             publishYear = rs.getInt("publishYear");
             location = rs.getString("location");
+            ageLimit = rs.getInt("ageLimit");
+            pCountry = rs.getString("pCountry");
         }
         
         selectKeyword.setInt(1, itemNo);
@@ -107,9 +119,23 @@ public class ChangeObjectControl {
             }
         }
         
-        Book item = new Book(isbn, publisher, title, publishYear, location, 
+        if(ageLimit == 0 && pCountry == null){
+            book = new Book(isbn, publisher, title, publishYear, location, 
                 keywords, genres, authorArtists);
-        return item;
+            return book;
+        }
+        else if(isbn == null && publisher == null){
+            movie = new Movie(ageLimit, pCountry, title, publishYear, location, 
+                    keywords, genres, authorArtists);
+            return movie;
+        }
+        else if(isbn == null && ageLimit == 0){
+            magazine = new Magazine(publisher, title, publishYear, location, 
+                    keywords, genres, authorArtists);
+            return magazine;
+        }
+        else
+            return null;
     }
     
     
