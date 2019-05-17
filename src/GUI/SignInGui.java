@@ -15,12 +15,15 @@ import java.util.logging.Logger;
  * @author annalangstrom
  */
 public class SignInGui extends javax.swing.JFrame {
+   
+   private HomePageGui homePage;
 
     /**
      * Creates new form SignIn
      */
-    public SignInGui() {
+    public SignInGui(HomePageGui homePage) {
         initComponents();
+        this.homePage = homePage;
     }
 
     /**
@@ -188,6 +191,7 @@ public class SignInGui extends javax.swing.JFrame {
             // TODO add your handling code here:
             SignInControl control = new SignInControl(this);
             control.signIn(txtUserAccount.getText(), txtPassword.getText());
+            homePage.setSignedIn(true);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
         }
