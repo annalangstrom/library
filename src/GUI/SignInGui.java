@@ -47,9 +47,9 @@ public class SignInGui extends javax.swing.JFrame {
       jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
       jLabel1.setText("Sign in");
 
-      jLabel2.setText("Please fill in your user account and password.");
+      jLabel2.setText("Please fill in your SSN and password.");
 
-      jLabel3.setText("User account:");
+      jLabel3.setText("User SSN:");
 
       jLabel4.setText("Password:");
 
@@ -99,7 +99,7 @@ public class SignInGui extends javax.swing.JFrame {
                   .addComponent(jLabel3)))
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
          .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-            .addContainerGap(171, Short.MAX_VALUE)
+            .addContainerGap(213, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                   .addComponent(jLabel2)
