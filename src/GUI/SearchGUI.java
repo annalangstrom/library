@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package GUI;
+import controlClasses.Search;
 
 /**
  *
@@ -32,7 +33,7 @@ public class SearchGUI extends javax.swing.JFrame {
         btnSearchMyPage = new javax.swing.JButton();
         panelReservationConfirm = new javax.swing.JLabel();
         labelSearch = new javax.swing.JLabel();
-        txtSearch = new javax.swing.JTextField();
+        txtSearchField = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         btnSearchSignOut = new javax.swing.JButton();
         btnSearchReserve = new javax.swing.JButton();
@@ -79,6 +80,11 @@ public class SearchGUI extends javax.swing.JFrame {
         labelSearch.setText("Search");
 
         btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         btnSearchSignOut.setText("Sign out");
 
@@ -103,7 +109,7 @@ public class SearchGUI extends javax.swing.JFrame {
                                     .addComponent(btnSearchReserve)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(63, 63, 63)
-                                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(txtSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnSearchSignOut)
@@ -119,7 +125,7 @@ public class SearchGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSearch)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSearchField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
@@ -131,6 +137,12 @@ public class SearchGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        txtSearchField.getText();
+        Search sea = new Search;
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,6 +191,6 @@ public class SearchGUI extends javax.swing.JFrame {
     private javax.swing.JList<String> listSearchResults;
     private javax.swing.JLabel panelReservationConfirm;
     private javax.swing.JPanel panelSearchConfirm;
-    private javax.swing.JTextField txtSearch;
+    private javax.swing.JTextField txtSearchField;
     // End of variables declaration//GEN-END:variables
 }
