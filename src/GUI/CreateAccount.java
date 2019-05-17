@@ -278,8 +278,8 @@ public class CreateAccount extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
-        String[] args = null;
-        SignIn.main(args);
+      SignIn signIn = new SignIn();
+      signIn.setVisible(true);
     }//GEN-LAST:event_btnSignInActionPerformed
 
     private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
