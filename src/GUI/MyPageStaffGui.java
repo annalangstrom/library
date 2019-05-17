@@ -148,6 +148,7 @@ public class MyPageStaffGui extends javax.swing.JFrame {
 
    private void btnAddNewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewItemActionPerformed
       // TODO add your handling code here:
+      //Test
    }//GEN-LAST:event_btnAddNewItemActionPerformed
 
    private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
