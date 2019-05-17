@@ -5,11 +5,17 @@
  */
 package GUI;
 
+import javax.swing.JOptionPane;
+import controlClasses.Search;
+
 /**
  *
  * @author annalangstrom
  */
 public class HomePageGui extends javax.swing.JFrame {
+   
+   private boolean signedIn = false;
+   private boolean borrower = true;
 
     /**
      * Creates new form HomePage
@@ -114,9 +120,19 @@ public class HomePageGui extends javax.swing.JFrame {
         getContentPane().add(panelSignedIn);
         panelSignedIn.setBounds(300, 310, 140, 90);
 
-        btnToMyAccount.setText("To my account");
+      btnToMyAccount.setText("To my account");
+      btnToMyAccount.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnToMyAccountActionPerformed(evt);
+         }
+      });
 
-        btnSignOut.setText("Sign out");
+      btnSignOut.setText("Sign out");
+      btnSignOut.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnSignOutActionPerformed(evt);
+         }
+      });
 
         javax.swing.GroupLayout panelNotSignedInLayout = new javax.swing.GroupLayout(panelNotSignedIn);
         panelNotSignedIn.setLayout(panelNotSignedInLayout);
@@ -154,30 +170,27 @@ public class HomePageGui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
    private void btnLoanItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanItemActionPerformed
-      /*  Ändra till rätt namn på sida +
-      IF låntagare inloggad - gå till lånsidan
-      ELSE gå till inloggningssidan*/
-      String[] args = null;
-//      Loan.main(args);
-      //Loan.main(args);
+      
+      if((borrower = true) && (signedIn = true)) {
+         LoanGUI loan = new LoanGUI();
+         loan.setVisible(true);
+      } else {
+         JOptionPane.showMessageDialog(this, "You have to be signed in as a borrower to loan an item.");
+      }
    }//GEN-LAST:event_btnLoanItemActionPerformed
 
    private void btnReturnItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnItemActionPerformed
-      /*  Ändra till rätt namn på sida +
-      IF låntagare inloggad - gå till återlämningssidan
-      ELSE gå till inloggningssidan*/
-      String[] args = null;
-//      Return.main(args);
-      //Return.main(args);
+      ReturnGui returnItem = new ReturnGui();
+      returnItem.setVisible(true);
    }//GEN-LAST:event_btnReturnItemActionPerformed
 
    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-      /*Ta text från textrutan
-      Stoppa in i sökmetod
-      Dirigera om till Söksidan*/
-      String[] args = null;
-//      Search.main(args);
-      //Search.main(args);
+      //Ta text från textrutan & Stoppa in i sökmetod
+      Search input = new Search();
+      input.searchItem(txtSearch.getText());
+      //Dirigera om till Söksidan:
+      SearchGUI search = new SearchGUI();
+      search.setVisible(true);
    }//GEN-LAST:event_btnSearchActionPerformed
 
    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
@@ -191,6 +204,23 @@ public class HomePageGui extends javax.swing.JFrame {
       CreateAccount createAccount = new CreateAccount();
       createAccount.setVisible(true);
    }//GEN-LAST:event_btnCreateAccountActionPerformed
+
+   private void btnToMyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMyAccountActionPerformed
+      // TODO add your handling code here:
+      if(borrower = true) {
+         MyPageStaffGui MyPage = new MyPageStaffGui();
+         MyPage.setVisible(true);
+      } else {
+         MyPageBorrowerGui MyPage = new MyPageBorrowerGui();
+         MyPage.setVisible(true);
+      }
+      
+   }//GEN-LAST:event_btnToMyAccountActionPerformed
+
+   private void btnSignOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignOutActionPerformed
+      // TODO add your handling code here:
+      signedIn = false;
+   }//GEN-LAST:event_btnSignOutActionPerformed
 
 //    /**
 //     * @param args the command line arguments

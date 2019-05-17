@@ -169,11 +169,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="To my account"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnToMyAccountActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnSignOut">
           <Properties>
             <Property name="text" type="java.lang.String" value="Sign out"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSignOutActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
