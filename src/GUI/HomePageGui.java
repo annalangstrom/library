@@ -10,6 +10,9 @@ package GUI;
  * @author annalangstrom
  */
 public class HomePageGui extends javax.swing.JFrame {
+   
+   private boolean signedIn = false;
+   private boolean borrower = true;
 
     /**
      * Creates new form HomePage
@@ -121,6 +124,11 @@ public class HomePageGui extends javax.swing.JFrame {
       });
 
       btnSignOut.setText("Sign out");
+      btnSignOut.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnSignOutActionPerformed(evt);
+         }
+      });
 
       javax.swing.GroupLayout panelNotSignedInLayout = new javax.swing.GroupLayout(panelNotSignedIn);
       panelNotSignedIn.setLayout(panelNotSignedInLayout);
@@ -197,9 +205,20 @@ public class HomePageGui extends javax.swing.JFrame {
 
    private void btnToMyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMyAccountActionPerformed
       // TODO add your handling code here:
-      MyPageBorrowerGui MyPage = new MyPageBorrowerGui();
-      MyPage.setVisible(true);
+      if(borrower = true) {
+         MyPageStaffGui MyPage = new MyPageStaffGui();
+         MyPage.setVisible(true);
+      } else {
+         MyPageBorrowerGui MyPage = new MyPageBorrowerGui();
+         MyPage.setVisible(true);
+      }
+      
    }//GEN-LAST:event_btnToMyAccountActionPerformed
+
+   private void btnSignOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignOutActionPerformed
+      // TODO add your handling code here:
+      //Sett inloggad till false
+   }//GEN-LAST:event_btnSignOutActionPerformed
 
 //    /**
 //     * @param args the command line arguments
