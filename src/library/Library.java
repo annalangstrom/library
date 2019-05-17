@@ -7,7 +7,6 @@ package library;
 
 import GUI.HomePageGui;
 
-
 /**
  *
  * @author annalangstrom
@@ -24,7 +23,6 @@ public class Library {
                 new HomePageGui().setVisible(true);
             }
         });
-                
     }
     
 }

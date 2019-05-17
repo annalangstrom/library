@@ -158,7 +158,8 @@ public class HomePageGui extends javax.swing.JFrame {
       IF låntagare inloggad - gå till lånsidan
       ELSE gå till inloggningssidan*/
       String[] args = null;
-      LoanGUI.main(args);
+//      Loan.main(args);
+      //Loan.main(args);
    }//GEN-LAST:event_btnLoanItemActionPerformed
 
    private void btnReturnItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnItemActionPerformed
@@ -175,7 +176,8 @@ public class HomePageGui extends javax.swing.JFrame {
       Stoppa in i sökmetod
       Dirigera om till Söksidan*/
       String[] args = null;
-      SearchGUI.main(args);
+//      Search.main(args);
+      //Search.main(args);
    }//GEN-LAST:event_btnSearchActionPerformed
 
    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
@@ -189,6 +191,42 @@ public class HomePageGui extends javax.swing.JFrame {
       CreateAccount createAccount = new CreateAccount();
       createAccount.setVisible(true);
    }//GEN-LAST:event_btnCreateAccountActionPerformed
+
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new HomePageGui().setVisible(true);
+//            }
+//        });
+//    }
 
 //    /**
 //     * @param args the command line arguments
