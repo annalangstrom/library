@@ -207,7 +207,7 @@ public class HomePageGui extends javax.swing.JFrame {
 
    private void btnToMyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMyAccountActionPerformed
       // TODO add your handling code here:
-      if(borrower = true) {
+      if(borrower = false) {
          MyPageStaffGui MyPage = new MyPageStaffGui();
          MyPage.setVisible(true);
       } else {
