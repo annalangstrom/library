@@ -5,8 +5,9 @@
  */
 package GUI;
 
+import controlClasses.ChangeObjectControl;
 import controlClasses.CreateObjectControl;
-import item.Item;
+import item.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,22 +20,52 @@ import javax.swing.JOptionPane;
  */
 public class ChangeObjectGui extends javax.swing.JFrame {
     
-    private final AddKeywordsGui addKeys;
-    private final AddGenres addGenres;
-    private final AddAutArtGui addAutArts;
+    private AddKeywordsGui addKeys;
+    private AddGenres addGenres;
+    private AddAutArtGui addAutArts;
     /**
      * Creates new form CreateObject
-     * @param item
+     * @param itemNo
      */
-    public ChangeObjectGui(Item item) {
+    public ChangeObjectGui(int itemNo) {
         super("New item");
         initComponents();
         addKeys = new AddKeywordsGui();
         addGenres = new AddGenres();
         addAutArts = new AddAutArtGui();
+        
+        try {
+            setTextInFields(itemNo);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(ChangeObjectGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void setTextInFields(int itemNo) throws SQLException, ClassNotFoundException{
+        ChangeObjectControl control = new ChangeObjectControl();
+        Book book = null;
+        Item item;
+        
+        item = control.getItemFromDB(itemNo);
+        
         txtTitle.setText(item.getTitle());
+        txtTitle.setText(item.getTitle());
+        txtPubYear.setText(Integer.toString(item.getPublishYear()));
+        txtLocation.setText(item.getLocation());
+        addKeys.setThings(item.getKeywords());
+        addGenres.setThings(item.getGenres());
+        //Lägg till authorartist
+        
+        if(item instanceof Book){
+            book = (Book)item;
+  
+            txtIsbn.setText(book.getIsbn());
+            txtPublisher.setText(book.getPublisher());
+            cmbCategory.setSelectedItem("Book");
+        }
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
