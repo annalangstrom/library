@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author annalangstrom
@@ -165,12 +167,13 @@ public class HomePageGui extends javax.swing.JFrame {
    }// </editor-fold>//GEN-END:initComponents
 
    private void btnLoanItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanItemActionPerformed
-      /*  Ändra till rätt namn på sida +
-      IF låntagare inloggad - gå till lånsidan
-      ELSE gå till inloggningssidan*/
-      String[] args = null;
-//      Loan.main(args);
-      //Loan.main(args);
+      
+      if((borrower = true) && (signedIn = true)) {
+         LoanGUI loan = new LoanGUI();
+         loan.setVisible(true);
+      } else {
+         JOptionPane.showMessageDialog(this, "You have to be signed in as a borrower to loan an item.");
+      }
    }//GEN-LAST:event_btnLoanItemActionPerformed
 
    private void btnReturnItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnItemActionPerformed
