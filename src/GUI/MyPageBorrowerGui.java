@@ -3,7 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+//Remove - stoppa in aktuell användares borrowerID
+//Update - stoppa in akutell användares borrowerID
 package GUI;
+
+import controlClasses.BorrowerControl;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -109,6 +117,11 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
         jScrollPane3.setViewportView(lstMyReservations);
 
         btnEraseMyAcount.setText("Erase my acount");
+        btnEraseMyAcount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEraseMyAcountActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -199,8 +212,26 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
    }//GEN-LAST:event_btnHomePage1ActionPerformed
 
    private void btnUpdatePersonalDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatePersonalDataActionPerformed
-      // TODO add your handling code here:
+       try {
+           // TODO add your handling code here:
+           ChangeAccountGui gui = new ChangeAccountGui();
+           gui.setBorrowerID(1);
+           gui.setTextInFields(1);
+           gui.setVisible(true);
+       } catch (ClassNotFoundException | SQLException ex) {
+           Logger.getLogger(MyPageBorrowerGui.class.getName()).log(Level.SEVERE, null, ex);
+       }
    }//GEN-LAST:event_btnUpdatePersonalDataActionPerformed
+
+    private void btnEraseMyAcountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEraseMyAcountActionPerformed
+       try {
+           // TODO add your handling code here:
+           BorrowerControl control = new BorrowerControl();
+           control.removeUser(1);
+       } catch (ClassNotFoundException | SQLException ex) {
+           Logger.getLogger(MyPageBorrowerGui.class.getName()).log(Level.SEVERE, null, ex);
+       }
+    }//GEN-LAST:event_btnEraseMyAcountActionPerformed
 
    /**
     * @param args the command line arguments

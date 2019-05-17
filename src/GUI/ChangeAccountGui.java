@@ -7,6 +7,7 @@
 //Man får inte ändra: ssn
 package GUI;
 
+import controlClasses.BorrowerControl;
 import controlClasses.CreateAccountControl;
 import java.awt.Color;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import persons.Borrower;
 
 
 /**
@@ -22,13 +24,37 @@ import javax.swing.JOptionPane;
  */
 public class ChangeAccountGui extends javax.swing.JFrame {
 
+    int borrowerID;
+
+    public int getBorrowerID() {
+        return borrowerID;
+    }
+
+    public void setBorrowerID(int borrowerID) {
+        this.borrowerID = borrowerID;
+    }
+    
     /**
      * Creates new form CreateAccount
      */
     public ChangeAccountGui() {
         initComponents();
+        
     }
 
+    public void setTextInFields(int borrowerID) throws ClassNotFoundException, SQLException{
+        Borrower borrower;
+        BorrowerControl control = new BorrowerControl();
+        
+        borrower = control.getBorrowerFromDB(borrowerID);
+        
+        txtSsn.setText(borrower.getSsn());
+        txtSsn.setEditable(false);
+        txtPassword.setText(borrower.getPassword());
+        txtFirstName.setText(borrower.getFname());
+        txtLastName.setText(borrower.getSname());
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,12 +88,10 @@ public class ChangeAccountGui extends javax.swing.JFrame {
         txtPostcode = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtCity = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        btnSignIn = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
-        jLabel1.setText("Create account");
+        jLabel1.setText("Update account");
 
         btnHomePage.setText("Home Page");
         btnHomePage.addActionListener(new java.awt.event.ActionListener() {
@@ -113,7 +137,7 @@ public class ChangeAccountGui extends javax.swing.JFrame {
 
         jLabel8.setText("Phone number:");
 
-        btnCreateAccount.setText("Create account");
+        btnCreateAccount.setText("Save changes");
         btnCreateAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreateAccountActionPerformed(evt);
@@ -133,15 +157,6 @@ public class ChangeAccountGui extends javax.swing.JFrame {
 
         jLabel11.setText("City:");
 
-        jLabel12.setText("Have you got an account?");
-
-        btnSignIn.setText("Sign in");
-        btnSignIn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSignInActionPerformed(evt);
-            }
-        });
-
         txtPassword.setForeground(new java.awt.Color(204, 204, 204));
         txtPassword.setText("123456");
         txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -155,28 +170,25 @@ public class ChangeAccountGui extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSignIn)
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel6))
-                            .addComponent(txtSsn)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel2))
-                            .addComponent(txtFirstName)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)))
-                            .addComponent(txtLastName)
-                            .addComponent(cmbCategory, 0, 163, Short.MAX_VALUE)
-                            .addComponent(txtPassword))))
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel6))
+                    .addComponent(txtSsn)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel2))
+                    .addComponent(txtFirstName)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)))
+                    .addComponent(txtLastName)
+                    .addComponent(cmbCategory, 0, 163, Short.MAX_VALUE)
+                    .addComponent(txtPassword))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(66, 66, 66)
@@ -206,12 +218,9 @@ public class ChangeAccountGui extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnHomePage)
-                        .addGap(94, 94, 94)
-                        .addComponent(jLabel1))
-                    .addComponent(jLabel12))
+                .addComponent(btnHomePage)
+                .addGap(94, 94, 94)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -265,11 +274,8 @@ public class ChangeAccountGui extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSignIn)
                     .addComponent(btnCreateAccount)
                     .addComponent(btnCancel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -278,11 +284,6 @@ public class ChangeAccountGui extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
-        String[] args = null;
-        SignIn.main(args);
-    }//GEN-LAST:event_btnSignInActionPerformed
 
     private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
         
@@ -322,6 +323,7 @@ public class ChangeAccountGui extends javax.swing.JFrame {
 
     private void txtSsnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSsnActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtSsnActionPerformed
 
     private void txtSsnFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSsnFocusGained
@@ -433,12 +435,10 @@ public class ChangeAccountGui extends javax.swing.JFrame {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnCreateAccount;
     private javax.swing.JButton btnHomePage;
-    private javax.swing.JButton btnSignIn;
     private javax.swing.JComboBox<String> cmbCategory;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
