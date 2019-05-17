@@ -222,6 +222,10 @@ public class HomePageGui extends javax.swing.JFrame {
       signedIn = false;
    }//GEN-LAST:event_btnSignOutActionPerformed
 
+   public void setSignedIn(boolean signedIn) {
+      this.signedIn = signedIn;
+   }
+   
 //    /**
 //     * @param args the command line arguments
 //     */
