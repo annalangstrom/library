@@ -195,7 +195,7 @@ public class HomePageGui extends javax.swing.JFrame {
 
    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
       // TODO add your handling code here:
-      SignInGui signIn = new SignInGui();
+      SignInGui signIn = new SignInGui(this);
       signIn.setVisible(true);
    }//GEN-LAST:event_btnSignInActionPerformed
 
