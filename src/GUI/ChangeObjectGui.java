@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-//Få den befintliga informationen att synas i fälten när man öppnar
+//Få den befintliga informationen att synas i fälten när man öppnar, lyckas inte med listorna...
 package GUI;
 
 import controlClasses.ChangeObjectControl;
@@ -22,9 +22,9 @@ import javax.swing.JOptionPane;
  */
 public class ChangeObjectGui extends javax.swing.JFrame {
     
-    private final AddKeywordsGui addKeys;
-    private final AddGenres addGenres;
-    private final AddAutArtGui addAutArts;
+    private AddKeywordsGui addKeys;
+    private AddGenres addGenres;
+    private AddAutArtGui addAutArts;
     private int itemNo;
     /**
      * Creates new form CreateObject
@@ -32,9 +32,7 @@ public class ChangeObjectGui extends javax.swing.JFrame {
     public ChangeObjectGui() {
         super("New item");
         initComponents();
-        addKeys = new AddKeywordsGui();
-        addGenres = new AddGenres();
-        addAutArts = new AddAutArtGui();
+        
         
     }
 
@@ -52,15 +50,19 @@ public class ChangeObjectGui extends javax.swing.JFrame {
         Movie movie;
         Magazine magazine;
         Item item;
+        addKeys = new AddKeywordsGui();
+        addGenres = new AddGenres();
+        addAutArts = new AddAutArtGui();
         
         item = control.getItemFromDB(itemNo);
+        
+        addKeys.setThings(item.getKeywords());
+        addGenres.setThings(item.getGenres());
+        addAutArts.setThings(item.getAuthorArtists());
         
         txtTitle.setText(item.getTitle());
         txtPubYear.setText(Integer.toString(item.getPublishYear()));
         txtLocation.setText(item.getLocation());
-        addKeys.setThings(item.getKeywords());
-        addGenres.setThings(item.getGenres());
-        //Lägg till authorartist
         
         if(item instanceof Book){
             book = (Book)item;
@@ -161,7 +163,7 @@ public class ChangeObjectGui extends javax.swing.JFrame {
 
         jLabel8.setText("Location*");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         jLabel1.setText("New item");
@@ -349,20 +351,6 @@ public class ChangeObjectGui extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             CreateObjectControl control = new CreateObjectControl();
-            if(cmbCategory.getSelectedItem().equals("Book"))
-                control.addBookToDB(txtIsbn.getText(), txtPublisher.getText(), txtTitle.getText(),
-                        Integer.parseInt(txtPubYear.getText()), txtLocation.getText(), addKeys.getThings(),
-                        addGenres.getThings(), addAutArts.getThings());
-            
-            else if(cmbCategory.getSelectedItem().equals("Movie"))
-                control.addMovieToDB(Integer.parseInt(txtAgeLimit.getText()), txtPCountry.getText(), 
-                        txtTitle.getText(), Integer.parseInt(txtPubYear.getText()), txtLocation.getText(), 
-                        addKeys.getThings(), addGenres.getThings(), addAutArts.getThings());
-           
-            else if(cmbCategory.getSelectedItem().equals("Magazine"))
-                control.addMagazineToDB(txtPublisher.getText(), txtTitle.getText(), 
-                        Integer.parseInt(txtPubYear.getText()), txtLocation.getText(), 
-                        addKeys.getThings(), addGenres.getThings(), addAutArts.getThings());
             
             control.confirmSaving();
             

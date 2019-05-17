@@ -86,6 +86,22 @@ public abstract class Item {
     public ArrayList<AuthorArtist> getAuthorArtist() {
         return authorArtist;
     }
+    
+    public ArrayList<String> getAuthorArtists(){
+        ArrayList<String> autArts = new ArrayList<>();
+        String fname, sname, fullname;
+        
+        for(int i = 0; i < authorArtist.size(); i++){
+            AuthorArtist aa = authorArtist.get(i);
+            fname = aa.getFname();
+            sname = aa.getSname();
+            
+            fullname = fname + " " + sname;
+            autArts.add(fullname);
+        }
+        
+        return autArts;
+    }
 
     public void setAuthorArtist(ArrayList<AuthorArtist> authorArtist) {
         this.authorArtist = authorArtist;

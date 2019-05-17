@@ -6,6 +6,7 @@
 package GUI;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.DefaultListModel;
 
 /**
@@ -32,11 +33,22 @@ public class AddKeywordsGui extends javax.swing.JFrame {
         super("Add keywords");
         model = new DefaultListModel();
         initComponents();
+//        this.addThingsInList();
         initList();
     }
 
     private void initList(){
         lstThings.setModel(model);
+        
+        for (int i = 0; i < things.size(); i++) {
+        model.addElement(things.get(i));
+        }
+    }
+    
+    public void addThingsInList(){
+        for (int i = 0; i < things.size(); i++) {
+        model.addElement(things.get(i));
+        }
     }
     
     /**

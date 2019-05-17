@@ -92,9 +92,9 @@ public class ChangeObjectControl {
         }
         
         selectKeyword.setInt(1, itemNo);
-        rs = selectKeyword.executeQuery();
-        while(rs.next()){
-            String keyword = rs.getString("word");
+        ResultSet rs2 = selectKeyword.executeQuery();
+        while(rs2.next()){
+            String keyword = rs2.getString("word");
             keywords.add(keyword);
         }
         
@@ -110,10 +110,10 @@ public class ChangeObjectControl {
         while(rs.next()){
             int aNo = rs.getInt("aNo");
             selectAutArt.setInt(1, aNo);
-            ResultSet rs2 = selectAutArt.executeQuery();
-            while(rs2.next()){
-                String fname = rs2.getString("fName");
-                String sname = rs2.getString("sName");
+            ResultSet rs3 = selectAutArt.executeQuery();
+            while(rs3.next()){
+                String fname = rs3.getString("fName");
+                String sname = rs3.getString("sName");
                 AuthorArtist autArt = new AuthorArtist(fname, sname, itemNo);
                 authorArtists.add(autArt);
             }
@@ -127,11 +127,17 @@ public class ChangeObjectControl {
         else if(isbn == null && publisher == null){
             movie = new Movie(ageLimit, pCountry, title, publishYear, location, 
                     keywords, genres, authorArtists);
+            /*int ageLimit, String pCountry, String title, int publishYear, 
+            String location, ArrayList<String> keywords, ArrayList<String> genres, 
+            ArrayList<AuthorArtist> authorArtist*/
             return movie;
         }
-        else if(isbn == null && ageLimit == 0){
+        else if(isbn == null && ageLimit == 0 && pCountry == null){
             magazine = new Magazine(publisher, title, publishYear, location, 
                     keywords, genres, authorArtists);
+            /*String publisher, String title, int publishYear, 
+            String location, ArrayList<String> keywords, ArrayList<String> genres, 
+            ArrayList<AuthorArtist> authorArtist*/
             return magazine;
         }
         else
