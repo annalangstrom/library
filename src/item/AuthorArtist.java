@@ -15,14 +15,18 @@ public class AuthorArtist {
     private int aNo;
     private String fname;
     private String sname;
-    private ArrayList<Item> items;
+    private ArrayList<Integer> items = new ArrayList<>();
 
-    public AuthorArtist(String fname, String sname, Item item) {
+    public AuthorArtist(String fname, String sname, int item) {
         this.fname = fname;
         this.sname = sname;
         items.add(item);
     }
 
+    public void setaNo(int aNo) {
+        this.aNo = aNo;
+    }
+    
     public int getaNo() {
         return aNo;
     }
@@ -43,11 +47,11 @@ public class AuthorArtist {
         this.sname = sname;
     }
 
-    public ArrayList<Item> getItems() {
+    public ArrayList<Integer> getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<Item> items) {
+    public void setItems(ArrayList<Integer> items) {
         this.items = items;
     }
     

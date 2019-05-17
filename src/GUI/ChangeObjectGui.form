@@ -130,7 +130,6 @@
               </Group>
               <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="btnAddCopy" max="32767" attributes="0"/>
                   <Component id="btnAddKeyword" pref="228" max="32767" attributes="0"/>
                   <Component id="btnAddGenres" max="32767" attributes="0"/>
                   <Component id="addAutArt" max="32767" attributes="0"/>
@@ -191,9 +190,7 @@
                       <Component id="addAutArt" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnAddCopy" min="-2" pref="40" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtPublisher" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel6" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
@@ -333,11 +330,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addAutArtActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnAddCopy">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Add copy"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnCancel">
       <Properties>

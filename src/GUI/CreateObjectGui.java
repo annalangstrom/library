@@ -16,17 +16,20 @@ import javax.swing.JOptionPane;
  *
  * @author annalangstrom
  */
-public class CreateObject extends javax.swing.JFrame {
+public class CreateObjectGui extends javax.swing.JFrame {
     
-    AddKeywords addKeys;
-    AddGenres addGenres;
-    AddAutArt addAutArts;
+    private final AddKeywordsGui addKeys;
+    private final AddGenres addGenres;
+    private final AddAutArtGui addAutArts;
     /**
      * Creates new form CreateObject
      */
-    public CreateObject() {
+    public CreateObjectGui() {
         super("New item");
         initComponents();
+        addKeys = new AddKeywordsGui();
+        addGenres = new AddGenres();
+        addAutArts = new AddAutArtGui();
     }
 
     /**
@@ -66,7 +69,6 @@ public class CreateObject extends javax.swing.JFrame {
         btnAddKeyword = new javax.swing.JButton();
         btnAddGenres = new javax.swing.JButton();
         addAutArt = new javax.swing.JButton();
-        btnAddCopy = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
 
@@ -153,8 +155,6 @@ public class CreateObject extends javax.swing.JFrame {
             }
         });
 
-        btnAddCopy.setText("Add copy");
-
         btnCancel.setText("Cancel");
 
         btnSave.setText("Save");
@@ -203,7 +203,6 @@ public class CreateObject extends javax.swing.JFrame {
                             .addComponent(txtAgeLimit, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))))
                 .addGap(72, 72, 72)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAddCopy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAddKeyword, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
                     .addComponent(btnAddGenres, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(addAutArt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -250,9 +249,7 @@ public class CreateObject extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(addAutArt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAddCopy, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
+                .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -284,19 +281,14 @@ public class CreateObject extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddKeywordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddKeywordActionPerformed
-        
-        addKeys = new AddKeywords();
         addKeys.setVisible(true);
-        
     }//GEN-LAST:event_btnAddKeywordActionPerformed
 
     private void btnAddGenresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddGenresActionPerformed
-        addGenres = new AddGenres();
         addGenres.setVisible(true);
     }//GEN-LAST:event_btnAddGenresActionPerformed
 
     private void addAutArtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addAutArtActionPerformed
-        addAutArts = new AddAutArt();
         addAutArts.setVisible(true);
     }//GEN-LAST:event_addAutArtActionPerformed
 
@@ -324,7 +316,7 @@ public class CreateObject extends javax.swing.JFrame {
             
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(frame, "Something went wrong, " + ex.getMessage());
-            Logger.getLogger(CreateObject.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CreateObjectGui.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -345,27 +337,27 @@ public class CreateObject extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CreateObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CreateObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CreateObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreateObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CreateObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CreateObject().setVisible(true);
+                new CreateObjectGui().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAutArt;
-    private javax.swing.JButton btnAddCopy;
     private javax.swing.JButton btnAddGenres;
     private javax.swing.JButton btnAddKeyword;
     private javax.swing.JButton btnCancel;
