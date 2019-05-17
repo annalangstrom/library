@@ -3,6 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+//Kolla på cancel och remove knapparna
 package GUI;
 
 import controlClasses.CreateCopiesControl;
@@ -48,8 +50,6 @@ public class AddCopyGui extends javax.swing.JFrame {
         tblModel = new DefaultTableModel(this.data, columnNames);
         tblCopies.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tblCopies.setModel(tblModel);
-//        tblCopies.getColumnModel().getColumn(0).setPreferredWidth(5);
-//        tblCopies.getColumnModel().getColumn(1).setPreferredWidth(100);
         tblCopies.setShowGrid(true);
     }
     
@@ -111,7 +111,7 @@ public class AddCopyGui extends javax.swing.JFrame {
 
         jLabel3.setText("Category:");
 
-        cmbCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Movie", "Course litterature", "Other litterature", "Reference litterature" }));
+        cmbCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Movie", "Course litterature", "Other litterature", "Reference litterature", "Magazine" }));
 
         jLabel4.setText("Loan status:");
 
@@ -239,12 +239,10 @@ public class AddCopyGui extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         JFrame frame = new JFrame();
         try {
-            //Hur ska jag lyckas få tag i itemNo??????
-            
             control = new CreateCopiesControl(this);
             control.addCopy(Integer.parseInt(txtBarcode.getText()), itemNo, cmbCategory.getSelectedIndex(), 
                     cmbLoanStatus.getSelectedItem().toString(), txtCondition.getText());
-            //int barcode, int itemNo, int category, int loanStatus, String condition
+            
             JOptionPane.showMessageDialog(frame, "Copy added!");
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(this, "Something went wrong, "+ ex.getMessage());
@@ -254,7 +252,18 @@ public class AddCopyGui extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
-        //Hur gör man en delete från databasen?
+        JFrame frame = new JFrame();
+        try {
+            //Hur gör man en delete från databasen?
+            int row = tblCopies.getSelectedRow();
+            int barcode = Integer.parseInt(tblCopies.getValueAt(row,0).toString());
+            control = new CreateCopiesControl(this);
+            control.deleteCopy(barcode);
+            
+            JOptionPane.showMessageDialog(frame, "Copy removed!");
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(AddCopyGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed

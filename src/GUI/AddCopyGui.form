@@ -137,11 +137,12 @@
     <Component class="javax.swing.JComboBox" name="cmbCategory">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
+          <StringArray count="5">
             <StringItem index="0" value="Movie"/>
             <StringItem index="1" value="Course litterature"/>
             <StringItem index="2" value="Other litterature"/>
             <StringItem index="3" value="Reference litterature"/>
+            <StringItem index="4" value="Magazine"/>
           </StringArray>
         </Property>
       </Properties>

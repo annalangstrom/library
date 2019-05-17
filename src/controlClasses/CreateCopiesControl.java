@@ -85,10 +85,12 @@ public class CreateCopiesControl {
         connection.closeDbConnection(); 
     }
     
-    public void deleteCopy(int barcodeNo) throws SQLException{
+    public void deleteCopy(int barcodeNo) throws SQLException, ClassNotFoundException{
         deleteCopy.setInt(1, barcodeNo);
         deleteCopy.executeUpdate();
         deleteCopy.close();
+        
+        this.loadCopies();
     }
     
 

@@ -3,6 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+//Få den befintliga informationen att synas i fälten när man öppnar
 package GUI;
 
 import controlClasses.ChangeObjectControl;
@@ -48,7 +50,6 @@ public class ChangeObjectGui extends javax.swing.JFrame {
         
         item = control.getItemFromDB(itemNo);
         
-        txtTitle.setText(item.getTitle());
         txtTitle.setText(item.getTitle());
         txtPubYear.setText(Integer.toString(item.getPublishYear()));
         txtLocation.setText(item.getLocation());
