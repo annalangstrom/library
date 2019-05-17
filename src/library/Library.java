@@ -22,7 +22,7 @@ public class Library {
             public void run() {
                 new HomePageGui().setVisible(true);
             }
-        }
+        });
     }
     
 }
