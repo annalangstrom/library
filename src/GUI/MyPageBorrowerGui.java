@@ -12,6 +12,7 @@ import controlClasses.BorrowerControl;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,6 +20,17 @@ import java.util.logging.Logger;
  */
 public class MyPageBorrowerGui extends javax.swing.JFrame {
 
+    private int borrowerID;
+
+    public int getBorrowerID() {
+        return borrowerID;
+    }
+
+    public void setBorrowerID(int borrowerID) {
+        this.borrowerID = borrowerID;
+    }
+    
+    
    /**
     * Creates new form MyPageBorrowerGui
     */
@@ -213,10 +225,9 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
 
    private void btnUpdatePersonalDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatePersonalDataActionPerformed
        try {
-           // TODO add your handling code here:
            ChangeAccountGui gui = new ChangeAccountGui();
-           gui.setBorrowerID(1);
-           gui.setTextInFields(1);
+           gui.setBorrowerID(borrowerID);
+           gui.setTextInFields(borrowerID);
            gui.setVisible(true);
        } catch (ClassNotFoundException | SQLException ex) {
            Logger.getLogger(MyPageBorrowerGui.class.getName()).log(Level.SEVERE, null, ex);
@@ -225,9 +236,14 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
 
     private void btnEraseMyAcountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEraseMyAcountActionPerformed
        try {
-           // TODO add your handling code here:
-           BorrowerControl control = new BorrowerControl();
-           control.removeUser(1);
+           BorrowerControl control;
+           int input = JOptionPane.showConfirmDialog(rootPane, "Are you sure you want to erase your account?", 
+                   "Are you sure?", JOptionPane.YES_NO_CANCEL_OPTION);
+           
+           if(input == 0){
+               control = new BorrowerControl();
+               control.inactivateUser(borrowerID);
+           }
        } catch (ClassNotFoundException | SQLException ex) {
            Logger.getLogger(MyPageBorrowerGui.class.getName()).log(Level.SEVERE, null, ex);
        }
