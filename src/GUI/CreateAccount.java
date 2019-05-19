@@ -298,7 +298,7 @@ public class CreateAccount extends javax.swing.JFrame {
         if(!luhn(txtSsn.getText())){
             JOptionPane.showMessageDialog(frame, "Invalid social security number.");
         }
-        while(!passwordCheck(txtPassword.getText())){
+        if(!passwordCheck(txtPassword.getText())){
             JOptionPane.showMessageDialog(frame, "Incorrect password.");
         }
         try {
