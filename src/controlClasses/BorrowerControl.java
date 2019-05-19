@@ -76,9 +76,9 @@ public class BorrowerControl {
     
     public void showBorrower(){}
     
-    public void updateBorrower(int category, int borrowerID, String fname, String sname, 
+    public void updateBorrower( int borrowerID, String fname, String sname, 
             String password, String email, String phoneNo, String street, 
-            String postcode, String city) throws SQLException{
+            String postcode, String city, int category) throws SQLException{
         
         updateBorrower.setString(1, fname);
         updateBorrower.setString(2, sname);
@@ -93,27 +93,39 @@ public class BorrowerControl {
         updateBorrower.executeUpdate();
     }
     
-    public void removeUser(int borrowerID) throws SQLException{
-        //Inparameter vilken användare?
+    public void inactivateUser(int borrowerID) throws SQLException{
         setBorrowerInactive.setInt(1, borrowerID);
         setBorrowerInactive.executeUpdate();
     }
     
     public Borrower getBorrowerFromDB(int borrowerID) throws SQLException{
+        String ssn = null;
+        String fname = null;
+        String sname = null;
+        String email = null; 
+        String phoneNo = null;
+        String password = null;
+        String street = null; 
+        String postcode = null;
+        String city = null;
+        int category = 0;
         
         selectBorrower.setInt(1, borrowerID);
         ResultSet rs = selectBorrower.executeQuery();
-        String ssn = rs.getString("ssn");
-        String fname = rs.getString("fName");
-        String sname = rs.getString("sName");
-        String email = rs.getString("email");
-        String phoneNo = rs.getString("phoneNo");
-        String password = rs.getString("password");
-        String street = rs.getString("street");
-        String postcode = rs.getString("postcode");
-        String city = rs.getString("city");
+        while(rs.next()){
+        ssn = rs.getString("ssn");
+        fname = rs.getString("fName");
+        sname = rs.getString("sName");
+        email = rs.getString("email");
+        phoneNo = rs.getString("phoneNo");
+        password = rs.getString("password");
+        street = rs.getString("street");
+        postcode = rs.getString("postcode");
+        city = rs.getString("city");
+        category = rs.getInt("category");
+        }
         
-        Student student = new Student(ssn, fname, sname, password, email, phoneNo, street, postcode, city);
+        Student student = new Student(ssn, fname, sname, password, email, phoneNo, street, postcode, city, category);
         
         return student;
     }

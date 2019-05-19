@@ -53,6 +53,12 @@ public class ChangeAccountGui extends javax.swing.JFrame {
         txtPassword.setText(borrower.getPassword());
         txtFirstName.setText(borrower.getFname());
         txtLastName.setText(borrower.getSname());
+        txtMail.setText(borrower.getEmail());
+        txtPhoneNumber.setText(borrower.getPhoneNo());
+        txtStreet.setText(borrower.getStreet());
+        txtPostcode.setText(borrower.getPostcode());
+        txtCity.setText(borrower.getCity());
+        cmbCategory.setSelectedIndex(borrower.getCategory());
         
     }
     /**
@@ -100,7 +106,6 @@ public class ChangeAccountGui extends javax.swing.JFrame {
             }
         });
 
-        txtSsn.setForeground(new java.awt.Color(204, 204, 204));
         txtSsn.setText("YYYYMMDDXXXX");
         txtSsn.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -127,7 +132,6 @@ public class ChangeAccountGui extends javax.swing.JFrame {
 
         jLabel7.setText("Email:");
 
-        txtMail.setForeground(new java.awt.Color(204, 204, 204));
         txtMail.setText("example@gmail.com");
         txtMail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -157,7 +161,6 @@ public class ChangeAccountGui extends javax.swing.JFrame {
 
         jLabel11.setText("City:");
 
-        txtPassword.setForeground(new java.awt.Color(204, 204, 204));
         txtPassword.setText("123456");
         txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -296,29 +299,19 @@ public class ChangeAccountGui extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
-        JFrame frame = new JFrame();
-        
-        if(!luhn(txtSsn.getText())){
-            JOptionPane.showMessageDialog(frame, "Invalid social security number.");
-        }
-        while(!passwordCheck(txtPassword.getText())){
-            JOptionPane.showMessageDialog(frame, "Incorrect password.");
-        }
         try {
-            CreateAccountControl control = new CreateAccountControl();
+            BorrowerControl control = new BorrowerControl();
             
-            control.addBorrowerToDB(txtSsn.getText(), cmbCategory.getSelectedIndex(),
-                    txtFirstName.getText(), txtLastName.getText(), txtPassword.getText(),
-                    txtMail.getText(), txtPhoneNumber.getText(), txtStreet.getText(),
-                    txtPostcode.getText(), txtCity.getText());
+            control.updateBorrower(borrowerID, txtFirstName.getText(), txtLastName.getText(), 
+                    txtPassword.getText(), txtMail.getText(), txtPhoneNumber.getText(),
+                    txtStreet.getText(), txtPostcode.getText(), txtCity.getText(), 
+                    cmbCategory.getSelectedIndex());
             
-            JOptionPane.showMessageDialog(frame, "Creation completed!");
+            JOptionPane.showMessageDialog(rootPane, "Update completed!");
+            
         } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(frame, "Something went wrong, " + ex.getMessage());
             Logger.getLogger(ChangeAccountGui.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-        
     }//GEN-LAST:event_btnCreateAccountActionPerformed
 
     private void txtSsnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSsnActionPerformed
@@ -328,8 +321,6 @@ public class ChangeAccountGui extends javax.swing.JFrame {
 
     private void txtSsnFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSsnFocusGained
         // TODO add your handling code here:
-        txtSsn.setText("");
-        txtSsn.setForeground(Color.black);
     }//GEN-LAST:event_txtSsnFocusGained
 
     private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
@@ -340,51 +331,8 @@ public class ChangeAccountGui extends javax.swing.JFrame {
 
     private void txtMailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMailFocusGained
         // TODO add your handling code here:
-        txtMail.setText("");
-        txtMail.setForeground(Color.black);
     }//GEN-LAST:event_txtMailFocusGained
 
-    
-    private boolean luhn(String pnr){
-        JFrame frame = new JFrame();
-        //ifall angivet personnummer är längre än 10 anges antalet extrasiffror i "extra"
-        int extra = pnr.length() - 10; 
-
-        //ifall extrasiffrorna är färre än noll så innebär det att personnumret var 
-        //färre än 10 siffror, vilket ett giltigt persnr måste vara, därför skrivs
-        //ett felmeddelande ut och resultatet blir false och går tillbaka till "fillPnr"-metoden
-        if (extra < 0) {
-            JOptionPane.showMessageDialog(frame, "Social security number needs to contain of at least 10 numbers.");
-            
-            return false;
-        }
-
-        pnr = pnr.substring(extra, 10 + extra);
-        int sum = 0;
-
-        for (int i = 0; i < pnr.length(); i++){
-
-            char c = pnr.charAt(i); 
-
-            int num = c - '0'; 
-
-            int product;
-            if (i % 2 != 0){
-                product = num * 1;
-            }else{
-                product = num * 2;
-            }
-
-            if (product > 9){
-            product -= 9;
-            }
-            sum += product;              
-        }
-    
-        //metoden returnerar sant ifall att "remaindern" av 10 är 0, 
-        //alltså att summan gick att dela med 10 utan rester, i annat fall returneras false
-        return (sum % 10 == 0);
-    }
     private boolean passwordCheck(String password){
         if (password.length() < 6){
             JFrame frame = new JFrame();
