@@ -34,7 +34,6 @@ public class UpdatePersonalInfoGui extends javax.swing.JFrame {
       btnUpdatePersonalData = new javax.swing.JButton();
       btnCancle = new javax.swing.JButton();
       jLabel2 = new javax.swing.JLabel();
-      btnSignOut1 = new javax.swing.JButton();
       btnSave = new javax.swing.JButton();
       checkBoxStudent = new javax.swing.JCheckBox();
       checkBoxReasearcher = new javax.swing.JCheckBox();
@@ -127,8 +126,6 @@ public class UpdatePersonalInfoGui extends javax.swing.JFrame {
       jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
       jLabel2.setText("Update Personal Information");
 
-      btnSignOut1.setText("Sign out");
-
       btnSave.setText("Save");
       btnSave.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,8 +207,9 @@ public class UpdatePersonalInfoGui extends javax.swing.JFrame {
                   .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                      .addComponent(txtPostcode1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                      .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                     .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                     .addComponent(btnSignOut1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                     .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
                   .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                      .addGroup(layout.createSequentialGroup()
                         .addGap(91, 91, 91)
@@ -268,17 +266,15 @@ public class UpdatePersonalInfoGui extends javax.swing.JFrame {
             .addGap(43, 43, 43)
             .addComponent(jLabel6)
             .addGap(7, 7, 7)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-               .addComponent(txtNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-               .addComponent(btnSave))
+            .addComponent(txtNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(13, 13, 13)
             .addComponent(txtRepeatNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(13, 13, 13)
             .addComponent(txtOldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(18, 18, 18)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-               .addComponent(btnSignOut1)
-               .addComponent(btnCancle))
+               .addComponent(btnCancle)
+               .addComponent(btnSave))
             .addContainerGap())
       );
 
@@ -345,7 +341,6 @@ public class UpdatePersonalInfoGui extends javax.swing.JFrame {
    private javax.swing.JButton btnHomePage;
    private javax.swing.JButton btnSave;
    private javax.swing.JButton btnSignOut;
-   private javax.swing.JButton btnSignOut1;
    private javax.swing.JButton btnUpdatePersonalData;
    private javax.swing.JCheckBox checkBoxNon;
    private javax.swing.JCheckBox checkBoxOtherUni;

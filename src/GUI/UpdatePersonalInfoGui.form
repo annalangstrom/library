@@ -147,8 +147,10 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="txtPostcode1" alignment="0" min="-2" pref="158" max="-2" attributes="0"/>
                           <Component id="txtCity" alignment="0" min="-2" pref="158" max="-2" attributes="0"/>
-                          <Component id="btnSave" min="-2" pref="123" max="-2" attributes="0"/>
-                          <Component id="btnSignOut1" alignment="0" min="-2" pref="123" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <Component id="btnSave" min="-2" pref="123" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -223,18 +225,15 @@
               <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="7" pref="7" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtNewPassword" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="btnSave" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="txtNewPassword" min="-2" pref="25" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
               <Component id="txtRepeatNewPassword" min="-2" pref="25" max="-2" attributes="0"/>
               <EmptySpace min="13" pref="13" max="-2" attributes="0"/>
               <Component id="txtOldPassword" min="-2" pref="25" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnSignOut1" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnCancle" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSave" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -256,11 +255,6 @@
           <Font name="Tahoma" size="36" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Update Personal Information"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnSignOut1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Sign out"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="btnSave">
