@@ -170,7 +170,7 @@ public class SignInGui extends javax.swing.JFrame {
    }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
-        CreateAccountGui gui = new CreateAccountGui();
+        CreateAccountGui gui = new CreateAccountGui(homePage);
         gui.setVisible(true);
     }//GEN-LAST:event_btnCreateAccountActionPerformed
 

@@ -27,10 +27,10 @@ public class HomePageGui extends javax.swing.JFrame {
         
          panelSignedIn.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
-               if(signedIn = true){
+               if(signedIn == true){
                   panelSignedIn.setVisible(true);
                }
-               if(signedIn = false){
+               if(signedIn == false){
                   panelSignedIn.setVisible(false);
                }
             }
@@ -183,7 +183,7 @@ public class HomePageGui extends javax.swing.JFrame {
 
    private void btnLoanItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanItemActionPerformed
       
-      if((borrower = true) && (signedIn = true)) {
+      if((borrower == true) && (signedIn == true)) {
          LoanGUI loan = new LoanGUI();
          loan.setVisible(true);
       } else {
@@ -213,13 +213,13 @@ public class HomePageGui extends javax.swing.JFrame {
 
    private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
       // TODO add your handling code here:
-      CreateAccountGui createAccount = new CreateAccountGui();
+      CreateAccountGui createAccount = new CreateAccountGui(this);
       createAccount.setVisible(true);
    }//GEN-LAST:event_btnCreateAccountActionPerformed
 
    private void btnToMyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMyAccountActionPerformed
       // TODO add your handling code here:
-      if(borrower = false) {
+      if(borrower == false) {
          MyPageStaffGui MyPage = new MyPageStaffGui();
          MyPage.setVisible(true);
       } else {
