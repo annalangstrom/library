@@ -30,12 +30,15 @@ public class ChangeObjectControl {
     private final String GENRE_SELECT = "SELECT * FROM Genre WHERE itemNo = ?";
     private final String AA_ITEM_SELECT = "SELECT * FROM AAitem WHERE itemNo = ?";
     private final String AUTART_SELECT = "SELECT * FROM AuthorArtist WHERE aNo = ?";
+    private final String ITEM_UPDATE = "UPDATE Item SET isbn = ?, title = ?, ageLimit = ?, "
+            + "pCountry = ?, publisher = ?, publishYear = ?, location = ? WHERE itemNo = ?";
     
     private final PreparedStatement selectItem;
     private final PreparedStatement selectKeyword;
     private final PreparedStatement selectGenre;
     private final PreparedStatement selectAAitem;
     private final PreparedStatement selectAutArt;
+    private final PreparedStatement updateItem;
     
     JDBCconnection connection = new JDBCconnection();
     private Connection con = null;
@@ -51,9 +54,12 @@ public class ChangeObjectControl {
        selectGenre = con.prepareStatement(GENRE_SELECT);
        selectAAitem = con.prepareStatement(AA_ITEM_SELECT);
        selectAutArt = con.prepareStatement(AUTART_SELECT);
+       updateItem = con.prepareStatement(ITEM_UPDATE);
     }
     
-    public void updateInfo(Item item){}
+    public void updateInfo(Item item) throws SQLException{
+    updateItem.setString(1, item.getTitle());
+    }
     
     public String comfirmSaving(){
         return "Change completed!";
@@ -144,5 +150,15 @@ public class ChangeObjectControl {
             return null;
     }
     
-    
+    public void updateObject(String isbn, String title, int ageLimit, String pCountry,
+            String publisher, int publishYear, String location) throws SQLException{
+        updateItem.setString(1, isbn);
+        updateItem.setString(2, title);
+        updateItem.setInt(3, ageLimit);
+        updateItem.setString(4, pCountry);
+        updateItem.setString(5, publisher);
+        updateItem.setInt(6, publishYear);
+        updateItem.setString(7, location);
+        updateItem.executeUpdate();
+    }
 }
