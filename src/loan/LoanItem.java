@@ -22,11 +22,18 @@ public class LoanItem {
     private Date lastReturnDate;
     private Date actualReturnDate = null;
 
-    public LoanItem(int loanItemNo, Copy copy, Date lastReturnDate) {
-        this.loanItemNo = loanItemNo;
+    public LoanItem(Copy copy) {
         this.copy = copy;
     }
 
+    public void setLoanItemNo(int loanItemNo) {
+        this.loanItemNo = loanItemNo;
+    }
+    
+    public int getLoanItemNo() {
+        return loanItemNo;
+    }
+    
     public Copy getCopy() {
         return copy;
     }
