@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+//Man får inte ändra: ssn
 package GUI;
 
+import controlClasses.BorrowerControl;
 import controlClasses.CreateAccountControl;
 import java.awt.Color;
 import java.sql.SQLException;
@@ -12,21 +15,52 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import persons.Borrower;
 
 
 /**
  *
  * @author annalangstrom
  */
-public class CreateAccount extends javax.swing.JFrame {
+public class ChangeAccountGui extends javax.swing.JFrame {
 
+    int borrowerID;
+
+    public int getBorrowerID() {
+        return borrowerID;
+    }
+
+    public void setBorrowerID(int borrowerID) {
+        this.borrowerID = borrowerID;
+    }
+    
     /**
      * Creates new form CreateAccount
      */
-    public CreateAccount() {
+    public ChangeAccountGui() {
         initComponents();
+        
     }
 
+    public void setTextInFields(int borrowerID) throws ClassNotFoundException, SQLException{
+        Borrower borrower;
+        BorrowerControl control = new BorrowerControl();
+        
+        borrower = control.getBorrowerFromDB(borrowerID);
+        
+        txtSsn.setText(borrower.getSsn());
+        txtSsn.setEditable(false);
+        txtPassword.setText(borrower.getPassword());
+        txtFirstName.setText(borrower.getFname());
+        txtLastName.setText(borrower.getSname());
+        txtMail.setText(borrower.getEmail());
+        txtPhoneNumber.setText(borrower.getPhoneNo());
+        txtStreet.setText(borrower.getStreet());
+        txtPostcode.setText(borrower.getPostcode());
+        txtCity.setText(borrower.getCity());
+        cmbCategory.setSelectedIndex(borrower.getCategory());
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,12 +94,10 @@ public class CreateAccount extends javax.swing.JFrame {
         txtPostcode = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtCity = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        btnSignIn = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
-        jLabel1.setText("Create account");
+        jLabel1.setText("Update account");
 
         btnHomePage.setText("Home Page");
         btnHomePage.addActionListener(new java.awt.event.ActionListener() {
@@ -74,7 +106,6 @@ public class CreateAccount extends javax.swing.JFrame {
             }
         });
 
-        txtSsn.setForeground(new java.awt.Color(204, 204, 204));
         txtSsn.setText("YYYYMMDDXXXX");
         txtSsn.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -101,7 +132,6 @@ public class CreateAccount extends javax.swing.JFrame {
 
         jLabel7.setText("Email:");
 
-        txtMail.setForeground(new java.awt.Color(204, 204, 204));
         txtMail.setText("example@gmail.com");
         txtMail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -111,7 +141,7 @@ public class CreateAccount extends javax.swing.JFrame {
 
         jLabel8.setText("Phone number:");
 
-        btnCreateAccount.setText("Create account");
+        btnCreateAccount.setText("Save changes");
         btnCreateAccount.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCreateAccountActionPerformed(evt);
@@ -131,16 +161,6 @@ public class CreateAccount extends javax.swing.JFrame {
 
         jLabel11.setText("City:");
 
-        jLabel12.setText("Have you got an account?");
-
-        btnSignIn.setText("Sign in");
-        btnSignIn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSignInActionPerformed(evt);
-            }
-        });
-
-        txtPassword.setForeground(new java.awt.Color(204, 204, 204));
         txtPassword.setText("123456");
         txtPassword.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -153,28 +173,25 @@ public class CreateAccount extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSignIn)
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jLabel6))
-                            .addComponent(txtSsn)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel2))
-                            .addComponent(txtFirstName)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)))
-                            .addComponent(txtLastName)
-                            .addComponent(cmbCategory, 0, 163, Short.MAX_VALUE)
-                            .addComponent(txtPassword))))
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel6))
+                    .addComponent(txtSsn)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel2))
+                    .addComponent(txtFirstName)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)))
+                    .addComponent(txtLastName)
+                    .addComponent(cmbCategory, 0, 163, Short.MAX_VALUE)
+                    .addComponent(txtPassword))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(66, 66, 66)
@@ -204,12 +221,9 @@ public class CreateAccount extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnHomePage)
-                        .addGap(94, 94, 94)
-                        .addComponent(jLabel1))
-                    .addComponent(jLabel12))
+                .addComponent(btnHomePage)
+                .addGap(94, 94, 94)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -263,11 +277,8 @@ public class CreateAccount extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSignIn)
                     .addComponent(btnCreateAccount)
                     .addComponent(btnCancel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -276,11 +287,6 @@ public class CreateAccount extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
-        SignIn gui = new SignIn();
-        gui.setVisible(true);
-    }//GEN-LAST:event_btnSignInActionPerformed
 
     private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
         
@@ -293,39 +299,28 @@ public class CreateAccount extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
-        JFrame frame = new JFrame();
-        
-        if(!luhn(txtSsn.getText())){
-            JOptionPane.showMessageDialog(frame, "Invalid social security number.");
-        }
-        if(!passwordCheck(txtPassword.getText())){
-            JOptionPane.showMessageDialog(frame, "Incorrect password.");
-        }
         try {
-            CreateAccountControl control = new CreateAccountControl();
+            BorrowerControl control = new BorrowerControl();
             
-            control.addBorrowerToDB(txtSsn.getText(), cmbCategory.getSelectedIndex(),
-                    txtFirstName.getText(), txtLastName.getText(), txtPassword.getText(),
-                    txtMail.getText(), txtPhoneNumber.getText(), txtStreet.getText(),
-                    txtPostcode.getText(), txtCity.getText());
+            control.updateBorrower(borrowerID, txtFirstName.getText(), txtLastName.getText(), 
+                    txtPassword.getText(), txtMail.getText(), txtPhoneNumber.getText(),
+                    txtStreet.getText(), txtPostcode.getText(), txtCity.getText(), 
+                    cmbCategory.getSelectedIndex());
             
-            JOptionPane.showMessageDialog(frame, "Creation completed!");
+            JOptionPane.showMessageDialog(rootPane, "Update completed!");
+            
         } catch (ClassNotFoundException | SQLException ex) {
-            JOptionPane.showMessageDialog(frame, "Something went wrong, " + ex.getMessage());
-            Logger.getLogger(CreateAccount.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ChangeAccountGui.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-        
     }//GEN-LAST:event_btnCreateAccountActionPerformed
 
     private void txtSsnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSsnActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtSsnActionPerformed
 
     private void txtSsnFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSsnFocusGained
         // TODO add your handling code here:
-        txtSsn.setText("");
-        txtSsn.setForeground(Color.black);
     }//GEN-LAST:event_txtSsnFocusGained
 
     private void txtPasswordFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtPasswordFocusGained
@@ -336,51 +331,8 @@ public class CreateAccount extends javax.swing.JFrame {
 
     private void txtMailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMailFocusGained
         // TODO add your handling code here:
-        txtMail.setText("");
-        txtMail.setForeground(Color.black);
     }//GEN-LAST:event_txtMailFocusGained
 
-    
-    private boolean luhn(String pnr){
-        JFrame frame = new JFrame();
-        //ifall angivet personnummer är längre än 10 anges antalet extrasiffror i "extra"
-        int extra = pnr.length() - 10; 
-
-        //ifall extrasiffrorna är färre än noll så innebär det att personnumret var 
-        //färre än 10 siffror, vilket ett giltigt persnr måste vara, därför skrivs
-        //ett felmeddelande ut och resultatet blir false och går tillbaka till "fillPnr"-metoden
-        if (extra < 0) {
-            JOptionPane.showMessageDialog(frame, "Social security number needs to contain of at least 10 numbers.");
-            
-            return false;
-        }
-
-        pnr = pnr.substring(extra, 10 + extra);
-        int sum = 0;
-
-        for (int i = 0; i < pnr.length(); i++){
-
-            char c = pnr.charAt(i); 
-
-            int num = c - '0'; 
-
-            int product;
-            if (i % 2 != 0){
-                product = num * 1;
-            }else{
-                product = num * 2;
-            }
-
-            if (product > 9){
-            product -= 9;
-            }
-            sum += product;              
-        }
-    
-        //metoden returnerar sant ifall att "remaindern" av 10 är 0, 
-        //alltså att summan gick att dela med 10 utan rester, i annat fall returneras false
-        return (sum % 10 == 0);
-    }
     private boolean passwordCheck(String password){
         if (password.length() < 6){
             JFrame frame = new JFrame();
@@ -408,20 +360,21 @@ public class CreateAccount extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(CreateAccount.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(ChangeAccountGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(CreateAccount.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(ChangeAccountGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(CreateAccount.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(ChangeAccountGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(CreateAccount.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(ChangeAccountGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
+//        //</editor-fold>
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new CreateAccount().setVisible(true);
+//                new ChangeAccountGui().setVisible(true);
 //            }
 //        });
 //    }
@@ -430,12 +383,10 @@ public class CreateAccount extends javax.swing.JFrame {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnCreateAccount;
     private javax.swing.JButton btnHomePage;
-    private javax.swing.JButton btnSignIn;
     private javax.swing.JComboBox<String> cmbCategory;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

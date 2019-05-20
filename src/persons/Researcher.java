@@ -12,8 +12,8 @@ package persons;
 public class Researcher extends Borrower{
     
     public Researcher(String ssn, String fname, String sname, String password, 
-            String email, String phoneNo, String street, String postcode, String city) {
-        super(ssn, fname, sname, password, email, phoneNo, street, postcode, city);
+            String email, String phoneNo, String street, String postcode, String city, int category) {
+        super(ssn, fname, sname, password, email, phoneNo, street, postcode, city, category);
     }
     
 }

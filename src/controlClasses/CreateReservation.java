@@ -15,7 +15,7 @@ import persons.*;
  */
 public class CreateReservation {
     
-    public void createNewReservation(Borrower borrower, Item item, Staff staff, Date date){
+    public void createNewReservation(BorrowerControl borrower, Item item, Staff staff, Date date){
         
     }
 }

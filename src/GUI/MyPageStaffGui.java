@@ -5,6 +5,9 @@
  */
 package GUI;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -173,7 +176,15 @@ public class MyPageStaffGui extends javax.swing.JFrame {
    }//GEN-LAST:event_btnUpdatePasswordActionPerformed
 
    private void btnUpdateItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateItemActionPerformed
-      // TODO add your handling code here:
+       try {
+           ChangeObjectGui changeObject = new ChangeObjectGui();
+           String itemNo = JOptionPane.showInputDialog(rootPane, "Which itemnumber do you wanna update?");
+           changeObject.setItemNo(Integer.parseInt(itemNo));
+           changeObject.setTextInFields(changeObject.getItemNo());
+           changeObject.setVisible(true);
+       } catch (SQLException | ClassNotFoundException ex) {
+           Logger.getLogger(MyPageStaffGui.class.getName()).log(Level.SEVERE, null, ex);
+       }
    }//GEN-LAST:event_btnUpdateItemActionPerformed
 
     private void btnAddCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCopyActionPerformed
