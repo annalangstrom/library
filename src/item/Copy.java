@@ -11,17 +11,19 @@ package item;
  */
 public class Copy {
     private int barcodeNo;
-    private Item item;
+    private int item;
     private int loanCategory;
     private String loanStatus;
     private String condition;
+    private String title;
 
-    public Copy(int barcodeNo, Item item, int loanCategory, String loanStatus, String condition) {
+    public Copy(int barcodeNo, int item, int loanCategory, String loanStatus, String condition, String title) {
         this.barcodeNo = barcodeNo;
         this.item = item;
         this.loanCategory = loanCategory;
         this.loanStatus = loanStatus;
         this.condition = condition;
+        this.title = title;
     }
     
     public Copy(int barcode, String condition, int loanCategory, String loanStatus){
@@ -43,11 +45,11 @@ public class Copy {
         this.barcodeNo = barcodeNo;
     }
 
-    public Item getItem() {
+    public int getItem() {
         return item;
     }
 
-    public void setItem(Item item) {
+    public void setItem(int item) {
         this.item = item;
     }
 
@@ -74,6 +76,16 @@ public class Copy {
     public void setCondition(String condition) {
         this.condition = condition;
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
+    
     
     public void searchCopy(Item item){
         //sätt returtyp Copy
