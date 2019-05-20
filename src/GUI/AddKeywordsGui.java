@@ -15,7 +15,7 @@ import javax.swing.DefaultListModel;
 public class AddKeywordsGui extends javax.swing.JFrame {
 
     private final DefaultListModel model;
-    private ArrayList<String> things = new ArrayList<>();
+    private ArrayList<String> things;
 
     public ArrayList<String> getThings() {
         return things;
@@ -31,12 +31,23 @@ public class AddKeywordsGui extends javax.swing.JFrame {
     public AddKeywordsGui() {
         super("Add keywords");
         model = new DefaultListModel();
+        things = new ArrayList<>();
         initComponents();
         initList();
     }
 
     private void initList(){
         lstThings.setModel(model);
+        
+        for (int i = 0; i < things.size(); i++) {
+            model.addElement(things.get(i));
+        }
+    }
+    
+    public void addThingsInList(){
+        for (int i = 0; i < things.size(); i++) {
+        model.addElement(things.get(i));
+        }
     }
     
     /**
@@ -130,30 +141,22 @@ public class AddKeywordsGui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
         model.addElement(txtAdd.getText());
         things.add(txtAdd.getText());
         txtAdd.setText("");
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
-        // TODO add your handling code here:
         int index = lstThings.getSelectedIndex();
         things.remove(index);
         model.remove(index);
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        // TODO add your handling code here:
         super.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        
-//        for(int i = 0; i < model.size(); i++){
-//            things.add(model.elementAt(i).toString());
-//        }
-        
         super.dispose();
     }//GEN-LAST:event_btnSaveActionPerformed
 

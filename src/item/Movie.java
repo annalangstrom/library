@@ -5,8 +5,6 @@
  */
 package item;
 
-import item.AuthorArtist;
-import item.Item;
 import java.sql.SQLException;
 import java.time.Year;
 import java.util.ArrayList;

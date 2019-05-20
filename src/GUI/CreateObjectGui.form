@@ -107,12 +107,12 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="txtPCountry" alignment="0" pref="179" max="32767" attributes="0"/>
+                          <Component id="txtPublisher" alignment="0" pref="179" max="32767" attributes="0"/>
                           <Component id="txtIsbn" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtPubYear" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtPublisher" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtLocation" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtTitle" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txtLocation" max="32767" attributes="0"/>
+                          <Component id="txtPCountry" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -192,18 +192,18 @@
               </Group>
               <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtPublisher" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtLocation" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel6" alignment="3" min="-2" pref="21" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtPCountry" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtPublisher" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtLocation" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtPCountry" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -265,7 +265,7 @@
         <Property name="text" type="java.lang.String" value="Location*"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtLocation">
+    <Component class="javax.swing.JTextField" name="txtPCountry">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
@@ -291,14 +291,14 @@
         <Property name="text" type="java.lang.String" value="Publisher"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtPublisher">
+    <Component class="javax.swing.JTextField" name="txtLocation">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel10">
       <Properties>
         <Property name="text" type="java.lang.String" value="Publisher country"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtPCountry">
+    <Component class="javax.swing.JTextField" name="txtPublisher">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">
       <Properties>

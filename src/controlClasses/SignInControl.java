@@ -5,6 +5,7 @@
  */
 package controlClasses;
 
+import GUI.MyPageBorrowerGui;
 import GUI.CreateAccountGui;
 import GUI.SignInGui;
 import JDBCconnection.JDBCconnection;
@@ -57,6 +58,7 @@ public class SignInControl {
             con = new JDBCconnection();
             rs = checkValidInlog(user, password, rs);
             printSignInResult(rs);
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(frame, "Something went wrong.", "Error message", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
@@ -66,17 +68,23 @@ public class SignInControl {
     private void printSignInResult(ResultSet rs) throws SQLException{
         JFrame frame = new JFrame();
         String fullname = "";
-        
+        int id = 0;
         
         if (rs!=null){
             while (rs.next()){
                 fullname = rs.getString("fName") + " " + rs.getString("sName");
+                id = rs.getInt("borrowerID");
             }
             
             if (fullname.equals(""))
                 JOptionPane.showMessageDialog(frame, "User account or password was wrong.");
-            else
-            JOptionPane.showMessageDialog(frame, "You are signed is as " + fullname + ".");
+            else{
+                JOptionPane.showMessageDialog(frame, "You are signed is as " + fullname + ".");
+
+                MyPageBorrowerGui gui = new MyPageBorrowerGui();
+                gui.setBorrowerID(id);
+                gui.setVisible(true);
+            }
         }
         else {
             JOptionPane.showMessageDialog(frame, "You are not signed in.");

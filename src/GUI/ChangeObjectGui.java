@@ -4,11 +4,10 @@
  * and open the template in the editor.
  */
 
-//Få den befintliga informationen att synas i fälten när man öppnar
+//Få den befintliga informationen att synas i fälten när man öppnar, lyckas inte med listorna...
 package GUI;
 
 import controlClasses.ChangeObjectControl;
-import controlClasses.CreateObjectControl;
 import item.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -25,37 +24,45 @@ public class ChangeObjectGui extends javax.swing.JFrame {
     private AddKeywordsGui addKeys;
     private AddGenres addGenres;
     private AddAutArtGui addAutArts;
+    private int itemNo;
+    Item item;
     /**
      * Creates new form CreateObject
-     * @param itemNo
      */
-    public ChangeObjectGui(int itemNo) {
+    public ChangeObjectGui() {
         super("New item");
         initComponents();
-        addKeys = new AddKeywordsGui();
+        
+        
+    }
+
+    public int getItemNo() {
+        return itemNo;
+    }
+
+    public void setItemNo(int itemNo) {
+        this.itemNo = itemNo;
+    }
+    
+    public void setTextInFields(int itemNo) throws SQLException, ClassNotFoundException{
+        ChangeObjectControl control = new ChangeObjectControl();
+        Book book;
+        Movie movie;
+        Magazine magazine;
+        
+//        addKeys = new AddKeywordsGui();
         addGenres = new AddGenres();
         addAutArts = new AddAutArtGui();
         
-        try {
-            setTextInFields(itemNo);
-        } catch (SQLException | ClassNotFoundException ex) {
-            Logger.getLogger(ChangeObjectGui.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    private void setTextInFields(int itemNo) throws SQLException, ClassNotFoundException{
-        ChangeObjectControl control = new ChangeObjectControl();
-        Book book = null;
-        Item item;
-        
         item = control.getItemFromDB(itemNo);
+        
+//        addKeys.setThings(item.getKeywords());
+        addGenres.setThings(item.getGenres());
+        addAutArts.setThings(item.getAuthorArtists());
         
         txtTitle.setText(item.getTitle());
         txtPubYear.setText(Integer.toString(item.getPublishYear()));
         txtLocation.setText(item.getLocation());
-        addKeys.setThings(item.getKeywords());
-        addGenres.setThings(item.getGenres());
-        //Lägg till authorartist
         
         if(item instanceof Book){
             book = (Book)item;
@@ -64,9 +71,21 @@ public class ChangeObjectGui extends javax.swing.JFrame {
             txtPublisher.setText(book.getPublisher());
             cmbCategory.setSelectedItem("Book");
         }
+        
+        if(item instanceof Movie){
+            movie = (Movie)item;
+            
+            txtAgeLimit.setText(Integer.toString(movie.getAgeLimit()));
+            txtPCountry.setText(movie.getpCountry());
+        }
+        
+        if(item instanceof Magazine){
+            magazine = (Magazine)item;
+            
+            txtPublisher.setText(magazine.getPublisher());
+        }
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -144,10 +163,10 @@ public class ChangeObjectGui extends javax.swing.JFrame {
 
         jLabel8.setText("Location*");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
-        jLabel1.setText("New item");
+        jLabel1.setText("Update item");
 
         btnHomePage.setText("Home Page");
 
@@ -316,6 +335,8 @@ public class ChangeObjectGui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddKeywordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddKeywordActionPerformed
+        addKeys = new AddKeywordsGui();
+        addKeys.setThings(item.getKeywords());
         addKeys.setVisible(true);
     }//GEN-LAST:event_btnAddKeywordActionPerformed
 
@@ -330,24 +351,11 @@ public class ChangeObjectGui extends javax.swing.JFrame {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         JFrame frame = new JFrame();
         try {
-            // TODO add your handling code here:
-            CreateObjectControl control = new CreateObjectControl();
-            if(cmbCategory.getSelectedItem().equals("Book"))
-                control.addBookToDB(txtIsbn.getText(), txtPublisher.getText(), txtTitle.getText(),
-                        Integer.parseInt(txtPubYear.getText()), txtLocation.getText(), addKeys.getThings(),
-                        addGenres.getThings(), addAutArts.getThings());
-            
-            else if(cmbCategory.getSelectedItem().equals("Movie"))
-                control.addMovieToDB(Integer.parseInt(txtAgeLimit.getText()), txtPCountry.getText(), 
-                        txtTitle.getText(), Integer.parseInt(txtPubYear.getText()), txtLocation.getText(), 
-                        addKeys.getThings(), addGenres.getThings(), addAutArts.getThings());
-           
-            else if(cmbCategory.getSelectedItem().equals("Magazine"))
-                control.addMagazineToDB(txtPublisher.getText(), txtTitle.getText(), 
-                        Integer.parseInt(txtPubYear.getText()), txtLocation.getText(), 
-                        addKeys.getThings(), addGenres.getThings(), addAutArts.getThings());
-            
-            control.confirmSaving();
+            ChangeObjectControl control = new ChangeObjectControl();
+            control.updateObject(txtIsbn.getText(), txtTitle.getText(), Integer.parseInt(txtAgeLimit.getText()), 
+                    txtPCountry.getText(), txtPublisher.getText(), 
+                    Integer.parseInt(txtPubYear.getText()), txtLocation.getText());
+            JOptionPane.showMessageDialog(rootPane, control.comfirmSaving());
             
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(frame, "Something went wrong, " + ex.getMessage());
@@ -358,40 +366,40 @@ public class ChangeObjectGui extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ChangeObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ChangeObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ChangeObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ChangeObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new ChangeObjectGui().setVisible(true);
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
 //            }
-//        });
-    }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(ChangeObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(ChangeObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(ChangeObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(ChangeObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+////        java.awt.EventQueue.invokeLater(new Runnable() {
+////            public void run() {
+////                new ChangeObjectGui().setVisible(true);
+////            }
+////        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAutArt;

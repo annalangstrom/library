@@ -11,8 +11,9 @@ package persons;
  */
 public class OtherEmployee extends Borrower{
     
-    public OtherEmployee(String ssn, String fname, String sname, String password, String email, String phoneNo, String street, String postcode, String city) {
-        super(ssn, fname, sname, password, email, phoneNo, street, postcode, city);
+    public OtherEmployee(String ssn, String fname, String sname, String password, 
+            String email, String phoneNo, String street, String postcode, String city, int category) {
+        super(ssn, fname, sname, password, email, phoneNo, street, postcode, city, category);
     }
     
 }

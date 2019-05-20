@@ -57,13 +57,13 @@ public class CreateObjectGui extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtPubYear = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtLocation = new javax.swing.JTextField();
+        txtPCountry = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         cmbCategory = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
-        txtPublisher = new javax.swing.JTextField();
+        txtLocation = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txtPCountry = new javax.swing.JTextField();
+        txtPublisher = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtAgeLimit = new javax.swing.JTextField();
         btnAddKeyword = new javax.swing.JButton();
@@ -186,12 +186,12 @@ public class CreateObjectGui extends javax.swing.JFrame {
                                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtPCountry, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
+                            .addComponent(txtPublisher, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE)
                             .addComponent(txtIsbn, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtPubYear, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPublisher, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtLocation, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtTitle, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtLocation)))
+                            .addComponent(txtPCountry)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(146, 146, 146)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -251,16 +251,16 @@ public class CreateObjectGui extends javax.swing.JFrame {
                         .addComponent(addAutArt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(68, 68, 68)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(txtPCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(txtLocation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPCountry, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtAgeLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -301,17 +301,24 @@ public class CreateObjectGui extends javax.swing.JFrame {
                 control.addBookToDB(txtIsbn.getText(), txtPublisher.getText(), txtTitle.getText(),
                         Integer.parseInt(txtPubYear.getText()), txtLocation.getText(), addKeys.getThings(),
                         addGenres.getThings(), addAutArts.getThings());
-            
+            /*String isbn, String publisher, String title, 
+            int publishYear, String location, ArrayList<String> keywords, 
+            ArrayList<String> genres, ArrayList<String> authorArtist*/
             else if(cmbCategory.getSelectedItem().equals("Movie"))
                 control.addMovieToDB(Integer.parseInt(txtAgeLimit.getText()), txtPCountry.getText(), 
                         txtTitle.getText(), Integer.parseInt(txtPubYear.getText()), txtLocation.getText(), 
                         addKeys.getThings(), addGenres.getThings(), addAutArts.getThings());
+            /*int ageLimit, String pCountry, String title, 
+            int publishYear, String location, ArrayList<String> keywords, 
+            ArrayList<String> genres, ArrayList<String> authorArtist*/
            
             else if(cmbCategory.getSelectedItem().equals("Magazine"))
                 control.addMagazineToDB(txtPublisher.getText(), txtTitle.getText(), 
                         Integer.parseInt(txtPubYear.getText()), txtLocation.getText(), 
                         addKeys.getThings(), addGenres.getThings(), addAutArts.getThings());
-            
+            /*String publisher, String title, int publishYear, 
+            String location, ArrayList<String> keywords, ArrayList<String> genres, 
+            ArrayList<String> authorArtist*/
             control.confirmSaving();
             
         } catch (ClassNotFoundException | SQLException ex) {
@@ -323,38 +330,38 @@ public class CreateObjectGui extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CreateObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CreateObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CreateObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CreateObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new CreateObjectGui().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(CreateObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(CreateObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(CreateObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(CreateObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new CreateObjectGui().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addAutArt;

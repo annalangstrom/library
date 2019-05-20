@@ -102,7 +102,8 @@ public class CreateObjectControl {
         
         //uppdatera arraylisten med de ifyllda posterna
         book.setAuthorArtist(authorArtists);
-        
+        if(con != null)
+            insertBook.close();
     }
     
     public void addMagazineToDB(String publisher, String title, int publishYear, 
@@ -119,9 +120,9 @@ public class CreateObjectControl {
         insertMagazine.setString(2, publisher);
         insertMagazine.setInt(3, publishYear);
         insertMagazine.setString(4, location);
-        insertMagazine.close();
+        insertMagazine.executeUpdate();
         
-        try (ResultSet generatedKeys = insertBook.getGeneratedKeys()) {
+        try (ResultSet generatedKeys = insertMagazine.getGeneratedKeys()) {
             if (generatedKeys.next()) {
                 magazine.setItemNo(generatedKeys.getInt(1));
             }
@@ -139,6 +140,8 @@ public class CreateObjectControl {
         
         //uppdatera arraylisten med de ifyllda posterna
         magazine.setAuthorArtist(authorArtists);
+        if(con != null)
+            insertMagazine.close();
     }
     
     public void addMovieToDB(int ageLimit, String pCountry, String title, 
@@ -148,7 +151,6 @@ public class CreateObjectControl {
         ArrayList<AuthorArtist> authorArtists = new ArrayList<>();
         Movie movie = new Movie(ageLimit, pCountry, title, publishYear, location, keywords, 
                 genres, authorArtists);
-        
         //insert into item (title, ageLimit, pCountry, publishYear, location) values (?, ?, ?, ?, ?)
         insertMovie.setString(1, title);
         insertMovie.setInt(2, ageLimit);
@@ -156,9 +158,8 @@ public class CreateObjectControl {
         insertMovie.setInt(4, publishYear);
         insertMovie.setString(5, location);
         insertMovie.executeUpdate();
-        insertMovie.close();
         
-        try (ResultSet generatedKeys = insertBook.getGeneratedKeys()) {
+        try (ResultSet generatedKeys = insertMovie.getGeneratedKeys()) {
             if (generatedKeys.next()) {
                 movie.setItemNo(generatedKeys.getInt(1));
             }
@@ -176,6 +177,8 @@ public class CreateObjectControl {
         
         //uppdatera arraylisten med de ifyllda posterna
         movie.setAuthorArtist(authorArtists);
+        if(con != null)
+            insertMovie.close();
     }
     
     private void insertIntoKeyword(ArrayList<String> keywords, Item item) throws SQLException{
@@ -186,7 +189,8 @@ public class CreateObjectControl {
             insertKeyword.setString(2, keywords.get(i));
             insertKeyword.executeUpdate();
         }
-        insertKeyword.close();
+        if(con != null)
+            insertKeyword.close();
     }
     
     private void insertIntoGenre(ArrayList<String> genres, Item item) throws SQLException{
@@ -197,8 +201,8 @@ public class CreateObjectControl {
             insertGenre.setString(2, genres.get(i));
             insertGenre.executeUpdate();
         }
-        
-        insertGenre.close();
+        if(con != null)
+            insertGenre.close();
     }
     
     private ArrayList<AuthorArtist> insertIntoAuthorArtist(ArrayList<String> authorArtist, 
@@ -219,23 +223,23 @@ public class CreateObjectControl {
             authorArtists.add(autArt);
             
             try (ResultSet generatedKeys = insertAutArt.getGeneratedKeys()) {
-            if (generatedKeys.next()) {
-                autArt.setaNo(generatedKeys.getInt(1));
+                if (generatedKeys.next()) {
+                    autArt.setaNo(generatedKeys.getInt(1));
+                }
+                else {
+                    throw new SQLException("Creating item failed, no ID obtained.");
+                }
             }
-            else {
-                throw new SQLException("Creating item failed, no ID obtained.");
-            }
-        }
-            
-            
             
             //insert into AAitem (itemNo, aNo) values (?, ?)
             insertAAitem.setInt(1, item.getItemNo());
             insertAAitem.setInt(2, autArt.getaNo());
             insertAAitem.executeUpdate();
         }
-        insertAutArt.close();
-        insertAAitem.close();
+        if(con != null){
+            insertAutArt.close();
+            insertAAitem.close();
+        }
         
         return authorArtists;
     }

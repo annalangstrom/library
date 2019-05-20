@@ -21,8 +21,10 @@ public abstract class Borrower {
     private String city;
     private int noOfLoans = 0;
     private boolean active = true;
+    private int category;
 
-    public Borrower(String ssn, String fname, String sname, String password, String email, String phoneNo, String street, String postcode, String city) {
+    public Borrower(String ssn, String fname, String sname, String password, String email, 
+            String phoneNo, String street, String postcode, String city, int category) {
         this.ssn = ssn;
         this.fname = fname;
         this.sname = sname;
@@ -32,6 +34,7 @@ public abstract class Borrower {
         this.street = street;
         this.postcode = postcode;
         this.city = city;
+        this.category = category;
     }
 
     public String getSsn() {
@@ -121,7 +124,13 @@ public abstract class Borrower {
     public void setActive(boolean active) {
         this.active = active;
     }
-    
-    
+
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
+    }
     
 }
