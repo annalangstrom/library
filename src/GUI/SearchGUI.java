@@ -15,10 +15,13 @@ public class SearchGUI extends javax.swing.JFrame {
     /**
      * Creates new form Search
      */
+    
+    
     public SearchGUI() {
         initComponents();
+        Search.searchItem(txtSearchField.getText());
     }
-
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -140,8 +143,8 @@ public class SearchGUI extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        txtSearchField.getText();
-        Search sea = new Search;
+      txtSearchField.getText();
+        
     }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
