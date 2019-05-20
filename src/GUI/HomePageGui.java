@@ -17,6 +17,7 @@ public class HomePageGui extends javax.swing.JFrame {
    
    private boolean signedIn = false;
    private boolean borrower = true;
+   private int id = 0;
 
     /**
      * Creates new form HomePage
@@ -24,17 +25,6 @@ public class HomePageGui extends javax.swing.JFrame {
     public HomePageGui() {
         initComponents();
         panelSignedIn.setVisible(false);
-        
-         panelSignedIn.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-               if(signedIn = true){
-                  panelSignedIn.setVisible(true);
-               }
-               if(signedIn = false){
-                  panelSignedIn.setVisible(false);
-               }
-            }
-         });
     }
 
     /**
@@ -59,6 +49,11 @@ public class HomePageGui extends javax.swing.JFrame {
       txtSearch = new javax.swing.JTextField();
 
       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+      addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+         public void propertyChange(java.beans.PropertyChangeEvent evt) {
+            formPropertyChange(evt);
+         }
+      });
       getContentPane().setLayout(null);
 
       jLabelTheLibrary.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
@@ -183,7 +178,7 @@ public class HomePageGui extends javax.swing.JFrame {
 
    private void btnLoanItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanItemActionPerformed
       
-      if((borrower = true) && (signedIn = true)) {
+      if((borrower == true) && (signedIn == true)) {
          LoanGUI loan = new LoanGUI();
          loan.setVisible(true);
       } else {
@@ -197,12 +192,12 @@ public class HomePageGui extends javax.swing.JFrame {
    }//GEN-LAST:event_btnReturnItemActionPerformed
 
    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-      //Ta text från textrutan & Stoppa in i sökmetod
-      Search input = new Search();
-      input.searchItem(txtSearch.getText());
       //Dirigera om till Söksidan:
       SearchGUI search = new SearchGUI();
       search.setVisible(true);
+      //Ta text från textrutan & Stoppa in i sökmetod
+      Search input = new Search();
+      input.searchItem(txtSearch.getText());
    }//GEN-LAST:event_btnSearchActionPerformed
 
    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
@@ -213,13 +208,13 @@ public class HomePageGui extends javax.swing.JFrame {
 
    private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
       // TODO add your handling code here:
-      CreateAccountGui createAccount = new CreateAccountGui();
+      CreateAccountGui createAccount = new CreateAccountGui(this);
       createAccount.setVisible(true);
    }//GEN-LAST:event_btnCreateAccountActionPerformed
 
    private void btnToMyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMyAccountActionPerformed
       // TODO add your handling code here:
-      if(borrower = false) {
+      if(borrower == false) {
          MyPageStaffGui MyPage = new MyPageStaffGui();
          MyPage.setVisible(true);
       } else {
@@ -233,9 +228,28 @@ public class HomePageGui extends javax.swing.JFrame {
       // TODO add your handling code here:
       signedIn = false;
    }//GEN-LAST:event_btnSignOutActionPerformed
+
+   private void formPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_formPropertyChange
+      // TODO add your handling code here:
+      if(signedIn == true){
+         panelSignedIn.setVisible(true);
+         panelNotSignedIn.setVisible(false);
+      } else {
+         panelSignedIn.setVisible(false);
+         panelNotSignedIn.setVisible(true);
+      }
+   }//GEN-LAST:event_formPropertyChange
    
    public void setSignedIn(boolean signedIn) {
       this.signedIn = signedIn;
+   }
+   
+   public void setBorrower(boolean borrower) {
+      this.borrower = borrower;
+   }
+   
+   public void setId(int id) {
+      this.id = id;
    }
    
 //    /**
@@ -274,41 +288,6 @@ public class HomePageGui extends javax.swing.JFrame {
 //        });
 //    }
 
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new HomePageGui().setVisible(true);
-//            }
-//        });
-//    }
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
    private javax.swing.JButton btnCreateAccount;

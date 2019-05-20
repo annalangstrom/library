@@ -25,29 +25,29 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AddCopyGui extends javax.swing.JFrame {
 
-    List <Copy> copyList = new ArrayList<>();
+    private List <Copy> copyList = new ArrayList<>();
     private Object[][] data = new Object[10][4]; 
-    DefaultTableModel tblModel;
-    CreateCopiesControl control;
     private int itemNo;
     /**
      * Creates new form AddCopy
+     * @param itemNo
      */
-    public AddCopyGui() {
+    public AddCopyGui(int itemNo) {
         initComponents();
-        initTable();
+        initTable(); 
+        this.itemNo = itemNo;
         try {
-            control = new CreateCopiesControl(this);
-            control.loadCopies();
+            CreateCopiesControl control = new CreateCopiesControl(this);
+            control.loadCopies(itemNo);
         } catch (SQLException | ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Something went wrong, " + ex.getMessage());
             Logger.getLogger(AddCopyGui.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    private void initTable(){
-        //Relaterar data till JTable(tblMessages) som visar innehållet 
+    private void initTable(){ 
         String[] columnNames = {"Barcode","Condition", "Category", "Loan status"};
-        tblModel = new DefaultTableModel(this.data, columnNames);
+        DefaultTableModel tblModel = new DefaultTableModel(this.data, columnNames);
         tblCopies.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tblCopies.setModel(tblModel);
         tblCopies.setShowGrid(true);
@@ -63,8 +63,8 @@ public class AddCopyGui extends javax.swing.JFrame {
         for (Copy copy : this.copyList){
             data[row][0] = copy.getBarcodeNo();
             data[row][1] = copy.getCondition();
-            data[row][2] = copy.getCategory();
-            data[row][3] = copy.getStatus();
+            data[row][2] = copy.getLoanCategory();
+            data[row][3] = copy.getLoanStatus();
             row++;
         }
         this.initTable();
@@ -239,10 +239,10 @@ public class AddCopyGui extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         JFrame frame = new JFrame();
         try {
-            control = new CreateCopiesControl(this);
+            CreateCopiesControl control = new CreateCopiesControl(this);
             control.addCopy(Integer.parseInt(txtBarcode.getText()), itemNo, cmbCategory.getSelectedIndex(), 
                     cmbLoanStatus.getSelectedItem().toString(), txtCondition.getText());
-            
+            control.loadCopies(itemNo);
             JOptionPane.showMessageDialog(frame, "Copy added!");
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(this, "Something went wrong, "+ ex.getMessage());
@@ -254,12 +254,11 @@ public class AddCopyGui extends javax.swing.JFrame {
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         JFrame frame = new JFrame();
         try {
-            //Hur gör man en delete från databasen?
             int row = tblCopies.getSelectedRow();
             int barcode = Integer.parseInt(tblCopies.getValueAt(row,0).toString());
-            control = new CreateCopiesControl(this);
+            CreateCopiesControl control = new CreateCopiesControl(this);
             control.deleteCopy(barcode);
-            
+            control.loadCopies(itemNo);
             JOptionPane.showMessageDialog(frame, "Copy removed!");
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(AddCopyGui.class.getName()).log(Level.SEVERE, null, ex);
