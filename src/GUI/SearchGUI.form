@@ -7,30 +7,25 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+                  <Component id="panelReservationConfirm" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="82" max="32767" attributes="0"/>
+              </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="108" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="btnSearchMyPage" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="btnSearchSearch" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="panelReservationConfirm" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btnSearchSearch" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="343" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace pref="73" max="32767" attributes="0"/>
+                  <EmptySpace pref="75" max="32767" attributes="0"/>
                   <Component id="panelReservationConfirm" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnSearchSearch" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnSearchMyPage" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="btnSearchSearch" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -40,11 +35,6 @@
         <Component class="javax.swing.JButton" name="btnSearchSearch">
           <Properties>
             <Property name="text" type="java.lang.String" value="Go to Search"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnSearchMyPage">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Go to My Page"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="panelReservationConfirm">
@@ -94,7 +84,7 @@
                                   <Component id="btnSearchReserve" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                                      <Component id="txtSearchField" min="-2" pref="412" max="-2" attributes="0"/>
+                                      <Component id="txtSearch" min="-2" pref="412" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
@@ -119,7 +109,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnSearch" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtSearchField" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="txtSearch" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="161" max="-2" attributes="0"/>
@@ -143,7 +133,7 @@
         <Property name="text" type="java.lang.String" value="Search"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtSearchField">
+    <Component class="javax.swing.JTextField" name="txtSearch">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="SearchGUI_txtSearchField"/>
       </AuxValues>
