@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AddCopyGui extends javax.swing.JFrame {
 
-    List <Copy> copyList = new ArrayList<>();
+    private List <Copy> copyList = new ArrayList<>();
     private Object[][] data = new Object[10][4]; 
     private int itemNo;
     /**
