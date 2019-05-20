@@ -287,8 +287,7 @@ public class CreateAccountGui extends javax.swing.JFrame {
 
     private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
         
-        HomePageGui gui = new HomePageGui();
-        gui.setVisible(true);
+        super.dispose();
     }//GEN-LAST:event_btnHomePageActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
