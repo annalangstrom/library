@@ -12,13 +12,11 @@ package item;
 public class Copy {
     private int barcodeNo;
     private Item item;
-    private LoanCategory loanCategory;
-    private LoanStatus loanStatus;
+    private int loanCategory;
+    private String loanStatus;
     private String condition;
-    private int category;
-    private String status;
 
-    public Copy(int barcodeNo, Item item, LoanCategory loanCategory, LoanStatus loanStatus, String condition) {
+    public Copy(int barcodeNo, Item item, int loanCategory, String loanStatus, String condition) {
         this.barcodeNo = barcodeNo;
         this.item = item;
         this.loanCategory = loanCategory;
@@ -29,9 +27,8 @@ public class Copy {
     public Copy(int barcode, String condition, int loanCategory, String loanStatus){
         this.barcodeNo = barcode;
         this.condition = condition;
-        this.category = loanCategory;
-        this.status = loanStatus;
-        
+        this.loanCategory = loanCategory;
+        this.loanStatus = loanStatus;
     }
     
     public Copy(int barcodeNo){
@@ -54,19 +51,19 @@ public class Copy {
         this.item = item;
     }
 
-    public LoanCategory getLoanCategory() {
+    public int getLoanCategory() {
         return loanCategory;
     }
 
-    public void setLoanCategory(LoanCategory loanCategory) {
+    public void setLoanCategory(int loanCategory) {
         this.loanCategory = loanCategory;
     }
 
-    public LoanStatus getLoanStatus() {
+    public String getLoanStatus() {
         return loanStatus;
     }
 
-    public void setLoanStatus(LoanStatus loanStatus) {
+    public void setLoanStatus(String loanStatus) {
         this.loanStatus = loanStatus;
     }
 
@@ -80,14 +77,6 @@ public class Copy {
     
     public void searchCopy(Item item){
         //sätt returtyp Copy
-    }
-
-    public int getCategory() {
-        return category;
-    }
-
-    public String getStatus() {
-        return status;
     }
     
     

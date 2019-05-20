@@ -20,9 +20,9 @@ import java.util.List;
  * @author annalangstrom
  */
 public class CreateCopiesControl {
-    private final String COPY_INSERT = "INSERT INTO Copy (barcodeNo, itemNo, lcNo, loanStatus, item_condition, title) "
-            + "VALUES (?, ?, ?, ?, ?, ?)";
-    private final String COPY_SELECT = "SELECT * FROM Copy ORDER BY copyNo DESC";
+    private final String COPY_INSERT = "INSERT INTO Copy (barcodeNo, itemNo, lcNo, loanStatus, item_condition) "
+            + "VALUES (?, ?, ?, ?, ?)";
+    private final String COPY_SELECT = "SELECT * FROM Copy WHERE itemNo = ? ORDER BY copyNo DESC";
     private final String COPY_DELETE = "DELETE FROM Copy WHERE barcodeNo = ?";
     
     private Connection con = null;
@@ -54,21 +54,17 @@ public class CreateCopiesControl {
     }
     
     public void addCopy(int barcode, int itemNo, int category, String loanStatus, String condition) throws SQLException, ClassNotFoundException{
-        String title = "title";
-        
         insertCopy.setInt(1, barcode);
         insertCopy.setInt(2, itemNo);
         insertCopy.setInt(3, category + 1);
         insertCopy.setString(4, loanStatus);
         insertCopy.setString(5, condition);
-        insertCopy.setString(6, title);
-        
         insertCopy.executeUpdate();
-        this.loadCopies();
     }
     
-    public void loadCopies() throws SQLException, ClassNotFoundException {
+    public void loadCopies(int itemNo) throws SQLException, ClassNotFoundException {
         //Exekvera SQL-uttrycket
+        selectAllCopies.setInt(1, itemNo);
         ResultSet rs = selectAllCopies.executeQuery();
         this.lstCopies = new ArrayList<>();
         //loopa resultat från SQL-uttrycket och ladda ArrayList
@@ -76,7 +72,8 @@ public class CreateCopiesControl {
             //Skapa nytt Message-objekt för varje post som returneras, 
             //data från resultset som inparametrar till konstruktorn i Message
             this.lstCopies.add(new Copy(
-                rs.getInt("barcodeNo"), rs.getString("item_condition"), rs.getInt("lcNo"), rs.getString("loanStatus")));
+                rs.getInt("barcodeNo"), rs.getString("item_condition"), 
+                    rs.getInt("lcNo"), rs.getString("loanStatus")));
             //barcode, condition, loanCategory, loanStatus
         } 
         this.addCopy.setCopyList(lstCopies);
@@ -89,8 +86,6 @@ public class CreateCopiesControl {
         deleteCopy.setInt(1, barcodeNo);
         deleteCopy.executeUpdate();
         deleteCopy.close();
-        
-        this.loadCopies();
     }
     
 
