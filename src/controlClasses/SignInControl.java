@@ -83,7 +83,6 @@ public class SignInControl {
 
                 MyPageBorrowerGui gui = new MyPageBorrowerGui();
                 gui.setBorrowerID(id);
-                gui.setVisible(true);
             }
         }
         else {
