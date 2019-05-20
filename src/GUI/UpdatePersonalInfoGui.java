@@ -32,7 +32,7 @@ public class UpdatePersonalInfoGui extends javax.swing.JFrame {
       jLabel1 = new javax.swing.JLabel();
       btnSignOut = new javax.swing.JButton();
       btnUpdatePersonalData = new javax.swing.JButton();
-      btnHomePage1 = new javax.swing.JButton();
+      btnCancle = new javax.swing.JButton();
       jLabel2 = new javax.swing.JLabel();
       btnSignOut1 = new javax.swing.JButton();
       btnSave = new javax.swing.JButton();
@@ -117,10 +117,10 @@ public class UpdatePersonalInfoGui extends javax.swing.JFrame {
 
       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-      btnHomePage1.setText("Home Page");
-      btnHomePage1.addActionListener(new java.awt.event.ActionListener() {
+      btnCancle.setText("Cancel");
+      btnCancle.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btnHomePage1ActionPerformed(evt);
+            btnCancleActionPerformed(evt);
          }
       });
 
@@ -188,9 +188,7 @@ public class UpdatePersonalInfoGui extends javax.swing.JFrame {
          .addGroup(layout.createSequentialGroup()
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                .addGroup(layout.createSequentialGroup()
-                  .addContainerGap()
-                  .addComponent(btnHomePage1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                  .addGap(32, 32, 32)
+                  .addGap(171, 171, 171)
                   .addComponent(jLabel2))
                .addGroup(layout.createSequentialGroup()
                   .addGap(523, 523, 523)
@@ -214,32 +212,33 @@ public class UpdatePersonalInfoGui extends javax.swing.JFrame {
                      .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                      .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                      .addComponent(btnSignOut1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                  .addGap(91, 91, 91)
                   .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                     .addComponent(jLabel6)
-                     .addComponent(txtNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                     .addComponent(txtRepeatNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                     .addComponent(txtOldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                      .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(77, 77, 77)
-                        .addComponent(checkBoxOtherUni))
-                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(199, 199, 199)
-                        .addComponent(checkBoxReasearcher)))))
+                        .addGap(91, 91, 91)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                           .addComponent(jLabel6)
+                           .addComponent(txtNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                           .addComponent(txtRepeatNewPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                           .addComponent(txtOldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                           .addGroup(layout.createSequentialGroup()
+                              .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                              .addGap(77, 77, 77)
+                              .addComponent(checkBoxOtherUni))
+                           .addGroup(layout.createSequentialGroup()
+                              .addComponent(jLabel5)
+                              .addGap(199, 199, 199)
+                              .addComponent(checkBoxReasearcher))))
+                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancle, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)))))
             .addGap(18, 18, 18))
       );
       layout.setVerticalGroup(
          layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
          .addGroup(layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-               .addGroup(layout.createSequentialGroup()
-                  .addGap(30, 30, 30)
-                  .addComponent(jLabel2))
-               .addGroup(layout.createSequentialGroup()
-                  .addContainerGap()
-                  .addComponent(btnHomePage1)))
+            .addGap(30, 30, 30)
+            .addComponent(jLabel2)
             .addGap(37, 37, 37)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                .addComponent(jLabel3)
@@ -277,7 +276,9 @@ public class UpdatePersonalInfoGui extends javax.swing.JFrame {
             .addGap(13, 13, 13)
             .addComponent(txtOldPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(18, 18, 18)
-            .addComponent(btnSignOut1)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+               .addComponent(btnSignOut1)
+               .addComponent(btnCancle))
             .addContainerGap())
       );
 
@@ -292,9 +293,9 @@ public class UpdatePersonalInfoGui extends javax.swing.JFrame {
       // TODO add your handling code here:
    }//GEN-LAST:event_btnUpdatePersonalDataActionPerformed
 
-   private void btnHomePage1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePage1ActionPerformed
+   private void btnCancleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancleActionPerformed
       // TODO add your handling code here:
-   }//GEN-LAST:event_btnHomePage1ActionPerformed
+   }//GEN-LAST:event_btnCancleActionPerformed
 
    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
       // TODO add your handling code here:
@@ -340,8 +341,8 @@ public class UpdatePersonalInfoGui extends javax.swing.JFrame {
    }
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
+   private javax.swing.JButton btnCancle;
    private javax.swing.JButton btnHomePage;
-   private javax.swing.JButton btnHomePage1;
    private javax.swing.JButton btnSave;
    private javax.swing.JButton btnSignOut;
    private javax.swing.JButton btnSignOut1;
