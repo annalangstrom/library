@@ -5,8 +5,20 @@
  */
 package GUI;
 
+import controlClasses.CreateCopiesControl;
+import controlClasses.LoanControl;
+import item.Copy;
+import java.awt.Color;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,20 +26,44 @@ import javax.swing.JOptionPane;
  */
 public class LoanGUI extends javax.swing.JFrame {
 
-    private final DefaultListModel model;
+    private Object[][] data = new Object[10][4]; 
+    private List<Copy> copies = new ArrayList<>();
     
     /**
      * Creates new form Loan
      */
     public LoanGUI() {
         super("Loan item");
-        model = new DefaultListModel();
         initComponents();
-        initList();
+        initTable();
     }
 
-    private void initList(){
-        lstLoan.setModel(model);
+    private void initTable(){ 
+        String[] columnNames = {"Barcode","Title"};
+        DefaultTableModel tblModel = new DefaultTableModel(this.data, columnNames);
+        tblLoan.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tblLoan.setModel(tblModel);
+        tblLoan.setShowGrid(true);
+    }
+    
+    public void loadTableData(){
+        int rows = this.copies.size();
+        //håller data i en 2d array 
+        //initierar storleken med rader & kolumner
+        this.data = new Object[rows][2];
+        //läs in data från ArrayList till data arrayen
+        int row=0; 
+        for (Copy copy : this.copies){
+            data[row][0] = copy.getBarcodeNo();
+            data[row][1] = copy.getTitle();
+            row++;
+        }
+        this.initTable();
+
+    }
+    
+    public void setCopyList(List<Copy> copyList) {
+        this.copies = copyList;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,12 +81,13 @@ public class LoanGUI extends javax.swing.JFrame {
         btnLoanHomePage = new javax.swing.JButton();
         btnLoanToSearch = new javax.swing.JButton();
         labelLoan = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lstLoan = new javax.swing.JList<>();
         btnLoanLoan = new javax.swing.JButton();
         btnLoanSignOut = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblLoan = new javax.swing.JTable();
+        txtAdd = new javax.swing.JTextField();
 
         labelLoanConfirm.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         labelLoanConfirm.setText("<html>\n<body>\n<p>\n<center>The loan was successful!</center>\n<br><center>You can see an overview of your borrowed items under \"My Page\".</center>\n</p>\n</body>");
@@ -105,9 +142,12 @@ public class LoanGUI extends javax.swing.JFrame {
         labelLoan.setText("Loan");
         labelLoan.setFocusable(false);
 
-        jScrollPane1.setViewportView(lstLoan);
-
         btnLoanLoan.setText("Loan");
+        btnLoanLoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoanLoanActionPerformed(evt);
+            }
+        });
 
         btnLoanSignOut.setText("Sign out");
         btnLoanSignOut.addActionListener(new java.awt.event.ActionListener() {
@@ -130,6 +170,27 @@ public class LoanGUI extends javax.swing.JFrame {
             }
         });
 
+        tblLoan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tblLoan);
+
+        txtAdd.setForeground(new java.awt.Color(204, 204, 204));
+        txtAdd.setText("Write your barcode number here");
+        txtAdd.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtAddFocusGained(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,43 +203,47 @@ public class LoanGUI extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(btnLoanHomePage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnLoanToSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(btnLoanToSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(178, 178, 178)
+                                .addComponent(labelLoan, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(77, 77, 77)
+                                .addGap(171, 171, 171)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 76, Short.MAX_VALUE))
+                                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnRemove, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                    .addComponent(txtAdd))))
+                        .addGap(0, 187, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnLoanLoan)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLoanSignOut)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(291, 291, 291)
-                .addComponent(labelLoan, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnLoanHomePage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLoanToSearch)
-                .addGap(4, 4, 4)
-                .addComponent(labelLoan, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnLoanHomePage)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLoanToSearch))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(labelLoan, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(txtAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
                     .addComponent(btnRemove))
-                .addGap(24, 24, 24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLoanSignOut)
                     .addComponent(btnLoanLoan))
@@ -189,9 +254,7 @@ public class LoanGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoanHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanHomePageActionPerformed
-        // TODO add your handling code here:
-        HomePageGui gui = new HomePageGui();
-        gui.setVisible(true);
+        super.dispose();
     }//GEN-LAST:event_btnLoanHomePageActionPerformed
 
     private void btnLoanToSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanToSearchActionPerformed
@@ -201,25 +264,39 @@ public class LoanGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoanToSearchActionPerformed
 
     private void btnLoanSignOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanSignOutActionPerformed
-        // TODO add your handling code here:
-        HomePageGui gui = new HomePageGui();
-        gui.setVisible(true);
+        super.dispose();
     }//GEN-LAST:event_btnLoanSignOutActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
-        int index = lstLoan.getSelectedIndex();
-//        things.remove(index);
-        model.remove(index);
-        
+        int index = tblLoan.getSelectedRow();
+        copies.remove(index);
+        loadTableData();
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        String input = JOptionPane.showInputDialog(rootPane, "Which barcode do you wanna add to your loan?");
-        
-//        model.addElement(txtAdd.getText());
-//        things.add(txtAdd.getText());
-//        txtAdd.setText("");
+        try {
+            LoanControl control = new LoanControl();
+            Copy copy = control.getCopyFromDB(Integer.parseInt(txtAdd.getText()));
+            copies.add(copy);
+            loadTableData();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(LoanGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void txtAddFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAddFocusGained
+        txtAdd.setText("");
+        txtAdd.setForeground(Color.black);
+    }//GEN-LAST:event_txtAddFocusGained
+
+    private void btnLoanLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanLoanActionPerformed
+        try {
+            LoanControl control = new LoanControl();
+            control.printReceipt(copies);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(LoanGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnLoanLoanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -266,10 +343,11 @@ public class LoanGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnLoanSignOut;
     private javax.swing.JButton btnLoanToSearch;
     private javax.swing.JButton btnRemove;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelLoan;
     private javax.swing.JLabel labelLoanConfirm;
-    private javax.swing.JList<String> lstLoan;
     private javax.swing.JPanel panelLoanConfirm;
+    private javax.swing.JTable tblLoan;
+    private javax.swing.JTextField txtAdd;
     // End of variables declaration//GEN-END:variables
 }
