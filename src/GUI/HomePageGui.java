@@ -197,12 +197,12 @@ public class HomePageGui extends javax.swing.JFrame {
    }//GEN-LAST:event_btnReturnItemActionPerformed
 
    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-      //Ta text från textrutan & Stoppa in i sökmetod
-      Search input = new Search();
-      input.searchItem(txtSearch.getText());
       //Dirigera om till Söksidan:
       SearchGUI search = new SearchGUI();
       search.setVisible(true);
+      //Ta text från textrutan & Stoppa in i sökmetod
+      Search input = new Search();
+      input.searchItem(txtSearch.getText());
    }//GEN-LAST:event_btnSearchActionPerformed
 
    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
