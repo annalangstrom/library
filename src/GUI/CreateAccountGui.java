@@ -19,12 +19,15 @@ import javax.swing.JOptionPane;
  * @author annalangstrom
  */
 public class CreateAccountGui extends javax.swing.JFrame {
+   
+   private HomePageGui homePage;
 
     /**
      * Creates new form CreateAccount
      */
-    public CreateAccountGui() {
+    public CreateAccountGui(HomePageGui homePage) {
         initComponents();
+        this.homePage = homePage;
     }
 
     /**
@@ -278,7 +281,7 @@ public class CreateAccountGui extends javax.swing.JFrame {
    }// </editor-fold>//GEN-END:initComponents
 
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
-      SignInGui signIn = new SignInGui();
+      SignInGui signIn = new SignInGui(homePage);
       signIn.setVisible(true);
     }//GEN-LAST:event_btnSignInActionPerformed
 
