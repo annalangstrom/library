@@ -24,17 +24,6 @@ public class HomePageGui extends javax.swing.JFrame {
     public HomePageGui() {
         initComponents();
         panelSignedIn.setVisible(false);
-        
-         panelSignedIn.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-               if(signedIn == true){
-                  panelSignedIn.setVisible(true);
-               }
-               if(signedIn == false){
-                  panelSignedIn.setVisible(false);
-               }
-            }
-         });
     }
 
     /**
@@ -59,6 +48,11 @@ public class HomePageGui extends javax.swing.JFrame {
       txtSearch = new javax.swing.JTextField();
 
       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+      addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+         public void propertyChange(java.beans.PropertyChangeEvent evt) {
+            formPropertyChange(evt);
+         }
+      });
       getContentPane().setLayout(null);
 
       jLabelTheLibrary.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
@@ -233,6 +227,17 @@ public class HomePageGui extends javax.swing.JFrame {
       // TODO add your handling code here:
       signedIn = false;
    }//GEN-LAST:event_btnSignOutActionPerformed
+
+   private void formPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_formPropertyChange
+      // TODO add your handling code here:
+      if(signedIn == true){
+         panelSignedIn.setVisible(true);
+         panelNotSignedIn.setVisible(false);
+      } else {
+         panelSignedIn.setVisible(false);
+         panelNotSignedIn.setVisible(true);
+      }
+   }//GEN-LAST:event_formPropertyChange
    
    public void setSignedIn(boolean signedIn) {
       this.signedIn = signedIn;
@@ -274,41 +279,6 @@ public class HomePageGui extends javax.swing.JFrame {
 //        });
 //    }
 
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new HomePageGui().setVisible(true);
-//            }
-//        });
-//    }
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
    private javax.swing.JButton btnCreateAccount;
