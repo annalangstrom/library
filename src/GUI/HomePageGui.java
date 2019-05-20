@@ -17,6 +17,7 @@ public class HomePageGui extends javax.swing.JFrame {
    
    private boolean signedIn = false;
    private boolean borrower = true;
+   private int id = 0;
 
     /**
      * Creates new form HomePage
@@ -241,6 +242,14 @@ public class HomePageGui extends javax.swing.JFrame {
    
    public void setSignedIn(boolean signedIn) {
       this.signedIn = signedIn;
+   }
+   
+   public void setBorrower(boolean borrower) {
+      this.borrower = borrower;
+   }
+   
+   public void setId(int id) {
+      this.id = id;
    }
    
 //    /**
