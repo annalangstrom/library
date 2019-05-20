@@ -5,7 +5,6 @@
  */
 package GUI;
 
-import controlClasses.CreateCopiesControl;
 import controlClasses.LoanControl;
 import item.Copy;
 import java.awt.Color;
@@ -14,9 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -36,6 +32,13 @@ public class LoanGUI extends javax.swing.JFrame {
         super("Loan item");
         initComponents();
         initTable();
+        try {
+            LoanControl control = new LoanControl();
+            control.createLoan();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(LoanGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     private void initTable(){ 
@@ -261,6 +264,7 @@ public class LoanGUI extends javax.swing.JFrame {
             Copy copy = control.getCopyFromDB(Integer.parseInt(txtAdd.getText()));
             copies.add(copy);
             loadTableData();
+            control.createLoanItem(copy);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(LoanGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -274,7 +278,7 @@ public class LoanGUI extends javax.swing.JFrame {
     private void btnLoanLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanLoanActionPerformed
         try {
             LoanControl control = new LoanControl();
-            control.printReceipt(copies);
+            control.printReceipt();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(LoanGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
