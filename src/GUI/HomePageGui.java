@@ -7,6 +7,7 @@ package GUI;
 
 import javax.swing.JOptionPane;
 import controlClasses.Search;
+import javax.swing.JPanel;
 
 /**
  *
@@ -23,6 +24,17 @@ public class HomePageGui extends javax.swing.JFrame {
     public HomePageGui() {
         initComponents();
         panelSignedIn.setVisible(false);
+        
+         panelSignedIn.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+               if(signedIn = true){
+                  panelSignedIn.setVisible(true);
+               }
+               if(signedIn = false){
+                  panelSignedIn.setVisible(false);
+               }
+            }
+         });
     }
 
     /**
@@ -221,7 +233,7 @@ public class HomePageGui extends javax.swing.JFrame {
       // TODO add your handling code here:
       signedIn = false;
    }//GEN-LAST:event_btnSignOutActionPerformed
-
+   
    public void setSignedIn(boolean signedIn) {
       this.signedIn = signedIn;
    }
