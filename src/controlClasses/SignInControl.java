@@ -57,15 +57,19 @@ public class SignInControl {
         try {                              
             con = new JDBCconnection();
             rs = checkValidInlog(user, password, rs);
-            printSignInResult(rs);
+            int id = printSignInResult(rs);
             
+            MyPageBorrowerGui gui = new MyPageBorrowerGui();
+            gui.setBorrowerID(id);
+            LoanControl control = new LoanControl();
+            control.setBorrower(id);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(frame, "Something went wrong.", "Error message", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    private void printSignInResult(ResultSet rs) throws SQLException{
+    private int printSignInResult(ResultSet rs) throws SQLException{
         JFrame frame = new JFrame();
         String fullname = "";
         int id = 0;
@@ -81,13 +85,12 @@ public class SignInControl {
             else{
                 JOptionPane.showMessageDialog(frame, "You are signed is as " + fullname + ".");
 
-                MyPageBorrowerGui gui = new MyPageBorrowerGui();
-                gui.setBorrowerID(id);
             }
         }
         else {
             JOptionPane.showMessageDialog(frame, "You are not signed in.");
         }
+        return id;
     }
     
     
