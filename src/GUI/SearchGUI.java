@@ -5,6 +5,15 @@
  */
 package GUI;
 
+//import controlClasses.Search;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+
 /**
  *
  * @author Rebec
@@ -14,8 +23,17 @@ public class SearchGUI extends javax.swing.JFrame {
     /**
      * Creates new form Search
      */
-    public SearchGUI() {
+    private controlClasses.Search controlSearch;
+    private String results;
+    DefaultListModel mod = new DefaultListModel();
+
+    public void setControlSearch(controlClasses.Search controlSearch) {
+        this.controlSearch = controlSearch;
+    }
+
+    public SearchGUI() throws SQLException {
         initComponents();
+        controlSearch.searchItem(txtSearch.getText());
     }
 
     /**
@@ -29,7 +47,6 @@ public class SearchGUI extends javax.swing.JFrame {
 
         panelSearchConfirm = new javax.swing.JPanel();
         btnSearchSearch = new javax.swing.JButton();
-        btnSearchMyPage = new javax.swing.JButton();
         panelReservationConfirm = new javax.swing.JLabel();
         labelSearch = new javax.swing.JLabel();
         txtSearch = new javax.swing.JTextField();
@@ -41,8 +58,6 @@ public class SearchGUI extends javax.swing.JFrame {
 
         btnSearchSearch.setText("Go to Search");
 
-        btnSearchMyPage.setText("Go to My Page");
-
         panelReservationConfirm.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         panelReservationConfirm.setText("<html>\n<body>\n<p>\n<center>The reservation successful!</center>\n<br><center>You can see an overview of your reservations under \"My Page\".</center>\n</p>\n</body>");
 
@@ -50,25 +65,22 @@ public class SearchGUI extends javax.swing.JFrame {
         panelSearchConfirm.setLayout(panelSearchConfirmLayout);
         panelSearchConfirmLayout.setHorizontalGroup(
             panelSearchConfirmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelSearchConfirmLayout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addComponent(panelReservationConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(82, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelSearchConfirmLayout.createSequentialGroup()
-                .addContainerGap(108, Short.MAX_VALUE)
-                .addGroup(panelSearchConfirmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(panelSearchConfirmLayout.createSequentialGroup()
-                        .addComponent(btnSearchMyPage)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSearchSearch))
-                    .addComponent(panelReservationConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(99, 99, 99))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSearchSearch)
+                .addGap(343, 343, 343))
         );
         panelSearchConfirmLayout.setVerticalGroup(
             panelSearchConfirmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelSearchConfirmLayout.createSequentialGroup()
-                .addContainerGap(73, Short.MAX_VALUE)
+                .addContainerGap(75, Short.MAX_VALUE)
                 .addComponent(panelReservationConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addGroup(panelSearchConfirmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSearchSearch)
-                    .addComponent(btnSearchMyPage))
+                .addGap(30, 30, 30)
+                .addComponent(btnSearchSearch)
                 .addGap(30, 30, 30))
         );
 
@@ -79,6 +91,11 @@ public class SearchGUI extends javax.swing.JFrame {
         labelSearch.setText("Search");
 
         btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         btnSearchSignOut.setText("Sign out");
 
@@ -132,6 +149,21 @@ public class SearchGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+//        try {
+//            // TODO add your handling code here:
+//
+//            results = controlSearch.searchItem(txtSearch.getText()); 
+//        } catch (SQLException ex) {
+//            Logger.getLogger(SearchGUI.class.getName()).log(Level.SEVERE, null, ex);
+//        } 
+        
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void addToList(){
+     listSearchResults.setModel(mod);
+     mod.addElement(evt); //här fylls de på med i+ for loop   
+    }
     /**
      * @param args the command line arguments
      */
@@ -163,14 +195,17 @@ public class SearchGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SearchGUI().setVisible(true);
+                try {
+                    new SearchGUI().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(SearchGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSearch;
-    private javax.swing.JButton btnSearchMyPage;
     private javax.swing.JButton btnSearchReserve;
     private javax.swing.JButton btnSearchSearch;
     private javax.swing.JButton btnSearchSignOut;
