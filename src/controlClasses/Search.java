@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 public class Search {
 
     private final String SEARCH_TITLE = "SELECT sName FROM AuthorArtist WHERE fName = ?"; //detta tillfälligt för test
-    private PreparedStatement psSearchTitle;
+    private final PreparedStatement psSearchTitle;
     JDBCconnection connection;
     private Connection con = null;
     private GUI.SearchGUI sGUI;
@@ -30,29 +30,25 @@ public class Search {
         this.sGUI = sGUI;
     }
 
-    public Search() throws ClassNotFoundException, SQLException {       
-        
+    public Search() throws SQLException, ClassNotFoundException {
+        //konstruktor
         this.connection = new JDBCconnection();
+        con = connection.connectToDb(con);
+        psSearchTitle = con.prepareCall(SEARCH_TITLE);
     }
 
-    public ResultSet searchItem(String string) throws SQLException {
-        try{
-            this.connection = new JDBCconnection();
-            con = connection.connectToDb(con);
-            psSearchTitle = con.prepareCall(SEARCH_TITLE);
-            searchResults = psSearchTitle.executeQuery(SEARCH_TITLE);
-        }
-        catch(Exception ex){
-            System.out.println("Couldn't retrieve the resultset");
-        }
+    public ResultSet searchItem(String string) throws SQLException {        
+        searchResults = psSearchTitle.executeQuery();
         return searchResults;
+        while (searchResults.next()){
+            
+        }
         
-
     }
 
     // public void searchItem(String string){
     //}
-    public void searchCopy(Item item) {
+    public void searchCopy(Item item) { //detta för reserve
 
     }
 }
