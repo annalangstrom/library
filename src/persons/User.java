@@ -5,16 +5,26 @@
  */
 package persons;
 
+import java.util.Observable;
+
 
 /**
  *
  * @author annalangstrom
  */
-public abstract class User {
-    public static boolean signedIn = false;
+public class User extends Observable {
+   
+    public boolean signedIn = false;
     
     public void signOut(){
         
     }
+   
+   //Ändra SigendIn och meddelar Observers att en ändring skett
+   public void setSignedIn(boolean signedIn) {
+      this.signedIn = signedIn;
+      setChanged();
+      notifyObservers(Boolean.valueOf(signedIn));
+   }
     
 }
