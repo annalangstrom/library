@@ -7,17 +7,15 @@ package GUI;
 
 import javax.swing.JOptionPane;
 import controlClasses.Search;
+import java.util.Observer;
+import java.util.Observable;
 import javax.swing.JPanel;
 
 /**
  *
  * @author annalangstrom
  */
-public class HomePageGui extends javax.swing.JFrame {
-   
-   private boolean signedIn = false;
-   private boolean borrower = true;
-   private int id = 0;
+public class HomePageGui extends javax.swing.JFrame implements Observer  {
 
     /**
      * Creates new form HomePage
@@ -49,11 +47,6 @@ public class HomePageGui extends javax.swing.JFrame {
       txtSearch = new javax.swing.JTextField();
 
       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-      addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-         public void propertyChange(java.beans.PropertyChangeEvent evt) {
-            formPropertyChange(evt);
-         }
-      });
       getContentPane().setLayout(null);
 
       jLabelTheLibrary.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
@@ -192,12 +185,12 @@ public class HomePageGui extends javax.swing.JFrame {
    }//GEN-LAST:event_btnReturnItemActionPerformed
 
    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-      //Dirigera om till Söksidan:
-      SearchGUI search = new SearchGUI();
-      search.setVisible(true);
-      //Ta text från textrutan & Stoppa in i sökmetod
-      Search input = new Search();
-      input.searchItem(txtSearch.getText());
+//      //Dirigera om till Söksidan:
+//      SearchGUI search = new SearchGUI();
+//      search.setVisible(true);
+//      //Ta text från textrutan & Stoppa in i sökmetod
+//      Search input = new Search();
+//      input.searchItem(txtSearch.getText());
    }//GEN-LAST:event_btnSearchActionPerformed
 
    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
@@ -229,64 +222,57 @@ public class HomePageGui extends javax.swing.JFrame {
       signedIn = false;
    }//GEN-LAST:event_btnSignOutActionPerformed
 
-   private void formPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_formPropertyChange
-      // TODO add your handling code here:
-      if(signedIn == true){
+   //metod som anropas varje gång attributet signedIn ändras hos user
+   @Override
+   public void update(Observable obj, Object arg) {
+      if(arg instanceof Boolean) {
+         boolean signedIn = (Boolean) arg;
+         
+         if(signedIn == true){
          panelSignedIn.setVisible(true);
          panelNotSignedIn.setVisible(false);
-      } else {
+         } else {
          panelSignedIn.setVisible(false);
          panelNotSignedIn.setVisible(true);
+         }
       }
-   }//GEN-LAST:event_formPropertyChange
-   
-   public void setSignedIn(boolean signedIn) {
-      this.signedIn = signedIn;
    }
    
-   public void setBorrower(boolean borrower) {
-      this.borrower = borrower;
-   }
-   
-   public void setId(int id) {
-      this.id = id;
-   }
-   
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new HomePageGui().setVisible(true);
-//            }
-//        });
-//    }
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new HomePageGui().setVisible(true);
+            }
+        });
+    }
 
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
