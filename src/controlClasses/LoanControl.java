@@ -14,7 +14,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.sql.Statement;
-import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import loan.Loan;
 import loan.LoanItem;
 
@@ -24,8 +25,9 @@ import loan.LoanItem;
  */
 public class LoanControl {
     
-    private int borrower;
-    private ArrayList<LoanItem> loanItems = new ArrayList<>();
+    private int borrower = 3;
+    private final ArrayList<LoanItem> loanItems = new ArrayList<>();
+    Loan loan = null;
 
     public int getBorrower() {
         return borrower;
@@ -58,7 +60,7 @@ public class LoanControl {
     }
     
     public void createLoan() throws SQLException{
-        Loan loan = new Loan(borrower, loanItems);
+        loan = new Loan(borrower, loanItems);
         insertLoan.setInt(1, borrower);
         insertLoan.setDate(2, Date.valueOf(loan.getStartDate()));
         insertLoan.executeUpdate();
@@ -78,7 +80,7 @@ public class LoanControl {
         loanItems.add(loanItem);
         
         insertLoanItem.setInt(1, copy.getBarcodeNo());
-        insertLoanItem.setInt(2, loanItem.getLoanItemNo());
+        insertLoanItem.setInt(2, loan.getLoanNo());
         insertLoanItem.executeUpdate();
         
         try (ResultSet generatedKeys = insertLoanItem.getGeneratedKeys()) {

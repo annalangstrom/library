@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,6 +26,7 @@ public class LoanGUI extends javax.swing.JFrame {
 
     private Object[][] data = new Object[10][4]; 
     private List<Copy> copies = new ArrayList<>();
+    LoanControl control;
     
     /**
      * Creates new form Loan
@@ -33,7 +36,7 @@ public class LoanGUI extends javax.swing.JFrame {
         initComponents();
         initTable();
         try {
-            LoanControl control = new LoanControl();
+            control = new LoanControl();
             control.createLoan();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(LoanGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -259,15 +262,21 @@ public class LoanGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        
         try {
-            LoanControl control = new LoanControl();
             Copy copy = control.getCopyFromDB(Integer.parseInt(txtAdd.getText()));
+            if (copy.getLoanCategory() == 4 || copy.getLoanCategory() == 5){ //reference litterature or magazine
+                JOptionPane.showMessageDialog(rootPane, "This item cannot be borrowed.");
+                return;
+            }
             copies.add(copy);
             loadTableData();
             control.createLoanItem(copy);
-        } catch (ClassNotFoundException | SQLException ex) {
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
             Logger.getLogger(LoanGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void txtAddFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAddFocusGained
@@ -276,12 +285,9 @@ public class LoanGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtAddFocusGained
 
     private void btnLoanLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanLoanActionPerformed
-        try {
-            LoanControl control = new LoanControl();
+        
             control.printReceipt();
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(LoanGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
     }//GEN-LAST:event_btnLoanLoanActionPerformed
 
     /**

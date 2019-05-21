@@ -157,10 +157,13 @@ public class SearchGUI extends javax.swing.JFrame {
 //        } catch (SQLException ex) {
 //            Logger.getLogger(SearchGUI.class.getName()).log(Level.SEVERE, null, ex);
 //        } 
+        controlSearch.searchItem(txtSearch.getText());
         
+               
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void addToList(){
+       
      listSearchResults.setModel(mod);
      mod.addElement(evt); //här fylls de på med i+ for loop   
     }
