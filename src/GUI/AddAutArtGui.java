@@ -5,7 +5,12 @@
  */
 package GUI;
 
+import controlClasses.CreateObjectControl;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 
 /**
@@ -14,7 +19,7 @@ import javax.swing.DefaultListModel;
  */
 public class AddAutArtGui extends javax.swing.JFrame {
 
-    private final DefaultListModel model;
+    private DefaultListModel model = null;
     private ArrayList<String> things = new ArrayList<>();
 
     public ArrayList<String> getThings() {
@@ -31,9 +36,14 @@ public class AddAutArtGui extends javax.swing.JFrame {
      */
     public AddAutArtGui() {
         super("Add author or artist");
-        model = new DefaultListModel();
-        initComponents();
-        initList();
+        try {
+            model = new DefaultListModel();
+            initComponents();
+            initList();
+            fillCombo();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(AddAutArtGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void initList(){
@@ -56,6 +66,7 @@ public class AddAutArtGui extends javax.swing.JFrame {
         lstThings = new javax.swing.JList<>();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
+        cmbAA = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -90,6 +101,13 @@ public class AddAutArtGui extends javax.swing.JFrame {
             }
         });
 
+        cmbAA.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select an author or artist" }));
+        cmbAA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbAAActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,29 +120,33 @@ public class AddAutArtGui extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnCancel))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
                         .addComponent(btnAdd)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnRemove))
-                    .addComponent(txtAdd, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(33, Short.MAX_VALUE))
+                    .addComponent(txtAdd, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cmbAA, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(txtAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(cmbAA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
                     .addComponent(btnRemove))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtAdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave)
                     .addComponent(btnCancel))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -132,10 +154,16 @@ public class AddAutArtGui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
-        model.addElement(txtAdd.getText());
-        things.add(txtAdd.getText());
-        txtAdd.setText("");
+        if(cmbAA.getSelectedIndex() == 0){
+            model.addElement(txtAdd.getText());
+            things.add(txtAdd.getText());
+            txtAdd.setText("");
+        }
+        else{
+            model.addElement(cmbAA.getSelectedItem());
+            things.add(cmbAA.getSelectedItem().toString());
+            cmbAA.setSelectedIndex(0);
+        }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
@@ -159,6 +187,18 @@ public class AddAutArtGui extends javax.swing.JFrame {
         super.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
+    private void cmbAAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbAAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbAAActionPerformed
+
+    private void fillCombo() throws ClassNotFoundException, SQLException{
+        CreateObjectControl control = new CreateObjectControl();
+        ResultSet rs = control.getAAfromDB();
+        while(rs.next()){
+            String name = rs.getString("fName") + " " + rs.getString("sName");
+            cmbAA.addItem(name);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -199,6 +239,7 @@ public class AddAutArtGui extends javax.swing.JFrame {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnRemove;
     private javax.swing.JButton btnSave;
+    private javax.swing.JComboBox<String> cmbAA;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> lstThings;
     private javax.swing.JTextField txtAdd;
