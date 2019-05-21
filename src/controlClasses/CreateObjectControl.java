@@ -32,6 +32,7 @@ public class CreateObjectControl {
     private final String GENRE_INSERT = "insert into Genre (itemNo, genre) values (?, ?)";
     private final String AUTHOR_ARTIST_INSERT = "insert into AuthorArtist (fName, sName) values (?, ?)";
     private final String AA_ITEM_INSERT = "insert into AAitem (itemNo, aNo) values (?, ?)";
+    private final String AUTHOR_ARTIST_SELECT = "select * from AuthorArtist";
     
     
     private final PreparedStatement insertBook;
@@ -41,6 +42,7 @@ public class CreateObjectControl {
     private final PreparedStatement insertGenre;
     private final PreparedStatement insertAutArt;
     private final PreparedStatement insertAAitem;
+    private final PreparedStatement selectAutArt;
     
     JDBCconnection connection = new JDBCconnection();
     private Connection con = null;
@@ -58,6 +60,7 @@ public class CreateObjectControl {
        insertGenre = con.prepareStatement(GENRE_INSERT);
        insertAutArt = con.prepareStatement(AUTHOR_ARTIST_INSERT, Statement.RETURN_GENERATED_KEYS);
        insertAAitem = con.prepareStatement(AA_ITEM_INSERT);
+       selectAutArt = con.prepareStatement(AUTHOR_ARTIST_SELECT);
     }
     
     public void confirmSaving(){
@@ -208,6 +211,9 @@ public class CreateObjectControl {
     private ArrayList<AuthorArtist> insertIntoAuthorArtist(ArrayList<String> authorArtist, 
             Item item, ArrayList<AuthorArtist> authorArtists) throws SQLException{
         AuthorArtist autArt;
+        //Skriv en kontroll ifall en sträng i den inkommande arraylisten matchar 
+        //en sträng i databasen, då läggs inte den strängen till i databasen, men 
+        //de övriga stegen genomförs med det aNo som databasen håller för strängen sen tidigare
         
         //insert into AuthorArtist (fName, sName) values (?, ?)
         for (int i = 0; i < authorArtist.size(); i++){
@@ -242,5 +248,11 @@ public class CreateObjectControl {
         }
         
         return authorArtists;
+    }
+    
+    public ResultSet getAAfromDB() throws SQLException{
+        ResultSet rs;
+        rs = selectAutArt.executeQuery();
+        return rs;
     }
 }
