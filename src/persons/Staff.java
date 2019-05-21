@@ -9,7 +9,7 @@ package persons;
  *
  * @author annalangstrom
  */
-public class Staff {
+public class Staff extends User{
     private int staffID;
     private String fname;
     private String sname;

@@ -9,7 +9,7 @@ package persons;
  *
  * @author annalangstrom
  */
-public abstract class Borrower {
+public abstract class Borrower extends User{
     private String ssn;
     private String fname;
     private String sname;
