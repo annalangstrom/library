@@ -299,10 +299,12 @@ public class CreateAccountGui extends javax.swing.JFrame {
         
         if(!luhn(txtSsn.getText())){
             JOptionPane.showMessageDialog(frame, "Invalid social security number.");
+            return;
         }
-        while(!passwordCheck(txtPassword.getText())){
-            JOptionPane.showMessageDialog(frame, "Incorrect password.");
+        if(!passwordCheck(txtPassword.getText())){
+            return;
         }
+        
         try {
             CreateAccountControl control = new CreateAccountControl();
             
@@ -383,6 +385,7 @@ public class CreateAccountGui extends javax.swing.JFrame {
         //alltså att summan gick att dela med 10 utan rester, i annat fall returneras false
         return (sum % 10 == 0);
     }
+    
     private boolean passwordCheck(String password){
         if (password.length() < 6){
             JFrame frame = new JFrame();
