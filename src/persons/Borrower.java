@@ -36,6 +36,9 @@ public class Borrower extends User{
         this.city = city;
         this.category = category;
     }
+    
+    public Borrower(){
+    }
 
     public String getSsn() {
         return ssn;
