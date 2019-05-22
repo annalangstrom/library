@@ -22,13 +22,15 @@ import persons.*;
 public class MyPageBorrowerGui extends javax.swing.JFrame {
 
     private User user;
+    private HomePageGui homePage;
     
    /**
     * Creates new form MyPageBorrowerGui
     */
-   public MyPageBorrowerGui(User user) {
+   public MyPageBorrowerGui(User user, HomePageGui homePage) {
       initComponents();
       this.user = user;
+      this.homePage = homePage;
    }
 
    /**
@@ -245,12 +247,14 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
 
    private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
       // TODO add your handling code here:
+      homePage.setVisible(true);
       super.dispose();
    }//GEN-LAST:event_btnHomePageActionPerformed
 
    private void btnSignOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignOutActionPerformed
       // TODO add your handling code here:
       user.setSignedIn(false);
+      homePage.setVisible(true);
       super.dispose();
    }//GEN-LAST:event_btnSignOutActionPerformed
 
