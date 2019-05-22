@@ -7,8 +7,11 @@ package GUI;
 
 import javax.swing.JOptionPane;
 import controlClasses.Search;
+import java.sql.SQLException;
 import java.util.Observer;
 import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
@@ -185,12 +188,16 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
    }//GEN-LAST:event_btnReturnItemActionPerformed
 
    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-//      //Dirigera om till Söksidan:
-//      SearchGUI search = new SearchGUI();
-//      search.setVisible(true);
-//      //Ta text från textrutan & Stoppa in i sökmetod
-//      Search input = new Search();
-//      input.searchItem(txtSearch.getText());
+        try {
+            //Dirigera om till Söksidan:
+            SearchGUI search = new SearchGUI();
+            search.setVisible(true);
+            //Ta text från textrutan & Stoppa in i sökmetod
+            Search input = new Search();
+            input.searchItem(txtSearch.getText());
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(HomePageGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
    }//GEN-LAST:event_btnSearchActionPerformed
 
    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
