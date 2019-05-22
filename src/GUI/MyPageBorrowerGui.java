@@ -73,6 +73,11 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
       setPreferredSize(new java.awt.Dimension(663, 437));
 
       btnSignOut.setText("Sign out");
+      btnSignOut.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnSignOutActionPerformed(evt);
+         }
+      });
 
       jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
       jLabel1.setText("My page");
@@ -242,6 +247,12 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
       // TODO add your handling code here:
       super.dispose();
    }//GEN-LAST:event_btnHomePageActionPerformed
+
+   private void btnSignOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignOutActionPerformed
+      // TODO add your handling code here:
+      user.setSignedIn(false);
+      super.dispose();
+   }//GEN-LAST:event_btnSignOutActionPerformed
 
    /**
     * @param args the command line arguments
