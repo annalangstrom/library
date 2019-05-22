@@ -10,6 +10,7 @@ import controlClasses.Search;
 import java.util.Observer;
 import java.util.Observable;
 import javax.swing.JPanel;
+import persons.*;
 
 /**
  *
@@ -17,12 +18,12 @@ import javax.swing.JPanel;
  */
 public class HomePageGui extends javax.swing.JFrame implements Observer  {
 
-    /**
-     * Creates new form HomePage
-     */
-    public HomePageGui() {
+   private User user; 
+   
+    public HomePageGui(User user) {
         initComponents();
         panelSignedIn.setVisible(false);
+        this.user =user;
     }
 
     /**
