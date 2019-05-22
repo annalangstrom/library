@@ -32,7 +32,7 @@ public abstract class Item {
         
     }
     
-    public Item (){}
+    public Item(){}
 
     public int getItemNo() {
         return itemNo;
