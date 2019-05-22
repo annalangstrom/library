@@ -13,7 +13,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import persons.*;
 
 
 /**
@@ -22,14 +21,14 @@ import persons.*;
  */
 public class CreateAccountGui extends javax.swing.JFrame {
    
-   private User user;
+   private HomePageGui homePage;
 
     /**
      * Creates new form CreateAccount
      */
-    public CreateAccountGui(User user) {
+    public CreateAccountGui(HomePageGui homePage) {
         initComponents();
-        this.user = user;
+        this.homePage = homePage;
     }
 
     /**
@@ -285,7 +284,7 @@ public class CreateAccountGui extends javax.swing.JFrame {
    }// </editor-fold>//GEN-END:initComponents
 
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
-      SignInGui signIn = new SignInGui(user);
+      SignInGui signIn = new SignInGui(homePage);
       signIn.setVisible(true);
       super.dispose();
     }//GEN-LAST:event_btnSignInActionPerformed
@@ -326,9 +325,8 @@ public class CreateAccountGui extends javax.swing.JFrame {
         //Logga in den nyskapade användaren
         try {
             // TODO add your handling code here:
-            SignInControl control = new SignInControl(user);
+            SignInControl control = new SignInControl(homePage);
             control.signIn(txtSsn.getText(), txtPassword.getText());
-            user.setSignedIn(true);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
         }
