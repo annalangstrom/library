@@ -8,6 +8,7 @@
 package GUI;
 
 import controlClasses.ChangeObjectControl;
+import controlClasses.ObjectControl;
 import controlClasses.RemoveObject;
 import item.*;
 import java.sql.SQLException;
@@ -46,7 +47,7 @@ public class ChangeObjectGui extends javax.swing.JFrame {
     }
     
     public void setTextInFields(int itemNo) throws SQLException, ClassNotFoundException{
-        ChangeObjectControl control = new ChangeObjectControl();
+        ObjectControl control = new ObjectControl();
         Book book;
         Movie movie;
         Magazine magazine;
@@ -352,11 +353,11 @@ public class ChangeObjectGui extends javax.swing.JFrame {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         JFrame frame = new JFrame();
         try {
-            ChangeObjectControl control = new ChangeObjectControl();
+            ObjectControl control = new ObjectControl();
             control.updateObject(txtIsbn.getText(), txtTitle.getText(), Integer.parseInt(txtAgeLimit.getText()), 
                     txtPCountry.getText(), txtPublisher.getText(), 
                     Integer.parseInt(txtPubYear.getText()), txtLocation.getText());
-            JOptionPane.showMessageDialog(rootPane, control.comfirmSaving());
+            control.confirmSaving();
             
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(frame, "Something went wrong, " + ex.getMessage());

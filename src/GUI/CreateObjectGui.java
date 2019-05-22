@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import controlClasses.CreateObjectControl;
+import controlClasses.ObjectControl;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -286,7 +286,7 @@ public class CreateObjectGui extends javax.swing.JFrame {
         JFrame frame = new JFrame();
         try {
             // TODO add your handling code here:
-            CreateObjectControl control = new CreateObjectControl();
+            ObjectControl control = new ObjectControl();
             if(cmbCategory.getSelectedItem().equals("Book"))
                 control.addBookToDB(txtIsbn.getText(), txtPublisher.getText(), txtTitle.getText(),
                         Integer.parseInt(txtPubYear.getText()), txtLocation.getText(), addKeys.getThings(),
