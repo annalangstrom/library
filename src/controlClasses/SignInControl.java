@@ -59,6 +59,8 @@ public class SignInControl {
             rs = checkValidInlog(user, password, rs);
             int id = printSignInResult(rs);
             
+            user = //Nytt
+            
             MyPageBorrowerGui gui = new MyPageBorrowerGui();
             gui.setBorrowerID(id);
             LoanControl control = new LoanControl();
