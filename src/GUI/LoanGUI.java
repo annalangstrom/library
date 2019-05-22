@@ -38,7 +38,7 @@ public class LoanGUI extends javax.swing.JFrame {
         this.user = user;
         initTable();
         try {
-            control = new LoanControl();
+            control = new LoanControl(user);
             control.createLoan();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(LoanGUI.class.getName()).log(Level.SEVERE, null, ex);
