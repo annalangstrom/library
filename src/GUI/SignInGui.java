@@ -166,7 +166,7 @@ public class SignInGui extends javax.swing.JFrame {
    }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
-        CreateAccountGui gui = new CreateAccountGui(homePage);
+        CreateAccountGui gui = new CreateAccountGui(user);
         gui.setVisible(true);
     }//GEN-LAST:event_btnCreateAccountActionPerformed
 
@@ -183,9 +183,9 @@ public class SignInGui extends javax.swing.JFrame {
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
         try {
             // TODO add your handling code here:
-            SignInControl control = new SignInControl(this);
+            SignInControl control = new SignInControl(user);
             control.signIn(txtUserAccount.getText(), txtPassword.getText());
-            homePage.setSignedIn(true);
+            user.setSignedIn(true);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
         }
