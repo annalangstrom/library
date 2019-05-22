@@ -329,6 +329,7 @@ public class CreateAccountGui extends javax.swing.JFrame {
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
         }
+        super.dispose();
             
         
     }//GEN-LAST:event_btnCreateAccountActionPerformed
