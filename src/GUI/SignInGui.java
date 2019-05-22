@@ -16,14 +16,14 @@ import java.util.logging.Logger;
  */
 public class SignInGui extends javax.swing.JFrame {
    
-   private HomePageGui homePage;
+   private User user;
 
     /**
      * Creates new form SignIn
      */
-    public SignInGui(HomePageGui homePage) {
+    public SignInGui(User user) {
         initComponents();
-        this.homePage = homePage;
+        this.user = user;
     }
 
     /**
