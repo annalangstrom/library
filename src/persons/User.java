@@ -14,11 +14,12 @@ import java.util.Observable;
  */
 public class User extends Observable {
    
-    public boolean signedIn = false;
+    public boolean signedIn;
+   
     
-    public void signOut(){
-        
-    }
+   public User() {
+      signedIn = false;
+   }
    
    public boolean getSignedIn() {
       return signedIn;
@@ -29,6 +30,10 @@ public class User extends Observable {
       this.signedIn = signedIn;
       setChanged();
       notifyObservers(Boolean.valueOf(signedIn));
+   }
+   
+   public void signOut(){
+        
    }
     
 }
