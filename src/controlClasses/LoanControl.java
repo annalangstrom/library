@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import loan.Loan;
 import loan.LoanItem;
+import persons.*;
 
 /**
  *
@@ -25,7 +26,8 @@ import loan.LoanItem;
  */
 public class LoanControl {
     
-    private int borrower = 3;
+    //private int borrower = 3;
+    private User user;
     private final ArrayList<LoanItem> loanItems = new ArrayList<>();
     Loan loan = null;
 
@@ -49,8 +51,10 @@ public class LoanControl {
     private Connection con = null;
 
     //Konstruktor
-    public LoanControl() throws ClassNotFoundException, 
+    public LoanControl(User user) throws ClassNotFoundException, 
             SQLException{
+       
+       this.user = user;
        //Koppla upp
        
        con = connection.connectToDb(con); 
