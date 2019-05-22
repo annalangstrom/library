@@ -150,14 +150,18 @@ public class SearchGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-//        try {
+        try {
+            //        try {
 //            // TODO add your handling code here:
 //
 //            results = controlSearch.searchItem(txtSearch.getText()); 
 //        } catch (SQLException ex) {
 //            Logger.getLogger(SearchGUI.class.getName()).log(Level.SEVERE, null, ex);
-//        } 
-        controlSearch.searchItem(txtSearch.getText());
+//        }
+controlSearch.searchItem(txtSearch.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(SearchGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
                
     }//GEN-LAST:event_btnSearchActionPerformed
