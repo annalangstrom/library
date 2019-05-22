@@ -84,15 +84,6 @@ public class ObjectControl {
        inactivateItem = con.prepareStatement(ITEM_INACTIVATE);
     }
     
-    public void removeItem(Item item) throws SQLException{
-            item.setActive(false); 
-            inactivateItem.setInt(1, item.getItemNo());
-    }
-    
-    public void confirmInactivating(){
-        JFrame frame = new JFrame();
-        JOptionPane.showMessageDialog(frame, "Remove completed!");
-    }
     
     public void confirmSaving(){
         JFrame frame = new JFrame();
@@ -390,4 +381,15 @@ public class ObjectControl {
         updateItem.setString(7, location);
         updateItem.executeUpdate();
     }
+    
+    public void removeItem(Item item) throws SQLException{
+            item.setActive(false); 
+            inactivateItem.setInt(1, item.getItemNo());
+    }
+    
+    public void confirmInactivating(){
+        JFrame frame = new JFrame();
+        JOptionPane.showMessageDialog(frame, "Remove completed!");
+    }
+    
 }
