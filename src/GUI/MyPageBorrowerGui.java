@@ -215,14 +215,9 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
       pack();
    }// </editor-fold>//GEN-END:initComponents
 
-   private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
-      // TODO add your handling code here:
-      HomePageGui gui = new HomePageGui();
-      gui.setVisible(true);
-   }//GEN-LAST:event_btnHomePageActionPerformed
-
    private void btnHomePage1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePage1ActionPerformed
       // TODO add your handling code here:
+      //Vet ej vart denna kommer ifrån??? - Vilken knapp Är btnHompage1?
    }//GEN-LAST:event_btnHomePage1ActionPerformed
 
    private void btnUpdatePersonalDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatePersonalDataActionPerformed
@@ -250,6 +245,11 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
            Logger.getLogger(MyPageBorrowerGui.class.getName()).log(Level.SEVERE, null, ex);
        }
     }//GEN-LAST:event_btnEraseMyAcountActionPerformed
+
+   private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
+      // TODO add your handling code here:
+      super.dispose();
+   }//GEN-LAST:event_btnHomePageActionPerformed
 
    /**
     * @param args the command line arguments

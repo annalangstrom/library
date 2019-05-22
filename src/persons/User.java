@@ -14,17 +14,26 @@ import java.util.Observable;
  */
 public class User extends Observable {
    
-    public boolean signedIn = false;
-    
-    public void signOut(){
-        
-    }
+    public boolean signedIn;
    
+    
+   public User() {
+      signedIn = false;
+   }
+   
+   public boolean getSignedIn() {
+      return signedIn;
+   }
+    
    //Ändra SigendIn och meddelar Observers att en ändring skett
    public void setSignedIn(boolean signedIn) {
       this.signedIn = signedIn;
       setChanged();
       notifyObservers(Boolean.valueOf(signedIn));
+   }
+   
+   public void signOut(){
+        
    }
     
 }

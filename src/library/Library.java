@@ -20,7 +20,7 @@ public class Library {
     public static void main(String[] args) {
          // Skapar Observable user object och Observer.
          User user = new User();
-         HomePageGui homePage = new HomePageGui();
+         HomePageGui homePage = new HomePageGui(user);
          // Add Observer
          user.addObserver(homePage);
          
