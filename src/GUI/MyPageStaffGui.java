@@ -47,7 +47,7 @@ public class MyPageStaffGui extends javax.swing.JFrame {
       btnShowLateObjects = new javax.swing.JToggleButton();
       btnAddCopy = new javax.swing.JButton();
 
-      setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+      setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
       txtAreaMyPersonalData.setColumns(20);
       txtAreaMyPersonalData.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
