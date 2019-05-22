@@ -285,6 +285,7 @@ public class CreateAccountGui extends javax.swing.JFrame {
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
       SignInGui signIn = new SignInGui(user);
       signIn.setVisible(true);
+      super.dispose();
     }//GEN-LAST:event_btnSignInActionPerformed
 
     private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
