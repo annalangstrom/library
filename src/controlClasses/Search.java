@@ -5,18 +5,12 @@
  */
 package controlClasses;
 
-import item.Item;
+import GUI.SearchGUI;
 import JDBCconnection.JDBCconnection;
-import item.AuthorArtist;
-import item.Book;
-import item.Magazine;
-import item.Movie;
+import item.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-//import GUI.SearchGUI;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -29,7 +23,7 @@ public class Search {
     
     private final String SEARCH_KEYWORD_GENRE_ITEMNO = "SELECT * FROM Keyword k JOIN "
             + "Item i ON k.itemNo = i.itemNo JOIN Genre g ON g.itemNo = i.itemNo "
-            + "WHERE itemNo = ?";
+            + "WHERE i.itemNo = ?";
     
     private final String SEARCH_KEYWORD_GENRE = "SELECT * FROM Keyword k JOIN "
             + "Item i ON k.itemNo = i.itemNo JOIN Genre g ON g.itemNo = i.itemNo "
@@ -39,7 +33,7 @@ public class Search {
             + "i.itemNo = ai.itemNo JOIN AuthorArtist aa ON ai.aNo = aa.aNo WHERE fName LIKE ? OR sName LIKE ?";
     
     private final String SEARCH_AUTART_ITEMNO = "SELECT * FROM Item i JOIN AAitem ai ON "
-            + "i.itemNo = ai.itemNo JOIN AuthorArtist aa ON ai.aNo = aa.aNo WHERE itemNo = ?";
+            + "i.itemNo = ai.itemNo JOIN AuthorArtist aa ON ai.aNo = aa.aNo WHERE i.itemNo = ?";
     
     
     private final PreparedStatement psSearchTitle;
@@ -50,12 +44,14 @@ public class Search {
     
     JDBCconnection connection;
     private Connection con = null;
-    private GUI.SearchGUI sGUI;
+    private SearchGUI sGUI = null;
     ResultSet searchResults = null;
     List<Item> items;
 
-    public void setSearchGUI(GUI.SearchGUI sGUI) {
+    
+    public Search(SearchGUI sGUI) throws SQLException, ClassNotFoundException{
         //koppling till SearchGUI
+        this();
         this.sGUI = sGUI;
     }
 
@@ -254,5 +250,12 @@ public class Search {
     //}
     public void searchCopy(Item item) { //detta för reserve
 
+    }
+    
+    public void loadCopies() throws SQLException, ClassNotFoundException {
+        this.sGUI.setItemList(items);
+        this.sGUI.loadTableData();
+        //Stäng uppkoppling...
+        connection.closeDbConnection(); 
     }
 }

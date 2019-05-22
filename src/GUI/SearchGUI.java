@@ -5,17 +5,15 @@
  */
 package GUI;
 
-//import controlClasses.Search;
-import item.Magazine;
-import item.Movie;
+import controlClasses.Search;
 import item.Book;
-import item.Copy;
 import item.Item;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -25,22 +23,22 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SearchGUI extends javax.swing.JFrame {
 
-    private controlClasses.Search controlSearch;
-    private String results;
+    private Search controlSearch;
+//    private String results;
 //    DefaultTableModel mod = new DefaultTableModel();
-    private List<Item> itemList = new ArrayList<>();
+    private List<Item> itemList;
     private Object[][] data = new Object[10][6];
 
     /**
      * Creates new form Search
      */
 
-    public void setControlSearch(controlClasses.Search controlSearch) {
-        this.controlSearch = controlSearch;
-    }
+//    public void setControlSearch(controlClasses.Search controlSearch) {
+//        this.controlSearch = controlSearch;
+//    }
 
     private void initTable() { //author artist -> en kolumn, + typ av item? 
-        String[] columnNames = {"Title", "Author/Artist", "ISBN", "Publisher, Publish Year, Genre"};
+        String[] columnNames = {"Title", "Author/Artist", "ISBN", "Publisher", "Publish Year", "Genre"};
         DefaultTableModel tblModel = new DefaultTableModel(this.data, columnNames);
         tblSearch.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         tblSearch.setModel(tblModel);
@@ -57,10 +55,12 @@ public class SearchGUI extends javax.swing.JFrame {
         for (Item item : this.itemList) {
             data[row][0] = item.getTitle();
             data[row][1] = item.getAuthorArtists();
-            data[row][2] = item  //ISBN?            
-            data[row][3] = item.get  //Publisher?
             data[row][4] = item.getPublishYear();
             data[row][5] = item.getGenres();
+            
+            Book book = (Book)item;
+            data[row][2] = book.getIsbn(); //ISBN?            
+            data[row][3] = book.getPublisher();  //Publisher?
             row++;
         }
         this.initTable();
@@ -69,9 +69,24 @@ public class SearchGUI extends javax.swing.JFrame {
 
     public SearchGUI() throws SQLException {
         initComponents();
-        controlSearch.searchItem(txtSearch.getText());
+        initTable(); 
+        try {
+            controlSearch = new Search(this);
+            itemList = new ArrayList<>();
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex);
+            Logger.getLogger(SearchGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
+    public List<Item> getItemList() {
+        return itemList;
+    }
+
+    public void setItemList(List<Item> itemList) {
+        this.itemList = itemList;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -196,26 +211,14 @@ public class SearchGUI extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         try {
-            //        try {
-//            // TODO add your handling code here:
-//
-//            results = controlSearch.searchItem(txtSearch.getText()); 
-//        } catch (SQLException ex) {
-//            Logger.getLogger(SearchGUI.class.getName()).log(Level.SEVERE, null, ex);
-//        }
             controlSearch.searchItem(txtSearch.getText());
-        } catch (SQLException ex) {
+            controlSearch.loadCopies();
+        } catch (SQLException | ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex);
             Logger.getLogger(SearchGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-
     }//GEN-LAST:event_btnSearchActionPerformed
 
-//    private void addToList() {
-//
-//        tblSearch.setModel(mod);
-//        mod.addElement(evt); //här fylls de på med i+ for loop   
-//    }
     /**
      * @param args the command line arguments
      */
