@@ -227,6 +227,7 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
 
    private void btnSignOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignOutActionPerformed
       // TODO add your handling code here:
+      user.setSignedIn(false);
    }//GEN-LAST:event_btnSignOutActionPerformed
 
    //metod som anropas varje gång attributet signedIn ändras hos user
