@@ -71,7 +71,7 @@ public class SearchGUI extends javax.swing.JFrame {
         initComponents();
         initTable(); 
         try {
-            controlSearch = new Search(this);
+            Search controlSearch = new Search(this);
             itemList = new ArrayList<>();
         } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(rootPane, ex);
