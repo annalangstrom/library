@@ -5,8 +5,13 @@
  */
 package controlClasses;
 
+import JDBCconnection.JDBCconnection;
 import item.Item;
-import java.util.Date;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Date;
 import persons.*;
 
 /**
@@ -15,7 +20,25 @@ import persons.*;
  */
 public class CreateReservation {
     
-    public void createNewReservation(BorrowerControl borrower, Item item, Staff staff, Date date){
-        
+    private final String INSERT_RESERVATION = "INSERT INTO Reservation (borrowerID, itemNo, date) VALUES (?, ?, ?)";
+    
+    private final PreparedStatement insertReservation;
+    
+    JDBCconnection connection;
+    private Connection con = null;
+    
+    public CreateReservation() throws ClassNotFoundException, SQLException{
+        this.connection = new JDBCconnection();
+        con = connection.connectToDb(con);
+        insertReservation = con.prepareStatement(INSERT_RESERVATION);
     }
+    
+    public void createNewReservation(int borrower, int item, Date date) throws SQLException{
+        insertReservation.setInt(1, borrower);
+        insertReservation.setInt(2, item);
+        insertReservation.setDate(3, date);
+        insertReservation.executeUpdate();
+    }
+    
+    
 }

@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import controlClasses.CreateReservation;
 import controlClasses.Search;
 import item.Book;
 import item.Item;
@@ -16,6 +17,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import loan.Reservation;
 
 /**
  *
@@ -23,11 +25,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SearchGUI extends javax.swing.JFrame {
 
-    private Search controlSearch;
-//    private String results;
-//    DefaultTableModel mod = new DefaultTableModel();
     private List<Item> itemList;
     private Object[][] data = new Object[10][6];
+    private int borrowerID = 2; // detta ska ändras till Carolines lösning
 
     /**
      * Creates new form Search
@@ -151,6 +151,11 @@ public class SearchGUI extends javax.swing.JFrame {
         btnSearchSignOut.setText("Sign out");
 
         btnSearchReserve.setText("Reserve");
+        btnSearchReserve.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchReserveActionPerformed(evt);
+            }
+        });
 
         tblSearch.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -181,9 +186,8 @@ public class SearchGUI extends javax.swing.JFrame {
                                 .addComponent(btnSearchReserve)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 268, Short.MAX_VALUE)
                                 .addComponent(btnSearchSignOut))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                .addComponent(txtSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(txtSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(btnSearch)))
                 .addGap(0, 63, Short.MAX_VALUE))
@@ -211,13 +215,30 @@ public class SearchGUI extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         try {
-            controlSearch.searchItem(txtSearch.getText());
-            controlSearch.loadCopies();
+            Search control = new Search(this);
+            control.searchItem(txtSearch.getText());
+            control.loadCopies();
         } catch (SQLException | ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(rootPane, ex);
             Logger.getLogger(SearchGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnSearchReserveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchReserveActionPerformed
+        try {
+            CreateReservation control = new CreateReservation();
+            Reservation reservation = new Reservation(borrowerID,
+                    itemList.get(tblSearch.getSelectedRow()).getItemNo());
+            
+            control.createNewReservation(reservation.getBorrower(), 
+                    reservation.getItem(), reservation.getDate());
+            panelSearchConfirm.setVisible(true);
+            JOptionPane.showMessageDialog(rootPane, "Reservation created!");
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(SearchGUI.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
+    }//GEN-LAST:event_btnSearchReserveActionPerformed
 
     /**
      * @param args the command line arguments
