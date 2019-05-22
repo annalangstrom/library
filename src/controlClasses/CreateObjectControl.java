@@ -214,7 +214,7 @@ public class CreateObjectControl {
         ArrayList<String> autArt_db = new ArrayList<>();
         ArrayList<Integer> aNo_db = new ArrayList<>();
         
-        ResultSet rs = selectAutArt.executeQuery();
+        ResultSet rs = getAAfromDB();
         while(rs.next()){
             String fullname_db = rs.getString("fName") + " " + rs.getString("sName");
             autArt_db.add(fullname_db);
@@ -264,4 +264,8 @@ public class CreateObjectControl {
         return authorArtists;
     }
     
+    public ResultSet getAAfromDB() throws SQLException{
+        ResultSet rs = selectAutArt.executeQuery();
+        return rs;
+    }
 }
