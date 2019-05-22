@@ -208,7 +208,7 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
 
    private void btnToMyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMyAccountActionPerformed
       // TODO add your handling code here:
-      if(borrower == false) {
+      if(user instanceof Staff) {
          MyPageStaffGui MyPage = new MyPageStaffGui();
          MyPage.setVisible(true);
       } else {
