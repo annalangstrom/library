@@ -202,7 +202,7 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
 
    private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
       // TODO add your handling code here:
-      CreateAccountGui createAccount = new CreateAccountGui(this);
+      CreateAccountGui createAccount = new CreateAccountGui(user);
       createAccount.setVisible(true);
    }//GEN-LAST:event_btnCreateAccountActionPerformed
 
