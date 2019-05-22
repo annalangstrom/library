@@ -6,7 +6,6 @@
 package library;
 
 import GUI.HomePageGui;
-import persons.User;
 
 /**
  *
@@ -18,16 +17,11 @@ public class Library {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-         // Skapar Observable user object och Observer.
-         User user = new User();
-         HomePageGui homePage = new HomePageGui(user);
-         // Add Observer
-         user.addObserver(homePage);
          
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 //new HomePageGui().setVisible(true);
-                homePage.setVisible(true);
+                new HomePageGui().setVisible(true);
             }
         });
     }
