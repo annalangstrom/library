@@ -6,6 +6,7 @@
 package GUI;
 
 import controlClasses.CreateAccountControl;
+import controlClasses.SignInControl;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -318,6 +319,15 @@ public class CreateAccountGui extends javax.swing.JFrame {
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(frame, "Something went wrong, " + ex.getMessage());
             Logger.getLogger(CreateAccountGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //Logga in den nyskapade användaren
+        try {
+            // TODO add your handling code here:
+            SignInControl control = new SignInControl(user);
+            control.signIn(txtSsn.getText(), txtPassword.getText());
+            user.setSignedIn(true);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
         }
             
         
