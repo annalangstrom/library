@@ -20,16 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class MyPageBorrowerGui extends javax.swing.JFrame {
 
-    private int borrowerID;
-
-    public int getBorrowerID() {
-        return borrowerID;
-    }
-
-    public void setBorrowerID(int borrowerID) {
-        this.borrowerID = borrowerID;
-    }
-    
+    private User user;
     
    /**
     * Creates new form MyPageBorrowerGui
