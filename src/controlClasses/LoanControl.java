@@ -16,6 +16,7 @@ import java.sql.Date;
 import java.sql.Statement;
 import loan.Loan;
 import loan.LoanItem;
+import persons.*;
 import persons.User;
 
 //Kom ihåg att implementera metoden printReceipt()
@@ -24,17 +25,18 @@ import persons.User;
  * @author annalangstrom
  */
 public class LoanControl {
-    User user;
-    private int borrower = user.getId(); //behöver ändras till en rörlig, är det så det ska va?
+    
+    //private int borrower = 3;
+    private User user;
     private final ArrayList<LoanItem> loanItems = new ArrayList<>();
     Loan loan = null;
 
-    public int getBorrower() {
-        return borrower;
+    public User getUser() {
+        return user;
     }
 
-    public void setBorrower(int borrower) {
-        this.borrower = borrower;
+    public void setBorrower(User user) {
+        this.user = user;
     }
     
     private final String COPY_SELECT = "SELECT * FROM Copy WHERE barcodeNo = ?";
@@ -49,8 +51,12 @@ public class LoanControl {
     private Connection con = null;
 
     //Konstruktor
-    public LoanControl() throws ClassNotFoundException, 
+    public LoanControl(User user) throws ClassNotFoundException, 
             SQLException{
+       
+       this.user = user;
+       //Koppla upp
+       
        con = connection.connectToDb(con); 
        selectCopy = con.prepareStatement(COPY_SELECT);
        insertLoan = con.prepareStatement(LOAN_INSERT, Statement.RETURN_GENERATED_KEYS);
@@ -58,8 +64,8 @@ public class LoanControl {
     }
     
     public void createLoan() throws SQLException{
-        loan = new Loan(borrower, loanItems);
-        insertLoan.setInt(1, borrower);
+        loan = new Loan(user.getId(), loanItems);
+        insertLoan.setInt(1, user.getId());
         insertLoan.setDate(2, Date.valueOf(loan.getStartDate()));
         insertLoan.executeUpdate();
         

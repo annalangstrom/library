@@ -23,6 +23,10 @@ public class Borrower extends User{
     private boolean active = true;
     private int category;
 
+    public Borrower(int id){
+       super.setId(id);
+    }
+    
     public Borrower(String ssn, String fname, String sname, String password, String email, 
             String phoneNo, String street, String postcode, String city, int category) {
         this.ssn = ssn;
@@ -37,8 +41,6 @@ public class Borrower extends User{
         this.category = category;
     }
     
-    public Borrower(){
-    }
     
     @Override
     public void setId(int id){

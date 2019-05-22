@@ -18,13 +18,15 @@ import persons.*;
 public class MyPageStaffGui extends javax.swing.JFrame {
    
    private User user;
+   private HomePageGui homePage;
 
    /**
     * Creates new form MyPageStaffGui
     */
-   public MyPageStaffGui(User user) {
+   public MyPageStaffGui(User user, HomePageGui homePage) {
       initComponents();
       this.user = user;
+      this.homePage = homePage;
    }
 
    /**
@@ -47,6 +49,7 @@ public class MyPageStaffGui extends javax.swing.JFrame {
         btnShowLateObjects = new javax.swing.JToggleButton();
         btnAddCopy = new javax.swing.JButton();
 
+      setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         txtAreaMyPersonalData.setColumns(20);
@@ -63,7 +66,12 @@ public class MyPageStaffGui extends javax.swing.JFrame {
             }
         });
 
-        btnSignOut.setText("Sign out");
+      btnSignOut.setText("Sign out");
+      btnSignOut.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnSignOutActionPerformed(evt);
+         }
+      });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("My staff page");
@@ -160,6 +168,7 @@ public class MyPageStaffGui extends javax.swing.JFrame {
 
    private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
       // TODO add your handling code here:
+      homePage.setVisible(true);
       super.dispose();
    }//GEN-LAST:event_btnHomePageActionPerformed
 
@@ -183,6 +192,13 @@ public class MyPageStaffGui extends javax.swing.JFrame {
 //        addCopy.setItemNo(Integer.parseInt(itemNo));
         addCopy.setVisible(true);
     }//GEN-LAST:event_btnAddCopyActionPerformed
+
+   private void btnSignOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignOutActionPerformed
+      // TODO add your handling code here:
+      user.setSignedIn(false);
+      homePage.setVisible(true);
+      super.dispose();
+   }//GEN-LAST:event_btnSignOutActionPerformed
 
 //   /**
 //    * @param args the command line arguments

@@ -5,7 +5,7 @@
  */
 package controlClasses;
 
-import GUI.MyPageBorrowerGui;
+import GUI.HomePageGui;
 import persons.*;
 import GUI.SignInGui;
 import JDBCconnection.JDBCconnection;
@@ -30,14 +30,15 @@ public class SignInControl {
     JDBCconnection connection = new JDBCconnection();
     private Connection con = null;
 
-    private User user = null;
+    private User user;
+    private HomePageGui homePage;
 //    List<Message> lstMessages; 
     
     //Konstruktor
-    public SignInControl(User user) throws ClassNotFoundException, 
+    public SignInControl(HomePageGui homePage) throws ClassNotFoundException, 
             SQLException{
         this();
-        this.user = user;
+        this.homePage = homePage;
         
     }
     //Konstruktor
@@ -59,11 +60,12 @@ public class SignInControl {
             rs = checkValidInlog(user, password, rs);
             int id = printSignInResult(rs);
             
-            this.user = new Borrower();//Nytt
-            this.user.setId(id);
+            this.user = new Borrower(id);
+            // Add Observer
+            this.user.addObserver(homePage);
+            homePage.setUser(this.user);
+            this.user.setSignedIn(true);
             
-            LoanControl control = new LoanControl();
-            control.setBorrower(id);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(frame, "Something went wrong.", "Error message", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);

@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import persons.*;
 
 /**
  *
@@ -26,16 +27,20 @@ public class LoanGUI extends javax.swing.JFrame {
     private Object[][] data = new Object[10][4]; 
     private List<Copy> copies = new ArrayList<>();
     LoanControl control;
+    private User user;
+    private HomePageGui homePage;
     
     /**
      * Creates new form Loan
      */
-    public LoanGUI() {
+    public LoanGUI(User user, HomePageGui homePage) {
         super("Loan item");
         initComponents();
+        this.user = user;
+        this.homePage = homePage;
         initTable();
         try {
-            control = new LoanControl();
+            control = new LoanControl(user);
             control.createLoan();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(LoanGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -126,7 +131,7 @@ public class LoanGUI extends javax.swing.JFrame {
             .addGap(44, 44, 44))
       );
 
-      setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+      setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
       btnLoanHomePage.setText("Home Page");
       btnLoanHomePage.addActionListener(new java.awt.event.ActionListener() {
@@ -247,11 +252,14 @@ public class LoanGUI extends javax.swing.JFrame {
    }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoanHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanHomePageActionPerformed
-        super.dispose();
+       homePage.setVisible(true); 
+       super.dispose();
     }//GEN-LAST:event_btnLoanHomePageActionPerformed
 
     private void btnLoanSignOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanSignOutActionPerformed
-        super.dispose();
+       user.setSignedIn(false);
+       homePage.setVisible(true);
+       super.dispose();
     }//GEN-LAST:event_btnLoanSignOutActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
@@ -287,41 +295,41 @@ public class LoanGUI extends javax.swing.JFrame {
         control.printReceipt();
     }//GEN-LAST:event_btnLoanLoanActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoanGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoanGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoanGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoanGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoanGUI().setVisible(true);
-            }
-        });
-    }
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(LoanGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(LoanGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(LoanGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(LoanGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new LoanGUI().setVisible(true);
+//            }
+//        });
+//    }
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
    private javax.swing.JButton btnAdd;
