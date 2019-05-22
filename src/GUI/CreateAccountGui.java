@@ -26,7 +26,7 @@ public class CreateAccountGui extends javax.swing.JFrame {
     /**
      * Creates new form CreateAccount
      */
-    public CreateAccountGui(HomePageGui homePage) {
+    public CreateAccountGui(User user) {
         initComponents();
         this.user = user;
     }
