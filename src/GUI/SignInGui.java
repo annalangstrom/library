@@ -187,6 +187,7 @@ public class SignInGui extends javax.swing.JFrame {
             SignInControl control = new SignInControl(user);
             control.signIn(txtUserAccount.getText(), txtPassword.getText());
             user.setSignedIn(true);
+            super.dispose();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
         }
