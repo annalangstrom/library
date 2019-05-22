@@ -290,12 +290,13 @@ public class CreateAccountGui extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSignInActionPerformed
 
     private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
-        
+        homePage.setVisible(true);
         super.dispose();
     }//GEN-LAST:event_btnHomePageActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        super.dispose();
+       homePage.setVisible(true);
+       super.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
