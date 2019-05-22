@@ -12,7 +12,6 @@ import java.util.Observer;
 import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JPanel;
 import persons.*;
 
 /**
@@ -21,12 +20,13 @@ import persons.*;
  */
 public class HomePageGui extends javax.swing.JFrame implements Observer  {
 
-   private User user; 
+   private User user;
    
-    public HomePageGui(User user) {
+   
+    public HomePageGui() {
         initComponents();
         panelSignedIn.setVisible(false);
-        this.user =user;
+
     }
 
     /**
@@ -51,6 +51,8 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
       txtSearch = new javax.swing.JTextField();
 
       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+      setPreferredSize(new java.awt.Dimension(630, 440));
+      setSize(new java.awt.Dimension(0, 0));
       getContentPane().setLayout(null);
 
       jLabelTheLibrary.setFont(new java.awt.Font("Lucida Grande", 0, 36)); // NOI18N
@@ -203,13 +205,13 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
 
    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
       // TODO add your handling code here:
-      SignInGui signIn = new SignInGui(user);
+      SignInGui signIn = new SignInGui(this);
       signIn.setVisible(true);
    }//GEN-LAST:event_btnSignInActionPerformed
 
    private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
       // TODO add your handling code here:
-      CreateAccountGui createAccount = new CreateAccountGui(user);
+      CreateAccountGui createAccount = new CreateAccountGui(this);
       createAccount.setVisible(true);
    }//GEN-LAST:event_btnCreateAccountActionPerformed
 
@@ -235,7 +237,6 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
    public void update(Observable obj, Object arg) {
       if(arg instanceof Boolean) {
          boolean signedIn = (Boolean) arg;
-         
          if(signedIn == true){
          panelSignedIn.setVisible(true);
          panelNotSignedIn.setVisible(false);
@@ -244,6 +245,10 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
          panelNotSignedIn.setVisible(true);
          }
       }
+   }
+   
+   public void setUser(User user){
+      this.user = user;
    }
    
 //    /**
