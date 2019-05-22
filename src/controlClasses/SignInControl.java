@@ -59,8 +59,7 @@ public class SignInControl {
             rs = checkValidInlog(user, password, rs);
             int id = printSignInResult(rs);
             
-            this.user = new Borrower();//Nytt
-            this.user.setId(id);
+            this.user = new Borrower(id);
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(frame, "Something went wrong.", "Error message", JOptionPane.ERROR_MESSAGE);
