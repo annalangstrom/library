@@ -214,6 +214,10 @@ public class CreateObjectControl {
         //Skriv en kontroll ifall en sträng i den inkommande arraylisten matchar 
         //en sträng i databasen, då läggs inte den strängen till i databasen, men 
         //de övriga stegen genomförs med det aNo som databasen håller för strängen sen tidigare
+        ResultSet rs = getAAfromDB();
+        while(rs.next()){
+            
+        }
         
         //insert into AuthorArtist (fName, sName) values (?, ?)
         for (int i = 0; i < authorArtist.size(); i++){
