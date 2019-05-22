@@ -14,18 +14,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.sql.Statement;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import loan.Loan;
 import loan.LoanItem;
+import persons.User;
 
+//Kom ihåg att implementera metoden printReceipt()
 /**
  *
  * @author annalangstrom
  */
 public class LoanControl {
-    
-    private int borrower = 3;
+    User user;
+    private int borrower = user.getId(); //behöver ändras till en rörlig, är det så det ska va?
     private final ArrayList<LoanItem> loanItems = new ArrayList<>();
     Loan loan = null;
 
@@ -45,14 +45,12 @@ public class LoanControl {
     private final PreparedStatement insertLoan;
     private final PreparedStatement insertLoanItem;
     
-     JDBCconnection connection = new JDBCconnection();
+    JDBCconnection connection = new JDBCconnection();
     private Connection con = null;
 
     //Konstruktor
     public LoanControl() throws ClassNotFoundException, 
             SQLException{
-       //Koppla upp
-       
        con = connection.connectToDb(con); 
        selectCopy = con.prepareStatement(COPY_SELECT);
        insertLoan = con.prepareStatement(LOAN_INSERT, Statement.RETURN_GENERATED_KEYS);

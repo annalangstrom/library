@@ -6,13 +6,10 @@
 package controlClasses;
 
 import JDBCconnection.JDBCconnection;
-import item.Item;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Date;
-import persons.*;
 
 /**
  *
