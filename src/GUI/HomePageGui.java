@@ -172,7 +172,7 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
 
    private void btnLoanItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanItemActionPerformed
       
-      if((borrower == true) && (signedIn == true)) {
+      if((user instanceof Borrower) && (user.getSignedIn() == true)) {
          LoanGUI loan = new LoanGUI();
          loan.setVisible(true);
       } else {
