@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import persons.*;
 
 /**
  *
@@ -20,22 +21,14 @@ import javax.swing.JOptionPane;
  */
 public class MyPageBorrowerGui extends javax.swing.JFrame {
 
-    private int borrowerID;
-
-    public int getBorrowerID() {
-        return borrowerID;
-    }
-
-    public void setBorrowerID(int borrowerID) {
-        this.borrowerID = borrowerID;
-    }
-    
+    private User user;
     
    /**
     * Creates new form MyPageBorrowerGui
     */
-   public MyPageBorrowerGui() {
+   public MyPageBorrowerGui(User user) {
       initComponents();
+      this.user = user;
    }
 
    /**
@@ -222,9 +215,8 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
 
    private void btnUpdatePersonalDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatePersonalDataActionPerformed
        try {
-           ChangeAccountGui gui = new ChangeAccountGui();
-           gui.setBorrowerID(borrowerID);
-           gui.setTextInFields(borrowerID);
+           ChangeAccountGui gui = new ChangeAccountGui(user.getId());
+           gui.setTextInFields(user.getId());
            gui.setVisible(true);
        } catch (ClassNotFoundException | SQLException ex) {
            Logger.getLogger(MyPageBorrowerGui.class.getName()).log(Level.SEVERE, null, ex);
@@ -239,7 +231,7 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
            
            if(input == 0){
                control = new BorrowerControl();
-               control.inactivateUser(borrowerID);
+               control.inactivateUser(user.getId());
            }
        } catch (ClassNotFoundException | SQLException ex) {
            Logger.getLogger(MyPageBorrowerGui.class.getName()).log(Level.SEVERE, null, ex);

@@ -6,6 +6,7 @@
 package GUI;
 
 import controlClasses.CreateAccountControl;
+import controlClasses.SignInControl;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -284,6 +285,7 @@ public class CreateAccountGui extends javax.swing.JFrame {
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
       SignInGui signIn = new SignInGui(user);
       signIn.setVisible(true);
+      super.dispose();
     }//GEN-LAST:event_btnSignInActionPerformed
 
     private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
@@ -319,6 +321,16 @@ public class CreateAccountGui extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(frame, "Something went wrong, " + ex.getMessage());
             Logger.getLogger(CreateAccountGui.class.getName()).log(Level.SEVERE, null, ex);
         }
+        //Logga in den nyskapade användaren
+        try {
+            // TODO add your handling code here:
+            SignInControl control = new SignInControl(user);
+            control.signIn(txtSsn.getText(), txtPassword.getText());
+            user.setSignedIn(true);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        super.dispose();
             
         
     }//GEN-LAST:event_btnCreateAccountActionPerformed

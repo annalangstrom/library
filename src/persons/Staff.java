@@ -10,26 +10,26 @@ package persons;
  * @author annalangstrom
  */
 public class Staff extends User{
-    private int staffID;
     private String fname;
     private String sname;
     private String category;
     private String password;
 
-    public Staff(int staffID, String fname, String sname, String category, String password) {
-        this.staffID = staffID;
+    public Staff(String fname, String sname, String category, String password) {
         this.fname = fname;
         this.sname = sname;
         this.category = category;
         this.password = password;
     }
 
-    public int getStaffID() {
-        return staffID;
+    @Override
+    public int getId() {
+        return super.getId();
     }
 
-    public void setStaffID(int staffID) {
-        this.staffID = staffID;
+    @Override
+    public void setId(int id) {
+        super.setId(id);
     }
 
     public String getFname() {

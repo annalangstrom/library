@@ -9,18 +9,22 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import persons.*;
 
 /**
  *
  * @author Caroline
  */
 public class MyPageStaffGui extends javax.swing.JFrame {
+   
+   private User user;
 
    /**
     * Creates new form MyPageStaffGui
     */
-   public MyPageStaffGui() {
+   public MyPageStaffGui(User user) {
       initComponents();
+      this.user = user;
    }
 
    /**
@@ -156,6 +160,7 @@ public class MyPageStaffGui extends javax.swing.JFrame {
 
    private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
       // TODO add your handling code here:
+      super.dispose();
    }//GEN-LAST:event_btnHomePageActionPerformed
 
    private void btnUpdateItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateItemActionPerformed

@@ -25,21 +25,12 @@ import persons.Borrower;
 public class ChangeAccountGui extends javax.swing.JFrame {
 
     int borrowerID;
-
-    public int getBorrowerID() {
-        return borrowerID;
-    }
-
-    public void setBorrowerID(int borrowerID) {
-        this.borrowerID = borrowerID;
-    }
-    
     /**
      * Creates new form CreateAccount
      */
-    public ChangeAccountGui() {
+    public ChangeAccountGui(int borrowerID) {
         initComponents();
-        
+        this.borrowerID = borrowerID;
     }
 
     public void setTextInFields(int borrowerID) throws ClassNotFoundException, SQLException{

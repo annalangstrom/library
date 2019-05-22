@@ -14,7 +14,8 @@ import java.util.Observable;
  */
 public class User extends Observable {
    
-    public boolean signedIn;
+    private boolean signedIn;
+    private int id;
    
     
    public User() {
@@ -30,6 +31,14 @@ public class User extends Observable {
       this.signedIn = signedIn;
       setChanged();
       notifyObservers(Boolean.valueOf(signedIn));
+   }
+   
+   public int getId(){
+     return id; 
+   }
+   
+   public void setId(int id){
+      this.id = id;
    }
    
    public void signOut(){

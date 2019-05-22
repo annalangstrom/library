@@ -216,10 +216,10 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
    private void btnToMyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMyAccountActionPerformed
       // TODO add your handling code here:
       if(user instanceof Staff) {
-         MyPageStaffGui MyPage = new MyPageStaffGui();
+         MyPageStaffGui MyPage = new MyPageStaffGui(user);
          MyPage.setVisible(true);
       } else {
-         MyPageBorrowerGui MyPage = new MyPageBorrowerGui();
+         MyPageBorrowerGui MyPage = new MyPageBorrowerGui(user);
          MyPage.setVisible(true);
       }
       
@@ -227,7 +227,6 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
 
    private void btnSignOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignOutActionPerformed
       // TODO add your handling code here:
-      signedIn = false;
    }//GEN-LAST:event_btnSignOutActionPerformed
 
    //metod som anropas varje gång attributet signedIn ändras hos user

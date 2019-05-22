@@ -59,10 +59,9 @@ public class SignInControl {
             rs = checkValidInlog(user, password, rs);
             int id = printSignInResult(rs);
             
-            user = //Nytt
+            this.user = new Borrower();//Nytt
+            this.user.setId(id);
             
-            MyPageBorrowerGui gui = new MyPageBorrowerGui();
-            gui.setBorrowerID(id);
             LoanControl control = new LoanControl();
             control.setBorrower(id);
         } catch (SQLException ex) {

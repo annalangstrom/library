@@ -168,6 +168,7 @@ public class SignInGui extends javax.swing.JFrame {
     private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
         CreateAccountGui gui = new CreateAccountGui(user);
         gui.setVisible(true);
+        super.dispose();
     }//GEN-LAST:event_btnCreateAccountActionPerformed
 
     private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
@@ -186,6 +187,7 @@ public class SignInGui extends javax.swing.JFrame {
             SignInControl control = new SignInControl(user);
             control.signIn(txtUserAccount.getText(), txtPassword.getText());
             user.setSignedIn(true);
+            super.dispose();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -36,6 +36,19 @@ public class Borrower extends User{
         this.city = city;
         this.category = category;
     }
+    
+    public Borrower(){
+    }
+    
+    @Override
+    public void setId(int id){
+       super.setId(id);
+    }
+    
+    @Override
+    public int getId(){
+       return super.getId();
+    }
 
     public String getSsn() {
         return ssn;
