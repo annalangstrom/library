@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import persons.*;
 
 
 /**
@@ -20,14 +21,14 @@ import javax.swing.JOptionPane;
  */
 public class CreateAccountGui extends javax.swing.JFrame {
    
-   private HomePageGui homePage;
+   private User user;
 
     /**
      * Creates new form CreateAccount
      */
     public CreateAccountGui(HomePageGui homePage) {
         initComponents();
-        this.homePage = homePage;
+        this.user = user;
     }
 
     /**
@@ -281,7 +282,7 @@ public class CreateAccountGui extends javax.swing.JFrame {
    }// </editor-fold>//GEN-END:initComponents
 
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
-      SignInGui signIn = new SignInGui(homePage);
+      SignInGui signIn = new SignInGui(user);
       signIn.setVisible(true);
     }//GEN-LAST:event_btnSignInActionPerformed
 
