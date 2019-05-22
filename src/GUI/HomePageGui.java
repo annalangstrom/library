@@ -176,7 +176,7 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
    private void btnLoanItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanItemActionPerformed
       
       if((user instanceof Borrower) && (user.getSignedIn() == true)) {
-         LoanGUI loan = new LoanGUI();
+         LoanGUI loan = new LoanGUI(user);
          loan.setVisible(true);
       } else {
          JOptionPane.showMessageDialog(this, "You have to be signed in as a borrower to loan an item.");
