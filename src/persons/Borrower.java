@@ -41,6 +41,10 @@ public class Borrower extends User{
     public Borrower(){
     }
     
+    public void setBorrowerID(int borrowerID){
+       this.borrowerID = borrowerID;
+    }
+    
     public int getBorrowerID() {
        return borrowerID;
     }
