@@ -125,8 +125,8 @@ public class BorrowerControl {
         category = rs.getInt("category");
         }
         
-        Student student = new Student(ssn, fname, sname, password, email, phoneNo, street, postcode, city, category);
+        Borrower borrower = new Borrower(ssn, fname, sname, password, email, phoneNo, street, postcode, city, category);
         
-        return student;
+        return borrower;
     }
 }
