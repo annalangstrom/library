@@ -6,13 +6,18 @@
 package GUI;
 
 //import controlClasses.Search;
+import item.Magazine;
+import item.Movie;
+import item.Book;
+import item.Copy;
+import item.Item;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
-import javax.swing.JOptionPane;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,15 +25,46 @@ import java.sql.ResultSetMetaData;
  */
 public class SearchGUI extends javax.swing.JFrame {
 
+    private controlClasses.Search controlSearch;
+    private String results;
+//    DefaultTableModel mod = new DefaultTableModel();
+    private List<Item> itemList = new ArrayList<>();
+    private Object[][] data = new Object[10][6];
+
     /**
      * Creates new form Search
      */
-    private controlClasses.Search controlSearch;
-    private String results;
-    DefaultListModel mod = new DefaultListModel();
 
     public void setControlSearch(controlClasses.Search controlSearch) {
         this.controlSearch = controlSearch;
+    }
+
+    private void initTable() { //author artist -> en kolumn, + typ av item? 
+        String[] columnNames = {"Title", "Author/Artist", "ISBN", "Publisher, Publish Year, Genre"};
+        DefaultTableModel tblModel = new DefaultTableModel(this.data, columnNames);
+        tblSearch.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tblSearch.setModel(tblModel);
+        tblSearch.setShowGrid(true);
+    }
+
+    public void loadTableData() {
+        int rows = this.itemList.size();
+        //håller data i en 2d array 
+        //initierar storleken med rader & kolumner
+        this.data = new Object[rows][6];
+        //läs in data från ArrayList till data arrayen
+        int row = 0;
+        for (Item item : this.itemList) {
+            data[row][0] = item.getTitle();
+            data[row][1] = item.getAuthorArtists();
+            data[row][2] = item  //ISBN?            
+            data[row][3] = item.get  //Publisher?
+            data[row][4] = item.getPublishYear();
+            data[row][5] = item.getGenres();
+            row++;
+        }
+        this.initTable();
+
     }
 
     public SearchGUI() throws SQLException {
@@ -53,8 +89,8 @@ public class SearchGUI extends javax.swing.JFrame {
         btnSearch = new javax.swing.JButton();
         btnSearchSignOut = new javax.swing.JButton();
         btnSearchReserve = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listSearchResults = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblSearch = new javax.swing.JTable();
 
         btnSearchSearch.setText("Go to Search");
 
@@ -101,7 +137,18 @@ public class SearchGUI extends javax.swing.JFrame {
 
         btnSearchReserve.setText("Reserve");
 
-        jScrollPane1.setViewportView(listSearchResults);
+        tblSearch.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tblSearch);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,20 +160,18 @@ public class SearchGUI extends javax.swing.JFrame {
                         .addGap(294, 294, 294)
                         .addComponent(labelSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(142, 142, 142)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnSearchReserve)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(63, 63, 63)
-                                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnSearchSignOut)
-                                    .addComponent(btnSearch)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 76, Short.MAX_VALUE))
+                                .addComponent(btnSearchReserve)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 268, Short.MAX_VALUE)
+                                .addComponent(btnSearchSignOut))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                .addComponent(txtSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSearch)))
+                .addGap(0, 63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,13 +182,13 @@ public class SearchGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSearch)
                     .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSearchSignOut)
-                    .addComponent(btnSearchReserve))
-                .addGap(29, 29, 29))
+                    .addComponent(btnSearchReserve)
+                    .addComponent(btnSearchSignOut))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
@@ -158,19 +203,19 @@ public class SearchGUI extends javax.swing.JFrame {
 //        } catch (SQLException ex) {
 //            Logger.getLogger(SearchGUI.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-controlSearch.searchItem(txtSearch.getText());
+            controlSearch.searchItem(txtSearch.getText());
         } catch (SQLException ex) {
             Logger.getLogger(SearchGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-               
+
+
     }//GEN-LAST:event_btnSearchActionPerformed
 
-    private void addToList(){
-       
-     listSearchResults.setModel(mod);
-     mod.addElement(evt); //här fylls de på med i+ for loop   
-    }
+//    private void addToList() {
+//
+//        tblSearch.setModel(mod);
+//        mod.addElement(evt); //här fylls de på med i+ for loop   
+//    }
     /**
      * @param args the command line arguments
      */
@@ -216,11 +261,11 @@ controlSearch.searchItem(txtSearch.getText());
     private javax.swing.JButton btnSearchReserve;
     private javax.swing.JButton btnSearchSearch;
     private javax.swing.JButton btnSearchSignOut;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelSearch;
-    private javax.swing.JList<String> listSearchResults;
     private javax.swing.JLabel panelReservationConfirm;
     private javax.swing.JPanel panelSearchConfirm;
+    private javax.swing.JTable tblSearch;
     private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
