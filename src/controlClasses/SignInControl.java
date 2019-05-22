@@ -6,7 +6,7 @@
 package controlClasses;
 
 import GUI.MyPageBorrowerGui;
-import GUI.CreateAccountGui;
+import persons.*;
 import GUI.SignInGui;
 import JDBCconnection.JDBCconnection;
 import java.sql.Connection;
@@ -30,14 +30,14 @@ public class SignInControl {
     JDBCconnection connection = new JDBCconnection();
     private Connection con = null;
 
-    private SignInGui si = null;
+    private User user = null;
 //    List<Message> lstMessages; 
     
     //Konstruktor
-    public SignInControl(SignInGui si) throws ClassNotFoundException, 
+    public SignInControl(User user) throws ClassNotFoundException, 
             SQLException{
         this();
-        this.si = si;
+        this.user = user;
         
     }
     //Konstruktor
