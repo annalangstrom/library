@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
@@ -285,9 +284,7 @@ public class LoanGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtAddFocusGained
 
     private void btnLoanLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanLoanActionPerformed
-        
-            control.printReceipt();
-        
+        control.printReceipt();
     }//GEN-LAST:event_btnLoanLoanActionPerformed
 
     /**
