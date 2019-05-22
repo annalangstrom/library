@@ -62,8 +62,6 @@ public class SignInControl {
             this.user = new Borrower();//Nytt
             this.user.setId(id);
             
-            LoanControl control = new LoanControl();
-            control.setBorrower(id);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(frame, "Something went wrong.", "Error message", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
