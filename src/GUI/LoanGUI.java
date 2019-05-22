@@ -254,7 +254,8 @@ public class LoanGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoanHomePageActionPerformed
 
     private void btnLoanSignOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanSignOutActionPerformed
-        super.dispose();
+       user.setSignedIn(false);
+       super.dispose();
     }//GEN-LAST:event_btnLoanSignOutActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
