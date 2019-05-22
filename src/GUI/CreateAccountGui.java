@@ -69,6 +69,8 @@ public class CreateAccountGui extends javax.swing.JFrame {
       btnSignIn = new javax.swing.JButton();
       txtPassword = new javax.swing.JPasswordField();
 
+      setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
       jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
       jLabel1.setText("Create account");
 
