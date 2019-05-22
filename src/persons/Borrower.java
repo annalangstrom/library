@@ -10,6 +10,7 @@ package persons;
  * @author annalangstrom
  */
 public class Borrower extends User{
+    private int borrowerID;
     private String ssn;
     private String fname;
     private String sname;
@@ -38,6 +39,10 @@ public class Borrower extends User{
     }
     
     public Borrower(){
+    }
+    
+    public int getBorrowerID() {
+       return borrowerID;
     }
 
     public String getSsn() {
