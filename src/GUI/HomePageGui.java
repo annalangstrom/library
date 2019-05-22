@@ -178,8 +178,9 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
    private void btnLoanItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanItemActionPerformed
       
       if((user instanceof Borrower) && (user.getSignedIn() == true)) {
-         LoanGUI loan = new LoanGUI(user);
+         LoanGUI loan = new LoanGUI(user, this);
          loan.setVisible(true);
+         this.setVisible(false);
       } else {
          JOptionPane.showMessageDialog(this, "You have to be signed in as a borrower to loan an item.");
       }
@@ -213,16 +214,19 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
       // TODO add your handling code here:
       CreateAccountGui createAccount = new CreateAccountGui(this);
       createAccount.setVisible(true);
+      this.setVisible(false);
    }//GEN-LAST:event_btnCreateAccountActionPerformed
 
    private void btnToMyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMyAccountActionPerformed
       // TODO add your handling code here:
       if(user instanceof Staff) {
-         MyPageStaffGui MyPage = new MyPageStaffGui(user);
+         MyPageStaffGui MyPage = new MyPageStaffGui(user, this);
          MyPage.setVisible(true);
+         this.setVisible(false);
       } else {
-         MyPageBorrowerGui MyPage = new MyPageBorrowerGui(user);
+         MyPageBorrowerGui MyPage = new MyPageBorrowerGui(user, this);
          MyPage.setVisible(true);
+         this.setVisible(false);
       }
       
    }//GEN-LAST:event_btnToMyAccountActionPerformed
