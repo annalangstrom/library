@@ -13,6 +13,7 @@ import java.util.Observable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
+import persons.*;
 
 /**
  *
@@ -20,12 +21,12 @@ import javax.swing.JPanel;
  */
 public class HomePageGui extends javax.swing.JFrame implements Observer  {
 
-    /**
-     * Creates new form HomePage
-     */
-    public HomePageGui() {
+   private User user; 
+   
+    public HomePageGui(User user) {
         initComponents();
         panelSignedIn.setVisible(false);
+        this.user =user;
     }
 
     /**
@@ -174,7 +175,7 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
 
    private void btnLoanItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanItemActionPerformed
       
-      if((borrower == true) && (signedIn == true)) {
+      if((user instanceof Borrower) && (user.getSignedIn() == true)) {
          LoanGUI loan = new LoanGUI();
          loan.setVisible(true);
       } else {
@@ -202,19 +203,19 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
 
    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
       // TODO add your handling code here:
-      SignInGui signIn = new SignInGui(this);
+      SignInGui signIn = new SignInGui(user);
       signIn.setVisible(true);
    }//GEN-LAST:event_btnSignInActionPerformed
 
    private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
       // TODO add your handling code here:
-      CreateAccountGui createAccount = new CreateAccountGui(this);
+      CreateAccountGui createAccount = new CreateAccountGui(user);
       createAccount.setVisible(true);
    }//GEN-LAST:event_btnCreateAccountActionPerformed
 
    private void btnToMyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMyAccountActionPerformed
       // TODO add your handling code here:
-      if(borrower == false) {
+      if(user instanceof Staff) {
          MyPageStaffGui MyPage = new MyPageStaffGui();
          MyPage.setVisible(true);
       } else {
