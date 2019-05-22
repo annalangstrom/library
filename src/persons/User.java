@@ -20,6 +20,10 @@ public class User extends Observable {
         
     }
    
+   public boolean getSignedIn() {
+      return signedIn;
+   }
+    
    //Ändra SigendIn och meddelar Observers att en ändring skett
    public void setSignedIn(boolean signedIn) {
       this.signedIn = signedIn;
