@@ -196,7 +196,7 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
 
    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
       // TODO add your handling code here:
-      SignInGui signIn = new SignInGui(this);
+      SignInGui signIn = new SignInGui(user);
       signIn.setVisible(true);
    }//GEN-LAST:event_btnSignInActionPerformed
 
