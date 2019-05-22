@@ -9,7 +9,6 @@ import controlClasses.SignInControl;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import persons.*;
 
 /**
  *
@@ -17,14 +16,14 @@ import persons.*;
  */
 public class SignInGui extends javax.swing.JFrame {
    
-   private User user;
+   private HomePageGui homePage;
 
     /**
      * Creates new form SignIn
      */
-    public SignInGui(User user) {
+    public SignInGui(HomePageGui homePage) {
         initComponents();
-        this.user = user;
+        this.homePage = homePage;
     }
 
     /**
@@ -168,7 +167,7 @@ public class SignInGui extends javax.swing.JFrame {
    }// </editor-fold>//GEN-END:initComponents
 
     private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
-        CreateAccountGui gui = new CreateAccountGui(user);
+        CreateAccountGui gui = new CreateAccountGui(homePage);
         gui.setVisible(true);
         super.dispose();
     }//GEN-LAST:event_btnCreateAccountActionPerformed
@@ -186,9 +185,8 @@ public class SignInGui extends javax.swing.JFrame {
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
         try {
             // TODO add your handling code here:
-            SignInControl control = new SignInControl(user);
+            SignInControl control = new SignInControl(homePage);
             control.signIn(txtUserAccount.getText(), txtPassword.getText());
-            user.setSignedIn(true);
             super.dispose();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
