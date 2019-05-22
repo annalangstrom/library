@@ -28,14 +28,16 @@ public class LoanGUI extends javax.swing.JFrame {
     private List<Copy> copies = new ArrayList<>();
     LoanControl control;
     private User user;
+    private HomePageGui homePage;
     
     /**
      * Creates new form Loan
      */
-    public LoanGUI(User user) {
+    public LoanGUI(User user, HomePageGui homePage) {
         super("Loan item");
         initComponents();
         this.user = user;
+        this.homePage = homePage;
         initTable();
         try {
             control = new LoanControl(user);
@@ -250,11 +252,13 @@ public class LoanGUI extends javax.swing.JFrame {
    }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoanHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanHomePageActionPerformed
-        super.dispose();
+       homePage.setVisible(true); 
+       super.dispose();
     }//GEN-LAST:event_btnLoanHomePageActionPerformed
 
     private void btnLoanSignOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanSignOutActionPerformed
        user.setSignedIn(false);
+       homePage.setVisible(true);
        super.dispose();
     }//GEN-LAST:event_btnLoanSignOutActionPerformed
 
