@@ -211,34 +211,44 @@ public class CreateObjectControl {
     private ArrayList<AuthorArtist> insertIntoAuthorArtist(ArrayList<String> authorArtist, 
             Item item, ArrayList<AuthorArtist> authorArtists) throws SQLException{
         AuthorArtist autArt;
-        //Skriv en kontroll ifall en sträng i den inkommande arraylisten matchar 
-        //en sträng i databasen, då läggs inte den strängen till i databasen, men 
-        //de övriga stegen genomförs med det aNo som databasen håller för strängen sen tidigare
-        ResultSet rs = getAAfromDB();
+        ArrayList<String> autArt_db = new ArrayList<>();
+        ArrayList<Integer> aNo_db = new ArrayList<>();
+        
+        ResultSet rs = selectAutArt.executeQuery();
         while(rs.next()){
-            
+            String fullname_db = rs.getString("fName") + " " + rs.getString("sName");
+            autArt_db.add(fullname_db);
+            int aNo = rs.getInt("aNo");
+            aNo_db.add(aNo);
         }
         
         //insert into AuthorArtist (fName, sName) values (?, ?)
         for (int i = 0; i < authorArtist.size(); i++){
-            String fname, lname, fullname;
-            fullname = authorArtist.get(i);
-            fname = fullname.substring(0, fullname.indexOf(" "));
-            lname = fullname.substring(fullname.indexOf(" "));
-            insertAutArt.setString(1, fname);
-            insertAutArt.setString(2, lname);
-            insertAutArt.executeUpdate();
+            String fullname = authorArtist.get(i);
+            String fname = fullname.substring(0, fullname.indexOf(" "));
+            String lname = fullname.substring(fullname.indexOf(" ") + 1);
+            
+            if(!autArt_db.contains(fullname)){
+                insertAutArt.setString(1, fname);
+                insertAutArt.setString(2, lname);
+                insertAutArt.executeUpdate();
+            } 
             
             autArt = new AuthorArtist(fname, lname, item.getItemNo());
             authorArtists.add(autArt);
             
-            try (ResultSet generatedKeys = insertAutArt.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    autArt.setaNo(generatedKeys.getInt(1));
+            if(!autArt_db.contains(fullname)){
+                try (ResultSet generatedKeys = insertAutArt.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        autArt.setaNo(generatedKeys.getInt(1));
+                    }
+                    else {
+                        throw new SQLException("Creating item failed, no ID obtained.");
+                    }
                 }
-                else {
-                    throw new SQLException("Creating item failed, no ID obtained.");
-                }
+            }
+            else {
+                autArt.setaNo(aNo_db.get(autArt_db.indexOf(fullname)));
             }
             
             //insert into AAitem (itemNo, aNo) values (?, ?)
@@ -254,9 +264,4 @@ public class CreateObjectControl {
         return authorArtists;
     }
     
-    public ResultSet getAAfromDB() throws SQLException{
-        ResultSet rs;
-        rs = selectAutArt.executeQuery();
-        return rs;
-    }
 }
