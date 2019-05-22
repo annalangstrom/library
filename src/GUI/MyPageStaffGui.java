@@ -22,7 +22,7 @@ public class MyPageStaffGui extends javax.swing.JFrame {
    /**
     * Creates new form MyPageStaffGui
     */
-   public MyPageStaffGui() {
+   public MyPageStaffGui(User user) {
       initComponents();
       this.user = user;
    }
