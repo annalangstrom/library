@@ -126,7 +126,7 @@ public class LoanGUI extends javax.swing.JFrame {
             .addGap(44, 44, 44))
       );
 
-      setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+      setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
       btnLoanHomePage.setText("Home Page");
       btnLoanHomePage.addActionListener(new java.awt.event.ActionListener() {
