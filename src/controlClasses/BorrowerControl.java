@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import persons.*;
 
 /**
@@ -23,29 +25,14 @@ public class BorrowerControl {
             + "email = ?, phoneNo = ?, password = ?, street = ?, postcode = ?, city = ?, category = ? "
             + "WHERE borrowerID = ?";
     private final String BORROWER_SELECT = "SELECT * FROM Borrower WHERE BorrowerID = ?";
+    private final String BORROWER_INSERT = "INSERT INTO Borrower (ssn, category, fName, "
+            + "sName, password, email, phoneNo, street, postcode, city) "
+            + "VALUES(?,?,?,?,?,?,?,?,?,?)";
     
-    private final String EMAIL_UPDATE = "UPDATE Borrower SET email = ? WHERE borrowerID = ?";
-    private final String PHONE_UPDATE = "UPDATE Borrower SET phoneNo = ? WHERE borrowerID = ?";
-    private final String FNAME_UPDATE = "UPDATE Borrower SET fName = ? WHERE borrowerID = ?";
-    private final String SNAME_UPDATE = "UPDATE Borrower SET sName = ? WHERE borrowerID = ?";
-    private final String PASSWORD_UPDATE = "UPDATE Borrower SET password = ? WHERE borrowerID = ?";
-    private final String STREET_UPDATE = "UPDATE Borrower SET street = ? WHERE borrowerID = ?";
-    private final String POSTCODE_UPDATE = "UPDATE Borrower SET postcode = ? WHERE borrowerID = ?";
-    private final String CITY_UPDATE = "UPDATE Borrower SET city = ? WHERE borrowerID = ?";
-    private final String CATEGORY_UPDATE = "UPDATE Borrower SET category = ? WHERE borrowerID = ?";
-    
+    private final PreparedStatement insertBorrower;
     private final PreparedStatement setBorrowerInactive;
     private final PreparedStatement updateBorrower;
     private final PreparedStatement selectBorrower;
-    private final PreparedStatement updateEmail;
-    private final PreparedStatement updatePhone;
-    private final PreparedStatement updateFname;
-    private final PreparedStatement updateSname;
-    private final PreparedStatement updatePassword;
-    private final PreparedStatement updateStreet;
-    private final PreparedStatement updatePostcode;
-    private final PreparedStatement updateCity;
-    private final PreparedStatement updateCategory;
     
     JDBCconnection connection = new JDBCconnection();
     private Connection con = null;
@@ -59,21 +46,30 @@ public class BorrowerControl {
        setBorrowerInactive = con.prepareStatement(BORROWER_SET_INACTIVE);
        updateBorrower = con.prepareStatement(BORROWER_UPDATE);
        selectBorrower = con.prepareStatement(BORROWER_SELECT);
-       updateEmail = con.prepareStatement(EMAIL_UPDATE);
-       updatePhone = con.prepareStatement(PHONE_UPDATE);
-       updateFname = con.prepareStatement(FNAME_UPDATE);
-       updateSname = con.prepareStatement(SNAME_UPDATE);
-       updatePassword = con.prepareStatement(PASSWORD_UPDATE);
-       updateStreet = con.prepareStatement(STREET_UPDATE);
-       updatePostcode = con.prepareStatement(POSTCODE_UPDATE);
-       updateCity = con.prepareStatement(CITY_UPDATE);
-       updateCategory = con.prepareStatement(CATEGORY_UPDATE);
+       insertBorrower = con.prepareStatement(BORROWER_INSERT);
     }
     
-    public void createBorrower(){
-        //Ange inparametrar
+    public void createBorrower(String ssn, int category, String fname, String sname, 
+            String password, String email, String phoneNo, String street, 
+            String postcode, String city) throws SQLException{
+        insertBorrower.setString(1, ssn);
+        insertBorrower.setInt(2, category + 1);
+        insertBorrower.setString(3, fname);
+        insertBorrower.setString(4, sname);
+        insertBorrower.setString(5, password);
+        insertBorrower.setString(6, email);
+        insertBorrower.setString(7, phoneNo);
+        insertBorrower.setString(8, street);
+        insertBorrower.setString(9, postcode);
+        insertBorrower.setString(10, city);
+        
+        insertBorrower.executeUpdate();
     }
     
+    public void confirmCreation(){
+        JFrame frame = new JFrame();
+        JOptionPane.showMessageDialog(frame, "Creation completed!");
+    }
     public void showBorrower(){}
     
     public void updateBorrower( int borrowerID, String fname, String sname, 
