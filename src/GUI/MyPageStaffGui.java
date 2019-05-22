@@ -18,13 +18,15 @@ import persons.*;
 public class MyPageStaffGui extends javax.swing.JFrame {
    
    private User user;
+   private HomePageGui homePage;
 
    /**
     * Creates new form MyPageStaffGui
     */
-   public MyPageStaffGui(User user) {
+   public MyPageStaffGui(User user, HomePageGui homePage) {
       initComponents();
       this.user = user;
+      this.homePage = homePage;
    }
 
    /**
@@ -165,6 +167,7 @@ public class MyPageStaffGui extends javax.swing.JFrame {
 
    private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
       // TODO add your handling code here:
+      homePage.setVisible(true);
       super.dispose();
    }//GEN-LAST:event_btnHomePageActionPerformed
 
@@ -192,6 +195,7 @@ public class MyPageStaffGui extends javax.swing.JFrame {
    private void btnSignOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignOutActionPerformed
       // TODO add your handling code here:
       user.setSignedIn(false);
+      homePage.setVisible(true);
       super.dispose();
    }//GEN-LAST:event_btnSignOutActionPerformed
 
