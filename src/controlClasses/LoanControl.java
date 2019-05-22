@@ -31,12 +31,12 @@ public class LoanControl {
     private final ArrayList<LoanItem> loanItems = new ArrayList<>();
     Loan loan = null;
 
-    public int getBorrower() {
-        return borrower;
+    public User getUser() {
+        return user;
     }
 
-    public void setBorrower(int borrower) {
-        this.borrower = borrower;
+    public void setBorrower(User user) {
+        this.user = user;
     }
     
     private final String COPY_SELECT = "SELECT * FROM Copy WHERE barcodeNo = ?";
@@ -64,8 +64,8 @@ public class LoanControl {
     }
     
     public void createLoan() throws SQLException{
-        loan = new Loan(borrower, loanItems);
-        insertLoan.setInt(1, borrower);
+        loan = new Loan(user.getId(), loanItems);
+        insertLoan.setInt(1, user.getId());
         insertLoan.setDate(2, Date.valueOf(loan.getStartDate()));
         insertLoan.executeUpdate();
         
