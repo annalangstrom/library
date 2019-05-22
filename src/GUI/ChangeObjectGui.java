@@ -367,9 +367,9 @@ public class ChangeObjectGui extends javax.swing.JFrame {
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         try {
-            RemoveObject control = new RemoveObject();
+            ObjectControl control = new ObjectControl();
             control.removeItem(item);
-            control.confirmActivating();
+            control.confirmInactivating();
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(rootPane, "Removal was suspended, " + ex.getMessage());
             Logger.getLogger(ChangeObjectGui.class.getName()).log(Level.SEVERE, null, ex);

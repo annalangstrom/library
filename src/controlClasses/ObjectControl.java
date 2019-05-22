@@ -40,7 +40,9 @@ public class ObjectControl {
     private final String AUTART_SELECT = "SELECT * FROM AuthorArtist WHERE aNo = ?";
     private final String ITEM_UPDATE = "UPDATE Item SET isbn = ?, title = ?, ageLimit = ?, "
             + "pCountry = ?, publisher = ?, publishYear = ?, location = ? WHERE itemNo = ?";
+    private final String ITEM_INACTIVATE = "UPDATE Item SET active = 0 WHERE itemNo = ?";
     
+    private final PreparedStatement inactivateItem;
     private final PreparedStatement selectItem;
     private final PreparedStatement selectKeyword;
     private final PreparedStatement selectGenre;
@@ -79,6 +81,17 @@ public class ObjectControl {
        selectAAitem = con.prepareStatement(AA_ITEM_SELECT);
        selectAutArt = con.prepareStatement(AUTART_SELECT);
        updateItem = con.prepareStatement(ITEM_UPDATE);
+       inactivateItem = con.prepareStatement(ITEM_INACTIVATE);
+    }
+    
+    public void removeItem(Item item) throws SQLException{
+            item.setActive(false); 
+            inactivateItem.setInt(1, item.getItemNo());
+    }
+    
+    public void confirmInactivating(){
+        JFrame frame = new JFrame();
+        JOptionPane.showMessageDialog(frame, "Remove completed!");
     }
     
     public void confirmSaving(){
