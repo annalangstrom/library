@@ -64,6 +64,11 @@ public class MyPageStaffGui extends javax.swing.JFrame {
       });
 
       btnSignOut.setText("Sign out");
+      btnSignOut.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnSignOutActionPerformed(evt);
+         }
+      });
 
       jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
       jLabel1.setText("My staff page");
@@ -183,6 +188,12 @@ public class MyPageStaffGui extends javax.swing.JFrame {
 //        addCopy.setItemNo(Integer.parseInt(itemNo));
         addCopy.setVisible(true);
     }//GEN-LAST:event_btnAddCopyActionPerformed
+
+   private void btnSignOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignOutActionPerformed
+      // TODO add your handling code here:
+      user.setSignedIn(false);
+      super.dispose();
+   }//GEN-LAST:event_btnSignOutActionPerformed
 
 //   /**
 //    * @param args the command line arguments
