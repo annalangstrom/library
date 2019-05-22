@@ -6,7 +6,8 @@
 package loan;
 
 import item.Item;
-import java.util.Date;
+import java.sql.Date;
+import java.time.LocalDate;
 import persons.Borrower;
 import persons.Staff;
 
@@ -15,33 +16,42 @@ import persons.Staff;
  * @author annalangstrom
  */
 public class Reservation {
-    private final int reservationNo;
-    private final Borrower borrower;
-    private final Item item;
-    private final Staff staff;
+    private int reservationNo = 0;
+    private final int borrower;
+    private final int item;
+    private int staff;
     private final Date date;
 
-    public Reservation(int reservationNo, Borrower borrower, Item item, Staff staff, Date date) {
-        this.reservationNo = reservationNo;
+    public Reservation(int borrower, int item, int staff) {
         this.borrower = borrower;
         this.item = item;
         this.staff = staff;
-        this.date = date;
+        this.date = Date.valueOf(LocalDate.now());
+    }
+
+    public Reservation(int borrower, int item) {
+        this.borrower = borrower;
+        this.item = item;
+        this.date = Date.valueOf(LocalDate.now());
+    }
+    
+    public void setReservationNo(int reservationNo){
+        this.reservationNo = reservationNo;
     }
 
     public int getReservationNo() {
         return reservationNo;
     }
 
-    public Borrower getBorrower() {
+    public int getBorrower() {
         return borrower;
     }
 
-    public Item getItem() {
+    public int getItem() {
         return item;
     }
 
-    public Staff getStaff() {
+    public int getStaff() {
         return staff;
     }
 

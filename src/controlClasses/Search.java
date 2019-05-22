@@ -11,6 +11,8 @@ import item.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,7 +36,7 @@ public class Search {
     
     private final String SEARCH_AUTART_ITEMNO = "SELECT * FROM Item i JOIN AAitem ai ON "
             + "i.itemNo = ai.itemNo JOIN AuthorArtist aa ON ai.aNo = aa.aNo WHERE i.itemNo = ?";
-    
+
     
     private final PreparedStatement psSearchTitle;
     private final PreparedStatement psSearchKeyGenItemNo;
@@ -46,7 +48,7 @@ public class Search {
     private Connection con = null;
     private SearchGUI sGUI = null;
     ResultSet searchResults = null;
-    List<Item> items;
+    List<Item> items = new ArrayList<>();
 
     
     public Search(SearchGUI sGUI) throws SQLException, ClassNotFoundException{
@@ -65,18 +67,8 @@ public class Search {
         psSearchAutArt = con.prepareStatement(SEARCH_AUTART);
         psSearchAutArtItemNo = con.prepareStatement(SEARCH_AUTART_ITEMNO);
     }
-//
-//    public ArrayList<Integer> searchKeyword(String string) throws SQLException{
-//        ArrayList<Integer> itemNumbers = new ArrayList<>();
-//        psSearchKeyword.setString(1, string);
-//        searchResults = psSearchKeyword.executeQuery();    
-//        while (searchResults.next()){
-//            itemNumbers.add(searchResults.getInt("itemNo"));
-//        }
-//        return itemNumbers;
-//    }
-//    
-    public List<Item> searchItem(String string) throws SQLException, ClassNotFoundException {
+
+    public void searchItem(String string) throws SQLException, ClassNotFoundException {
         
         ArrayList<String> keywords = new ArrayList<>();
         ArrayList<String> genres = new ArrayList<>();
@@ -97,12 +89,14 @@ public class Search {
             itemNumbers.add(searchResults.getInt("itemNo"));
         }
         
-        for(int i = 0; i < itemNumbers.size(); i++){
-            searchAutArtOnItemNo(itemNumbers.get(i), keywords, genres);
-        }
-        
+        if (!itemNumbers.isEmpty()){
+            for(int i = 0; i < itemNumbers.size(); i++){
+                int j = (int)itemNumbers.get(i);
+                this.searchAutArtOnItemNo(j, keywords, genres);
+            }
+
         itemNumbers.clear();
-        
+        }
         psSearchAutArt.setString(1, "%" + string + "%");
         psSearchAutArt.setString(2, "%" + string + "%");
         searchResults = psSearchAutArt.executeQuery();
@@ -120,19 +114,17 @@ public class Search {
             searchKeyGenOnItemNo(itemNumbers.get(i), authorArtists);
         }
         
-        return items;
     }
     
-    private void searchAutArtOnItemNo(int itemNo, ArrayList<String> keywords, 
+    public void searchAutArtOnItemNo(int itemNo, ArrayList<String> keywords, 
             ArrayList<String> genres) throws SQLException, ClassNotFoundException{
-        
-        String isbn = null;
-        String publisher = null;
-        String title = null;
-        int publishYear = 0;
-        String location = null;
-        int ageLimit = 0;
-        String pCountry = null;
+        String isbn;
+        String publisher;
+        String title;
+        int publishYear;
+        String location;
+        int ageLimit;
+        String pCountry;
         ArrayList<AuthorArtist> authorArtists = new ArrayList<>();
         
         psSearchAutArtItemNo.setInt(1, itemNo);
@@ -151,10 +143,11 @@ public class Search {
             String sname = searchResults.getString("sName");
             AuthorArtist autArt = new AuthorArtist(fname, sname, itemNo);
             authorArtists.add(autArt);
+            
+            addItemToList(isbn, publisher, title, publishYear, location, ageLimit, 
+                pCountry, keywords, genres, authorArtists, itemNo);
         }
 
-        addItemToList(isbn, publisher, title, publishYear, location, ageLimit, 
-                pCountry, keywords, genres, authorArtists);
     }
     
     private void searchKeyGenOnItemNo(int itemNo, ArrayList<AuthorArtist> authorArtists) 
@@ -186,68 +179,34 @@ public class Search {
         }
         
         addItemToList(isbn, publisher, title, publishYear, location, ageLimit, 
-                pCountry, keywords, genres, authorArtists);
+                pCountry, keywords, genres, authorArtists, itemNo);
     }
     
     private void addItemToList(String isbn, String publisher, String title, int publishYear, 
             String location, int ageLimit, String pCountry, ArrayList<String> keywords, 
-            ArrayList<String> genres, ArrayList<AuthorArtist> authorArtists) throws ClassNotFoundException, SQLException{
+            ArrayList<String> genres, ArrayList<AuthorArtist> authorArtists, int itemNo) throws ClassNotFoundException, SQLException{
+        
         if(ageLimit == 0 && pCountry == null){
-            items.add(new Book(isbn, publisher, title, publishYear, location, 
-                keywords, genres, authorArtists));
+            Book book = new Book(isbn, publisher, title, publishYear, location, 
+                keywords, genres, authorArtists);
+            items.add(book);
+            book.setItemNo(itemNo);
         }
         else if(isbn == null && publisher == null){
-            items.add(new Movie(ageLimit, pCountry, title, publishYear, location, 
-                    keywords, genres, authorArtists));
+            Movie movie = new Movie(ageLimit, pCountry, title, publishYear, location, 
+                    keywords, genres, authorArtists);
+            items.add(movie);
+            movie.setItemNo(itemNo);
+            
         }
         else if(isbn == null && ageLimit == 0 && pCountry == null){
-            items.add(new Magazine(publisher, title, publishYear, location, 
-                    keywords, genres, authorArtists));
+            Magazine magazine = new Magazine(publisher, title, publishYear, location, 
+                    keywords, genres, authorArtists);
+            items.add(magazine);
+            magazine.setItemNo(itemNo);
         }
     }
     
-//    public ResultSet searchItem(String string) throws SQLException {
-//        ArrayList<String> keyWords = new ArrayList<>();
-//        psSearchKeywordGenre.setString(1, string);
-//        psSearchKeywordGenre.setString(2, string);
-//        psSearchKeywordGenre.setString(3, string);
-//        psSearchKeywordGenre.setString(4, string);
-//        psSearchKeywordGenre.setString(5, string);
-//        psSearchKeywordGenre.setString(6, string);
-//        
-//        searchResults = psSearchKeywordGenre.executeQuery();
-//        
-//        psSearchAutArt.setString(1, "%" + string + "%");
-//        psSearchAutArt.setString(2, "%" + string + "%");
-//        
-//        
-//        ResultSet searchResults2 = psSearchAutArt.executeQuery();
-//        
-//        while(searchResults.next()) {
-//            while(searchResults2.next()){
-//                items.add(new Item());
-//            }
-//        }
-//        
-//        psSearchTitle.setString(1, string);
-//        psSearchTitle.setString(2, string);
-//        psSearchTitle.setString(3, string);
-//        psSearchTitle.setString(4, string);
-//        psSearchTitle.setString(5, string);
-//
-//        searchResults = psSearchTitle.executeQuery();
-//        return searchResults;
-//        while (searchResults.next()) {
-//            items.add(new Item)
-//        }
-//        //String title, int publishYear, String location, ArrayList<String> keywords, 
-//        // ArrayList<String> genres, ArrayList<AuthorArtist> authorArtist
-//        
-//
-//    }
-
-    // public void searchItem(String string){
-    //}
     public void searchCopy(Item item) { //detta för reserve
 
     }
