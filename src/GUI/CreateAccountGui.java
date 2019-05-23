@@ -297,9 +297,6 @@ public class CreateAccountGui extends javax.swing.JFrame {
 
     private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
         JFrame frame = new JFrame();
-        
-        
-        
         try {
             BorrowerControl control = new BorrowerControl();
             
@@ -322,11 +319,13 @@ public class CreateAccountGui extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(frame, "Something went wrong, " + ex.getMessage());
             Logger.getLogger(CreateAccountGui.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //Logga in den nyskapade användaren
+        //Logga in den nyskapade användaren, funkar inte???
         try {
             int inputSsn = Integer.parseInt(txtSsn.getText());
             SignInControl control = new SignInControl(homePage, inputSsn);
             control.signIn(txtSsn.getText(), txtPassword.getText());
+            HomePageGui gui = new HomePageGui();
+            gui.setVisible(true);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(CreateAccountGui.class.getName()).log(Level.SEVERE, null, ex);
         }
