@@ -5,6 +5,7 @@
  */
 package controlClasses;
 
+import GUI.PrintLoanReceiptGUI;
 import JDBCconnection.JDBCconnection;
 import item.Copy;
 import java.sql.Connection;
@@ -29,6 +30,7 @@ public class LoanControl {
     //private int borrower = 3;
     private User user;
     private final ArrayList<LoanItem> loanItems = new ArrayList<>();
+    private final ArrayList<String> title_returndate = new ArrayList<>();
     Loan loan = null;
 
     public User getUser() {
@@ -95,10 +97,15 @@ public class LoanControl {
                 throw new SQLException("Creating item failed, no ID obtained.");
             }
         }
+        
+        title_returndate.add(copy.getTitle() + ", " + loanItem.getLastReturnDate().toString());
     }
     
     public void printReceipt(){
-    
+        PrintLoanReceiptGUI gui = new PrintLoanReceiptGUI();
+        gui.setThings(title_returndate);
+        gui.setStartDate(Date.valueOf(loan.getStartDate()));
+        gui.setVisible(true);
     }
     
     public Copy getCopyFromDB(int barcode) throws SQLException{

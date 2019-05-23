@@ -5,8 +5,18 @@
  */
 package GUI;
 
+import controlClasses.Search;
+import controlClasses.ShowLate;
+import item.Book;
 import item.Item;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -14,13 +24,64 @@ import java.util.List;
  */
 public class ShowLateGUI extends javax.swing.JFrame {
 
-    private List<Item> itemList;
-    private Object[][] data = new Object[10][6];
+    private List<String[]> itemList;
+    private Object[][] data = new Object[10][7];
     /**
      * Creates new form ShowLateGUI
      */
     public ShowLateGUI() {
         initComponents();
+        initTable(); 
+        try {
+            itemList = new ArrayList<>();
+            ShowLate control = new ShowLate(this);
+            control.showLateItems();
+            control.loadCopies();
+            
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex);
+            Logger.getLogger(SearchGUI.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowLateGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void initTable() { //author artist -> en kolumn, + typ av item? 
+        String[] columnNames = {"First name", "Last name", "Email", "Telephone", "Title", "Barcode", "Last returndate"};
+        DefaultTableModel tblModel = new DefaultTableModel(this.data, columnNames);
+        tblLateItems.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tblLateItems.setModel(tblModel);
+        tblLateItems.setShowGrid(true);
+    }
+
+    public void loadTableData() {
+        int rows = this.itemList.size();
+        //håller data i en 2d array 
+        //initierar storleken med rader & kolumner
+        this.data = new Object[rows][7];
+        //läs in data från ArrayList till data arrayen
+        int row = 0;
+        for (int i = 0; i < itemList.size(); i++) {
+            data[row][0] = itemList.get(i)[0];
+            data[row][1] = itemList.get(i)[1];
+            data[row][2] = itemList.get(i)[2];
+            data[row][3] = itemList.get(i)[3];
+            data[row][4] = itemList.get(i)[4];
+            data[row][5] = itemList.get(i)[5];
+            data[row][6] = itemList.get(i)[6];
+            row++;
+            
+        }
+        this.initTable();
+
+    }
+
+    public List<String[]> getItemList() {
+        return itemList;
+    }
+
+    public void setItemList(List<String[]> itemList) {
+        this.itemList = itemList;
     }
 
     /**
@@ -38,7 +99,7 @@ public class ShowLateGUI extends javax.swing.JFrame {
         btnCancel = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
         jLabel1.setText("Show late items");
@@ -57,20 +118,23 @@ public class ShowLateGUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblLateItems);
 
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 568, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnCancel))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -80,6 +144,13 @@ public class ShowLateGUI extends javax.swing.JFrame {
                         .addGap(268, 268, 268)
                         .addComponent(btnRefresh)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 26, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCancel, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,7 +166,23 @@ public class ShowLateGUI extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        try {
+            ShowLate control = new ShowLate(this);
+            control.showLateItems();
+            control.loadCopies();
+        } catch (SQLException | ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+            Logger.getLogger(ShowLateGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        super.dispose();
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments
