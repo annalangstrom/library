@@ -5,10 +5,7 @@
  */
 package GUI;
 
-import controlClasses.Search;
 import controlClasses.ShowLate;
-import item.Book;
-import item.Item;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

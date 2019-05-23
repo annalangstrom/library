@@ -7,7 +7,7 @@
 //Få den befintliga informationen att synas i fälten när man öppnar, lyckas inte med listorna...
 package GUI;
 
-import controlClasses.*;
+import controlClasses.ObjectControl;
 import item.*;
 import java.sql.SQLException;
 import java.util.logging.Level;

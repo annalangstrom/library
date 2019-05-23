@@ -5,14 +5,10 @@
  */
 package GUI;
 
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
-import loan.LoanItem;
 import persons.User;
 
 /**
