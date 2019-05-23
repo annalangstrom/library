@@ -189,6 +189,7 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
    private void btnReturnItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnItemActionPerformed
       ReturnGui returnItem = new ReturnGui();
       returnItem.setVisible(true);
+      this.setVisible(false);
    }//GEN-LAST:event_btnReturnItemActionPerformed
 
    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
@@ -209,6 +210,7 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
       // TODO add your handling code here:
       SignInGui signIn = new SignInGui(this);
       signIn.setVisible(true);
+      this.setVisible(false);
    }//GEN-LAST:event_btnSignInActionPerformed
 
    private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
