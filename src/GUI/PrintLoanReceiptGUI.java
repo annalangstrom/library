@@ -8,6 +8,8 @@ package GUI;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import loan.LoanItem;
@@ -20,47 +22,38 @@ import persons.User;
 public class PrintLoanReceiptGUI extends javax.swing.JFrame {
 
     private final DefaultListModel model;
-    private ArrayList<String> loanItems = new ArrayList<>();
+    private ArrayList<String> loanItems;
     private User user;
-    private String startDate;
 
     public ArrayList<String> getThings() {
         return loanItems;
     }
 
-    public void setThings(ArrayList<String> things) {
+    private void setThings(ArrayList<String> things) {
         this.loanItems = things;
     }
 
-    private String getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
-        String strDate = dateFormat.format(startDate); 
-        this.startDate = strDate;
-    }
-    
-    
-    
     /**
      * Creates new form PrintLoanReceiptGUI
+     * @param loanList
      */
-    public PrintLoanReceiptGUI() {
-        super("Add genres");
+    public PrintLoanReceiptGUI(ArrayList<String> loanList, User user) {
+        super("Print receipt");
         model = new DefaultListModel();
+        loanItems = new ArrayList<>();
+        this.user = user;
+        setThings(loanList);
         initComponents();
         initList();
         lblBorrower.setText(Integer.toString(user.getId()));
-        lblDate.setText(getStartDate());
+        lblDate.setText(LocalDate.now().format(DateTimeFormatter.ISO_DATE));
     }
     
 
     private void initList(){
         lstThings.setModel(model);
-        for(String string : loanItems){
-            model.addElement(string);
+        for(int i = 0; i < loanItems.size(); i++) {
+            model.addElement(loanItems.get(i));
         }
     }
 
@@ -82,6 +75,7 @@ public class PrintLoanReceiptGUI extends javax.swing.JFrame {
         lstThings = new javax.swing.JList<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,13 +96,19 @@ public class PrintLoanReceiptGUI extends javax.swing.JFrame {
 
         jLabel5.setText("Return date");
 
+        jLabel6.setText("Thank you for lending items at the library!");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(157, 157, 157))
             .addGroup(layout.createSequentialGroup()
                 .addGap(61, 61, 61)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -121,14 +121,12 @@ public class PrintLoanReceiptGUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addGap(35, 35, 35)))
+                        .addGap(77, 77, 77)
+                        .addComponent(jLabel5))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel6)))
                 .addContainerGap(39, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(157, 157, 157))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,10 +147,13 @@ public class PrintLoanReceiptGUI extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -183,11 +184,11 @@ public class PrintLoanReceiptGUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new PrintLoanReceiptGUI().setVisible(true);
-            }
-        });
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new PrintLoanReceiptGUI().setVisible(true);
+//            }
+//        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -196,6 +197,7 @@ public class PrintLoanReceiptGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblBorrower;
     private javax.swing.JLabel lblDate;

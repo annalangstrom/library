@@ -32,6 +32,8 @@ public class LoanGUI extends javax.swing.JFrame {
     
     /**
      * Creates new form Loan
+     * @param user
+     * @param homePage
      */
     public LoanGUI(User user, HomePageGui homePage) {
         super("Loan item");
@@ -292,7 +294,8 @@ public class LoanGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtAddFocusGained
 
     private void btnLoanLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanLoanActionPerformed
-        control.printReceipt();
+        PrintLoanReceiptGUI gui = new PrintLoanReceiptGUI(control.getTitle_returndate(), user);
+        gui.setVisible(true);
     }//GEN-LAST:event_btnLoanLoanActionPerformed
 
 //    /**
