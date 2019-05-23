@@ -30,8 +30,8 @@ public class CopyControl {
     private final PreparedStatement selectAllCopies;
     private final PreparedStatement deleteCopy;
     
-    List<Copy> lstCopies; 
-    JDBCconnection connection;
+    private List<Copy> lstCopies; 
+    private JDBCconnection connection;
     private AddCopyGui addCopy = null;
     
     //Konstruktor

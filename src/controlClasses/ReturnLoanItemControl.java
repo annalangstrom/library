@@ -35,7 +35,6 @@ public class ReturnLoanItemControl {
     public void cancelLoanItem(int barcode) throws ClassNotFoundException, 
             SQLException {
       
-       DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
        LocalDate localDate = LocalDate.now();
      
        returnItem.setDate(1, Date.valueOf(localDate));

@@ -61,11 +61,8 @@ public class ObjectControl {
     JDBCconnection connection = new JDBCconnection();
     private Connection con = null;
 
-    //Konstruktor
     public ObjectControl() throws ClassNotFoundException, 
             SQLException{
-       //Koppla upp
-       
        con = connection.connectToDb(con); 
        insertBook = con.prepareStatement(BOOK_INSERT, Statement.RETURN_GENERATED_KEYS);
        insertMagazine = con.prepareStatement(MAGAZINE_INSERT, Statement.RETURN_GENERATED_KEYS);
@@ -101,7 +98,6 @@ public class ObjectControl {
         Book book = new Book(isbn, publisher, title, publishYear, location, keywords, 
                 genres, authorArtists);
         
-        //insert into Item (isbn, title, publisher, publishYear, location) values (?,?,?,?,?)
         insertBook.setString(1, isbn);
         insertBook.setString(2, title);
         insertBook.setString(3, publisher);
@@ -125,7 +121,6 @@ public class ObjectControl {
         if(!authorArtist.isEmpty())
             insertIntoAuthorArtist(authorArtist, book, authorArtists);
         
-        //uppdatera arraylisten med de ifyllda posterna
         book.setAuthorArtist(authorArtists);
         if(con != null)
             insertBook.close();
@@ -140,7 +135,6 @@ public class ObjectControl {
         Magazine magazine = new Magazine(publisher, title, publishYear, location, 
         keywords, genres, authorArtists);
         
-        //insert into item (title, publisher, publishYear, location) values (?, ?, ?, ?)
         insertMagazine.setString(1, title);
         insertMagazine.setString(2, publisher);
         insertMagazine.setInt(3, publishYear);
@@ -163,7 +157,6 @@ public class ObjectControl {
         if(!authorArtist.isEmpty())
             insertIntoAuthorArtist(authorArtist, magazine, authorArtists);
         
-        //uppdatera arraylisten med de ifyllda posterna
         magazine.setAuthorArtist(authorArtists);
         if(con != null)
             insertMagazine.close();
@@ -176,7 +169,7 @@ public class ObjectControl {
         ArrayList<AuthorArtist> authorArtists = new ArrayList<>();
         Movie movie = new Movie(ageLimit, pCountry, title, publishYear, location, keywords, 
                 genres, authorArtists);
-        //insert into item (title, ageLimit, pCountry, publishYear, location) values (?, ?, ?, ?, ?)
+        
         insertMovie.setString(1, title);
         insertMovie.setInt(2, ageLimit);
         insertMovie.setString(3, pCountry);
@@ -200,16 +193,14 @@ public class ObjectControl {
         if(!authorArtist.isEmpty())
             insertIntoAuthorArtist(authorArtist, movie, authorArtists);
         
-        //uppdatera arraylisten med de ifyllda posterna
         movie.setAuthorArtist(authorArtists);
         if(con != null)
             insertMovie.close();
     }
     
     private void insertIntoKeyword(ArrayList<String> keywords, Item item) throws SQLException{
-        //insert into Keyword (itemNo, word) values (?, ?)
+        
         for (int i = 0; i < keywords.size(); i++) {
-            //Hur få tag i itemNo?
             insertKeyword.setInt(1, item.getItemNo());
             insertKeyword.setString(2, keywords.get(i));
             insertKeyword.executeUpdate();
@@ -219,9 +210,8 @@ public class ObjectControl {
     }
     
     private void insertIntoGenre(ArrayList<String> genres, Item item) throws SQLException{
-        //insert into Genre (itemNo, genre) values (?, ?)
+        
         for (int i = 0; i < genres.size(); i++){
-            //hur få tag i itemNo?
             insertGenre.setInt(1, item.getItemNo());
             insertGenre.setString(2, genres.get(i));
             insertGenre.executeUpdate();
@@ -244,7 +234,6 @@ public class ObjectControl {
             aNo_db.add(aNo);
         }
         
-        //insert into AuthorArtist (fName, sName) values (?, ?)
         for (int i = 0; i < authorArtist.size(); i++){
             String fullname = authorArtist.get(i);
             String fname = fullname.substring(0, fullname.indexOf(" "));
@@ -273,7 +262,6 @@ public class ObjectControl {
                 autArt.setaNo(aNo_db.get(autArt_db.indexOf(fullname)));
             }
             
-            //insert into AAitem (itemNo, aNo) values (?, ?)
             insertAAitem.setInt(1, item.getItemNo());
             insertAAitem.setInt(2, autArt.getaNo());
             insertAAitem.executeUpdate();

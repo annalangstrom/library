@@ -18,24 +18,24 @@ import persons.*;
  */
 public class MyPageStaffGui extends javax.swing.JFrame {
    
-   private final User user;
-   private final HomePageGui homePage;
+    private final User user;
+    private final HomePageGui homePage;
 
    /**
     * Creates new form MyPageStaffGui
      * @param user
      * @param homePage
     */
-   public MyPageStaffGui(User user, HomePageGui homePage) {
-      initComponents();
-      this.user = user;
-      this.homePage = homePage;
-       try {
-           setTextInFields();
-       } catch (ClassNotFoundException | SQLException ex) {
-           Logger.getLogger(MyPageStaffGui.class.getName()).log(Level.SEVERE, null, ex);
-       }
-   }
+    public MyPageStaffGui(User user, HomePageGui homePage) {
+        initComponents();
+        this.user = user;
+        this.homePage = homePage;
+        try {
+            setTextInFields();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(MyPageStaffGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
    
    private void setTextInFields() throws ClassNotFoundException, SQLException{
        BorrowerControl control = new BorrowerControl();
@@ -49,6 +49,7 @@ public class MyPageStaffGui extends javax.swing.JFrame {
        txtCategory.setEditable(false);
        txtStaffID.setText(Integer.toString(user.getId()));
        txtStaffID.setEditable(false);
+       
    }
 
    /**
@@ -239,12 +240,11 @@ public class MyPageStaffGui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
    private void btnAddNewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewItemActionPerformed
-      CreateObjectGui gui = new CreateObjectGui();
-      gui.setVisible(true);
+        CreateObjectGui gui = new CreateObjectGui();
+        gui.setVisible(true);
    }//GEN-LAST:event_btnAddNewItemActionPerformed
 
    private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
-      // TODO add your handling code here:
       homePage.setVisible(true);
       super.dispose();
    }//GEN-LAST:event_btnHomePageActionPerformed
@@ -262,16 +262,12 @@ public class MyPageStaffGui extends javax.swing.JFrame {
    }//GEN-LAST:event_btnUpdateItemActionPerformed
 
     private void btnAddCopyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCopyActionPerformed
-        // TODO add your handling code here:
-        
         String itemNo = JOptionPane.showInputDialog(rootPane, "Which itemnumber do you wanna add copies to?");
         AddCopyGui addCopy = new AddCopyGui(Integer.parseInt(itemNo));
-//        addCopy.setItemNo(Integer.parseInt(itemNo));
         addCopy.setVisible(true);
     }//GEN-LAST:event_btnAddCopyActionPerformed
 
    private void btnSignOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignOutActionPerformed
-      // TODO add your handling code here:
       user.setSignedIn(false);
       homePage.setVisible(true);
       super.dispose();
@@ -281,41 +277,6 @@ public class MyPageStaffGui extends javax.swing.JFrame {
         ShowLateGUI gui = new ShowLateGUI();
         gui.setVisible(true);
     }//GEN-LAST:event_btnShowLateObjectsActionPerformed
-
-//   /**
-//    * @param args the command line arguments
-//    */
-//   public static void main(String args[]) {
-//      /* Set the Nimbus look and feel */
-//      //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//      /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//       */
-//      try {
-//         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//            if ("Nimbus".equals(info.getName())) {
-//               javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//               break;
-//            }
-//         }
-//      } catch (ClassNotFoundException ex) {
-//         java.util.logging.Logger.getLogger(MyPageStaffGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//      } catch (InstantiationException ex) {
-//         java.util.logging.Logger.getLogger(MyPageStaffGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//      } catch (IllegalAccessException ex) {
-//         java.util.logging.Logger.getLogger(MyPageStaffGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//      } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//         java.util.logging.Logger.getLogger(MyPageStaffGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//      }
-//      //</editor-fold>
-//
-//      /* Create and display the form */
-//      java.awt.EventQueue.invokeLater(new Runnable() {
-//         public void run() {
-//            new MyPageStaffGui().setVisible(true);
-//         }
-//      });
-//   }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddCopy;

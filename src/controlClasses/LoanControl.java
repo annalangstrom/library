@@ -5,7 +5,6 @@
  */
 package controlClasses;
 
-import GUI.PrintLoanReceiptGUI;
 import JDBCconnection.JDBCconnection;
 import item.Copy;
 import java.sql.Connection;
@@ -15,12 +14,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import loan.Loan;
 import loan.LoanItem;
-import persons.*;
 import persons.User;
 
 //Kom ihåg att implementera metoden printReceipt()

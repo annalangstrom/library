@@ -20,13 +20,11 @@ import persons.*;
  */
 public class HomePageGui extends javax.swing.JFrame implements Observer  {
 
-   private User user;
-   
+    private User user;
    
     public HomePageGui() {
         initComponents();
         panelSignedIn.setVisible(false);
-
     }
 
     /**
@@ -176,20 +174,19 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
    }// </editor-fold>//GEN-END:initComponents
 
    private void btnLoanItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoanItemActionPerformed
-      
-      if((user instanceof Borrower) && (user.getSignedIn() == true)) {
-         LoanGUI loan = new LoanGUI(user, this);
-         loan.setVisible(true);
-         this.setVisible(false);
-      } else {
-         JOptionPane.showMessageDialog(this, "You have to be signed in as a borrower to loan an item.");
-      }
+        if((user instanceof Borrower) && (user.getSignedIn() == true)) {
+            LoanGUI loan = new LoanGUI(user, this);
+            loan.setVisible(true);
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "You have to be signed in as a borrower to loan an item.");
+        }
    }//GEN-LAST:event_btnLoanItemActionPerformed
 
    private void btnReturnItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnItemActionPerformed
-      ReturnGui returnItem = new ReturnGui(this);
-      returnItem.setVisible(true);
-      this.setVisible(false);
+        ReturnGui returnItem = new ReturnGui(this);
+        returnItem.setVisible(true);
+        this.setVisible(false);
    }//GEN-LAST:event_btnReturnItemActionPerformed
 
    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
@@ -208,36 +205,32 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
    }//GEN-LAST:event_btnSearchActionPerformed
 
    private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
-      // TODO add your handling code here:
       SignInGui signIn = new SignInGui(this);
       signIn.setVisible(true);
       this.setVisible(false);
    }//GEN-LAST:event_btnSignInActionPerformed
 
    private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
-      // TODO add your handling code here:
       CreateAccountGui createAccount = new CreateAccountGui(this);
       createAccount.setVisible(true);
       this.setVisible(false);
    }//GEN-LAST:event_btnCreateAccountActionPerformed
 
    private void btnToMyAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMyAccountActionPerformed
-      // TODO add your handling code here:
-      if(user instanceof Staff) {
-         MyPageStaffGui MyPage = new MyPageStaffGui(user, this);
-         MyPage.setVisible(true);
-         this.setVisible(false);
-      } else {
-         MyPageBorrowerGui MyPage = new MyPageBorrowerGui(user, this);
-         MyPage.setVisible(true);
-         this.setVisible(false);
-      }
+        if(user instanceof Staff) {
+            MyPageStaffGui MyPage = new MyPageStaffGui(user, this);
+            MyPage.setVisible(true);
+            this.setVisible(false);
+        } else {
+            MyPageBorrowerGui MyPage = new MyPageBorrowerGui(user, this);
+            MyPage.setVisible(true);
+            this.setVisible(false);
+        }
       
    }//GEN-LAST:event_btnToMyAccountActionPerformed
 
    private void btnSignOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignOutActionPerformed
-      // TODO add your handling code here:
-      user.setSignedIn(false);
+        user.setSignedIn(false);
    }//GEN-LAST:event_btnSignOutActionPerformed
 
    //metod som anropas varje gång attributet signedIn ändras hos user
@@ -259,54 +252,17 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
       this.user = user;
    }
    
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(HomePageGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new HomePageGui().setVisible(true);
-//            }
-//        });
-//    }
-
-
-   // Variables declaration - do not modify//GEN-BEGIN:variables
-   private javax.swing.JButton btnCreateAccount;
-   private javax.swing.JButton btnLoanItem;
-   private javax.swing.JButton btnReturnItem;
-   private javax.swing.JButton btnSearch;
-   private javax.swing.JButton btnSignIn;
-   private javax.swing.JButton btnSignOut;
-   private javax.swing.JButton btnToMyAccount;
-   private javax.swing.JLabel jLabelTheLibrary;
-   private javax.swing.JPanel panelNotSignedIn;
-   private javax.swing.JPanel panelSignedIn;
-   private javax.swing.JTextField txtSearch;
-   // End of variables declaration//GEN-END:variables
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCreateAccount;
+    private javax.swing.JButton btnLoanItem;
+    private javax.swing.JButton btnReturnItem;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnSignIn;
+    private javax.swing.JButton btnSignOut;
+    private javax.swing.JButton btnToMyAccount;
+    private javax.swing.JLabel jLabelTheLibrary;
+    private javax.swing.JPanel panelNotSignedIn;
+    private javax.swing.JPanel panelSignedIn;
+    private javax.swing.JTextField txtSearch;
+    // End of variables declaration//GEN-END:variables
 }
