@@ -105,6 +105,7 @@ public class LoanControl {
         PrintLoanReceiptGUI gui = new PrintLoanReceiptGUI();
         gui.setThings(title_returndate);
         gui.setStartDate(Date.valueOf(loan.getStartDate()));
+        gui.setVisible(true);
     }
     
     public Copy getCopyFromDB(int barcode) throws SQLException{
