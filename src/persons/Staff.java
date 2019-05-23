@@ -21,6 +21,10 @@ public class Staff extends User{
         this.category = category;
         this.password = password;
     }
+    
+    public Staff(int id){
+       super.setId(id);
+    }
 
     @Override
     public int getId() {
