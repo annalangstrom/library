@@ -153,6 +153,11 @@ public class CreateObjectGui extends javax.swing.JFrame {
       });
 
       btnCancel.setText("Cancel");
+      btnCancel.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnCancelActionPerformed(evt);
+         }
+      });
 
       btnSave.setText("Save");
       btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -316,6 +321,11 @@ public class CreateObjectGui extends javax.swing.JFrame {
             Logger.getLogger(CreateObjectGui.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
+
+   private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+      // TODO add your handling code here:
+      super.dispose();
+   }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments
