@@ -100,8 +100,7 @@ public class AddCopyGui extends javax.swing.JFrame {
         tblCopies = new javax.swing.JTable();
         btnAdd = new javax.swing.JButton();
         btnRemove = new javax.swing.JButton();
-        btnCancel = new javax.swing.JButton();
-        btnSave = new javax.swing.JButton();
+        btnDone = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -144,17 +143,10 @@ public class AddCopyGui extends javax.swing.JFrame {
             }
         });
 
-        btnCancel.setText("Cancel");
-        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+        btnDone.setText("Done");
+        btnDone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelActionPerformed(evt);
-            }
-        });
-
-        btnSave.setText("Save");
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
+                btnDoneActionPerformed(evt);
             }
         });
 
@@ -195,9 +187,8 @@ public class AddCopyGui extends javax.swing.JFrame {
                 .addGap(29, 29, 29))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnSave)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCancel))
+                .addComponent(btnDone)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,9 +218,7 @@ public class AddCopyGui extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCancel)
-                    .addComponent(btnSave)))
+                .addComponent(btnDone))
         );
 
         pack();
@@ -265,15 +254,9 @@ public class AddCopyGui extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRemoveActionPerformed
 
-    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        //Hur ska man kunna avbryta när insättningen redan är gjord?
+    private void btnDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoneActionPerformed
         super.dispose();
-    }//GEN-LAST:event_btnCancelActionPerformed
-
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // TODO add your handling code here:
-        super.dispose();
-    }//GEN-LAST:event_btnSaveActionPerformed
+    }//GEN-LAST:event_btnDoneActionPerformed
 
     /**
      * @param args the command line arguments
@@ -312,9 +295,8 @@ public class AddCopyGui extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
-    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnDone;
     private javax.swing.JButton btnRemove;
-    private javax.swing.JButton btnSave;
     private javax.swing.JComboBox<String> cmbCategory;
     private javax.swing.JComboBox<String> cmbLoanStatus;
     private javax.swing.JLabel jLabel1;
