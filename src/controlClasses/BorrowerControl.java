@@ -28,11 +28,13 @@ public class BorrowerControl {
     private final String BORROWER_INSERT = "INSERT INTO Borrower (ssn, category, fName, "
             + "sName, password, email, phoneNo, street, postcode, city) "
             + "VALUES(?,?,?,?,?,?,?,?,?,?)";
+    private final String STAFF_SELECT = "SELECT * FROM Staff WHERE StaffID = ?";
     
     private final PreparedStatement insertBorrower;
     private final PreparedStatement setBorrowerInactive;
     private final PreparedStatement updateBorrower;
     private final PreparedStatement selectBorrower;
+    private final PreparedStatement selectStaff;
     
     JDBCconnection connection = new JDBCconnection();
     private Connection con = null;
@@ -47,6 +49,7 @@ public class BorrowerControl {
        updateBorrower = con.prepareStatement(BORROWER_UPDATE);
        selectBorrower = con.prepareStatement(BORROWER_SELECT);
        insertBorrower = con.prepareStatement(BORROWER_INSERT);
+       selectStaff = con.prepareStatement(STAFF_SELECT);
     }
     
     public void createBorrower(String ssn, int category, String fname, String sname, 
@@ -124,5 +127,25 @@ public class BorrowerControl {
         Borrower borrower = new Borrower(ssn, fname, sname, password, email, phoneNo, street, postcode, city, category);
         
         return borrower;
+    }
+    
+    public Staff getStaffFromDB(int staffID) throws SQLException{
+        String fname = null;
+        String sname = null;
+        String category = null;
+        String password = null;
+        
+        selectStaff.setInt(1, staffID);
+        ResultSet rs = selectStaff.executeQuery();
+        while(rs.next()){
+            fname = rs.getString("fName");
+            sname = rs.getString("sName");
+            category = rs.getString("category");
+            password = rs.getString("password");
+        }
+        
+        Staff staff = new Staff(fname, sname, category, password);
+        //String fname, String sname, String category, String password
+        return staff;
     }
 }
