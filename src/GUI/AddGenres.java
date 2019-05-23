@@ -21,24 +21,35 @@ public class AddGenres extends javax.swing.JFrame {
         return things;
     }
 
-    public void setThings(ArrayList<String> things) {
+    private void setThings(ArrayList<String> things) {
         this.things = things;
     }
     
-    
-
     /**
      * Creates new form AddGenres
+     * @param thing
      */
+    public AddGenres(ArrayList<String> thing) {
+        super("Add genres");
+        model = new DefaultListModel();
+        things = new ArrayList<>();
+        setThings(thing);
+        initComponents();
+        initList();
+    }
+    
     public AddGenres() {
         super("Add genres");
         model = new DefaultListModel();
+        things = new ArrayList<>();
         initComponents();
         initList();
     }
 
     private void initList(){
         lstThings.setModel(model);
+        for(String string : things)
+            model.addElement(string);
     }
     
     /**

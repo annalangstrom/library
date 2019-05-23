@@ -49,16 +49,13 @@ public class ChangeObjectGui extends javax.swing.JFrame {
         Book book;
         Movie movie;
         Magazine magazine;
-        
-        addKeys = new AddKeywordsGui();
-        addGenres = new AddGenres();
-        addAutArts = new AddAutArtGui();
+       
         
         item = control.getItemFromDB(itemNo);
         
-        addKeys.setThings(item.getKeywords());
-        addGenres.setThings(item.getGenres());
-        addAutArts.setThings(item.getAuthorArtists());
+        addKeys = new AddKeywordsGui(item.getKeywords());
+        addGenres = new AddGenres(item.getGenres());
+        addAutArts = new AddAutArtGui(item.getAuthorArtists());
         
         txtTitle.setText(item.getTitle());
         txtPubYear.setText(Integer.toString(item.getPublishYear()));
