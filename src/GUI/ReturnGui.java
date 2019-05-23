@@ -5,10 +5,9 @@
  */
 package GUI;
 
-/**
- *
- * @author Caroline
- */
+import controlClasses.ReturnLoanItemControl;
+
+
 public class ReturnGui extends javax.swing.JFrame {
 
    private HomePageGui homePage;
@@ -34,6 +33,7 @@ public class ReturnGui extends javax.swing.JFrame {
       txtEnterBarcode = new javax.swing.JTextField();
       jLabel1 = new javax.swing.JLabel();
       jLabel2 = new javax.swing.JLabel();
+      btnReturn = new javax.swing.JButton();
 
       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,6 +53,13 @@ public class ReturnGui extends javax.swing.JFrame {
 
       jLabel2.setText("Please enter the barcode on the item you want to return:");
 
+      btnReturn.setText("Return");
+      btnReturn.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnReturnActionPerformed(evt);
+         }
+      });
+
       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
       getContentPane().setLayout(layout);
       layout.setHorizontalGroup(
@@ -71,7 +78,10 @@ public class ReturnGui extends javax.swing.JFrame {
                   .addGap(102, 102, 102)
                   .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                      .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                     .addComponent(txtEnterBarcode))))
+                     .addComponent(txtEnterBarcode)))
+               .addGroup(layout.createSequentialGroup()
+                  .addGap(222, 222, 222)
+                  .addComponent(btnReturn)))
             .addContainerGap(109, Short.MAX_VALUE))
       );
       layout.setVerticalGroup(
@@ -90,7 +100,9 @@ public class ReturnGui extends javax.swing.JFrame {
             .addComponent(jLabel2)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(txtEnterBarcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addContainerGap(154, Short.MAX_VALUE))
+            .addGap(18, 18, 18)
+            .addComponent(btnReturn)
+            .addContainerGap(111, Short.MAX_VALUE))
       );
 
       pack();
@@ -100,6 +112,12 @@ public class ReturnGui extends javax.swing.JFrame {
       homePage.setVisible(true);
       super.dispose();
    }//GEN-LAST:event_btnHomePageActionPerformed
+
+   private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
+      ReturnLoanItemControl returnLoanItem = new ReturnLoanItemControl();
+      int inputBarcode = Integer.parseInt(txtEnterBarcode.getText());
+      returnLoanItem.cancelLoanItem(inputBarcode);
+   }//GEN-LAST:event_btnReturnActionPerformed
 
 //   /**
 //    * @param args the command line arguments
@@ -138,6 +156,7 @@ public class ReturnGui extends javax.swing.JFrame {
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
    private javax.swing.JButton btnHomePage;
+   private javax.swing.JButton btnReturn;
    private javax.swing.JLabel jLabel1;
    private javax.swing.JLabel jLabel2;
    private javax.swing.JLabel labelLoan;
