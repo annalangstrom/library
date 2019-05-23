@@ -6,6 +6,7 @@
 package GUI;
 
 import controlClasses.SignInControl;
+import controlClasses.SignInStaffControl;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -185,14 +186,25 @@ public class SignInGui extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
-        try {
-            // TODO add your handling code here:
-            SignInControl control = new SignInControl(homePage);
-            control.signIn(txtUserAccount.getText(), txtPassword.getText());
-            super.dispose();
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       if(txtUserAccount.getText().length() < 10) {
+          try {
+              SignInStaffControl control = new SignInStaffControl(homePage);
+              control.signIn(txtUserAccount.getText(), txtPassword.getText());
+              homePage.setVisible(true);
+              super.dispose();
+          } catch (ClassNotFoundException | SQLException ex) {
+              Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
+          }
+       } else {
+         try {
+              SignInControl control = new SignInControl(homePage);
+              control.signIn(txtUserAccount.getText(), txtPassword.getText());
+              homePage.setVisible(true);
+              super.dispose();
+          } catch (ClassNotFoundException | SQLException ex) {
+              Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
+          }
+       }
     }//GEN-LAST:event_btnSignInActionPerformed
 
 //    /**
