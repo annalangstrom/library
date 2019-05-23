@@ -326,8 +326,8 @@ public class CreateAccountGui extends javax.swing.JFrame {
         }
         //Logga in den nyskapade användaren
         try {
-            // TODO add your handling code here:
-            SignInControl control = new SignInControl(homePage);
+            int inputSsn = Integer.parseInt(txtSsn.getText());
+            SignInControl control = new SignInControl(homePage, inputSsn);
             control.signIn(txtSsn.getText(), txtPassword.getText());
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
