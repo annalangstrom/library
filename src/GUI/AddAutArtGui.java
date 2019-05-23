@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import controlClasses.CreateObjectControl;
+import controlClasses.ObjectControl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -185,7 +185,7 @@ public class AddAutArtGui extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbAAActionPerformed
 
     private void fillCombo() throws ClassNotFoundException, SQLException{
-        CreateObjectControl control = new CreateObjectControl();
+        ObjectControl control = new ObjectControl();
         ResultSet rs = control.getAAfromDB();
         while(rs.next()){
             String name = rs.getString("fName") + " " + rs.getString("sName");

@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import controlClasses.BorrowerControl;
 import controlClasses.CreateAccountControl;
 import controlClasses.SignInControl;
 import java.awt.Color;
@@ -311,14 +312,15 @@ public class CreateAccountGui extends javax.swing.JFrame {
         }
         
         try {
-            CreateAccountControl control = new CreateAccountControl();
+            BorrowerControl control = new BorrowerControl();
             
-            control.addBorrowerToDB(txtSsn.getText(), cmbCategory.getSelectedIndex(),
+            control.createBorrower(txtSsn.getText(), cmbCategory.getSelectedIndex(),
                     txtFirstName.getText(), txtLastName.getText(), txtPassword.getText(),
                     txtMail.getText(), txtPhoneNumber.getText(), txtStreet.getText(),
                     txtPostcode.getText(), txtCity.getText());
             
-            JOptionPane.showMessageDialog(frame, "Creation completed!");
+            control.confirmCreation();
+            
         } catch (ClassNotFoundException | SQLException ex) {
             JOptionPane.showMessageDialog(frame, "Something went wrong, " + ex.getMessage());
             Logger.getLogger(CreateAccountGui.class.getName()).log(Level.SEVERE, null, ex);

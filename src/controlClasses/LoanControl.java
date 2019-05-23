@@ -14,12 +14,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.sql.Statement;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import loan.Loan;
 import loan.LoanItem;
 import persons.*;
+import persons.User;
 
+//Kom ihåg att implementera metoden printReceipt()
 /**
  *
  * @author annalangstrom
@@ -47,7 +47,7 @@ public class LoanControl {
     private final PreparedStatement insertLoan;
     private final PreparedStatement insertLoanItem;
     
-     JDBCconnection connection = new JDBCconnection();
+    JDBCconnection connection = new JDBCconnection();
     private Connection con = null;
 
     //Konstruktor

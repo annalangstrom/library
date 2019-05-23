@@ -11,8 +11,6 @@ import item.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,9 +18,6 @@ import javax.swing.JOptionPane;
  */
 public class Search {
 
-    private final String SEARCH_TITLE = "SELECT * FROM Item WHERE ISBN = ?, "
-            + "title = ?, pCountry = ?, publisher = ?, publishYear = ?"; //detta tillfälligt för test
-    
     private final String SEARCH_KEYWORD_GENRE_ITEMNO = "SELECT * FROM Keyword k JOIN "
             + "Item i ON k.itemNo = i.itemNo JOIN Genre g ON g.itemNo = i.itemNo "
             + "WHERE i.itemNo = ?";
@@ -38,7 +33,6 @@ public class Search {
             + "i.itemNo = ai.itemNo JOIN AuthorArtist aa ON ai.aNo = aa.aNo WHERE i.itemNo = ?";
 
     
-    private final PreparedStatement psSearchTitle;
     private final PreparedStatement psSearchKeyGenItemNo;
     private final PreparedStatement psSearchKeywordGenre;
     private final PreparedStatement psSearchAutArt;
@@ -58,10 +52,8 @@ public class Search {
     }
 
     public Search() throws SQLException, ClassNotFoundException {
-        //konstruktor
         this.connection = new JDBCconnection();
         con = connection.connectToDb(con);
-        psSearchTitle = con.prepareStatement(SEARCH_TITLE);
         psSearchKeyGenItemNo = con.prepareStatement(SEARCH_KEYWORD_GENRE_ITEMNO);
         psSearchKeywordGenre = con.prepareStatement(SEARCH_KEYWORD_GENRE);
         psSearchAutArt = con.prepareStatement(SEARCH_AUTART);
@@ -82,6 +74,7 @@ public class Search {
         psSearchKeywordGenre.setString(5, string);
         psSearchKeywordGenre.setString(6, string);
         searchResults = psSearchKeywordGenre.executeQuery();
+        psSearchKeywordGenre.close();
         
         while (searchResults.next()) {
             genres.add(searchResults.getString("genre"));
@@ -100,6 +93,7 @@ public class Search {
         psSearchAutArt.setString(1, "%" + string + "%");
         psSearchAutArt.setString(2, "%" + string + "%");
         searchResults = psSearchAutArt.executeQuery();
+        psSearchAutArt.close();
         
         while(searchResults.next()){
             String fname = searchResults.getString("fName");
@@ -129,6 +123,7 @@ public class Search {
         
         psSearchAutArtItemNo.setInt(1, itemNo);
         searchResults = psSearchAutArtItemNo.executeQuery();
+        psSearchAutArtItemNo.close();
 
         while (searchResults.next()) {
 
@@ -165,6 +160,7 @@ public class Search {
         
         psSearchKeyGenItemNo.setInt(1, itemNo);
         searchResults = psSearchKeyGenItemNo.executeQuery();
+        psSearchKeyGenItemNo.close();
 
         while (searchResults.next()) {
             isbn = searchResults.getString("isbn");
@@ -207,14 +203,9 @@ public class Search {
         }
     }
     
-    public void searchCopy(Item item) { //detta för reserve
-
-    }
-    
     public void loadCopies() throws SQLException, ClassNotFoundException {
         this.sGUI.setItemList(items);
         this.sGUI.loadTableData();
-        //Stäng uppkoppling...
         connection.closeDbConnection(); 
     }
 }
