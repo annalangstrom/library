@@ -7,7 +7,7 @@
 //Kolla på cancel och remove knapparna
 package GUI;
 
-import controlClasses.CreateCopiesControl;
+import controlClasses.CopyControl;
 import item.Copy;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ public class AddCopyGui extends javax.swing.JFrame {
         initTable(); 
         this.itemNo = itemNo;
         try {
-            CreateCopiesControl control = new CreateCopiesControl(this);
+            CopyControl control = new CopyControl(this);
             control.loadCopies(itemNo);
         } catch (SQLException | ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(rootPane, "Something went wrong, " + ex.getMessage());
@@ -239,7 +239,7 @@ public class AddCopyGui extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         JFrame frame = new JFrame();
         try {
-            CreateCopiesControl control = new CreateCopiesControl(this);
+            CopyControl control = new CopyControl(this);
             control.addCopy(Integer.parseInt(txtBarcode.getText()), itemNo, cmbCategory.getSelectedIndex(), 
                     cmbLoanStatus.getSelectedItem().toString(), txtCondition.getText());
             control.loadCopies(itemNo);
@@ -256,7 +256,7 @@ public class AddCopyGui extends javax.swing.JFrame {
         try {
             int row = tblCopies.getSelectedRow();
             int barcode = Integer.parseInt(tblCopies.getValueAt(row,0).toString());
-            CreateCopiesControl control = new CreateCopiesControl(this);
+            CopyControl control = new CopyControl(this);
             control.deleteCopy(barcode);
             control.loadCopies(itemNo);
             JOptionPane.showMessageDialog(frame, "Copy removed!");

@@ -15,7 +15,7 @@ import java.sql.Date;
  *
  * @author annalangstrom
  */
-public class CreateReservation {
+public class ReservationControl {
     
     private final String INSERT_RESERVATION = "INSERT INTO Reservation (borrowerID, itemNo, date) VALUES (?, ?, ?)";
     
@@ -24,7 +24,7 @@ public class CreateReservation {
     JDBCconnection connection;
     private Connection con = null;
     
-    public CreateReservation() throws ClassNotFoundException, SQLException{
+    public ReservationControl() throws ClassNotFoundException, SQLException{
         this.connection = new JDBCconnection();
         con = connection.connectToDb(con);
         insertReservation = con.prepareStatement(INSERT_RESERVATION);
