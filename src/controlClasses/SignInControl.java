@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
  */
 public class SignInControl {
     
-    private String CHECK_INLOG = "SELECT * FROM Borrower WHERE ssn = ? AND password = ?";
+    private String CHECK_INLOG = "SELECT * FROM Borrower WHERE ssn = ? AND password = ?";//.............................................
     
     private final PreparedStatement checkInlog;
     JDBCconnection connection = new JDBCconnection();
@@ -46,7 +46,7 @@ public class SignInControl {
             SQLException{
        //Koppla upp
        con = connection.connectToDb(con); 
-       checkInlog = con.prepareStatement(CHECK_INLOG);
+       checkInlog = con.prepareStatement(CHECK_INLOG);//.......................................................
     }
     
     
@@ -60,7 +60,7 @@ public class SignInControl {
             rs = checkValidInlog(user, password, rs);
             int id = printSignInResult(rs);
             
-            this.user = new Borrower(id);
+            this.user = new Borrower(id);//......................................................................
             // Add Observer
             this.user.addObserver(homePage);
             homePage.setUser(this.user);
@@ -80,7 +80,7 @@ public class SignInControl {
         if (rs!=null){
             while (rs.next()){
                 fullname = rs.getString("fName") + " " + rs.getString("sName");
-                id = rs.getInt("borrowerID");
+                id = rs.getInt("borrowerID");//..........................................................................
             }
             
             if (fullname.equals(""))
