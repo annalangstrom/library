@@ -9,10 +9,15 @@
 package GUI;
 
 import controlClasses.BorrowerControl;
+import item.Item;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 import persons.*;
 
 /**
@@ -23,6 +28,12 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
 
     private User user;
     private HomePageGui homePage;
+   
+    
+    private ArrayList<String> date;
+    private ArrayList<String> title;
+    private ArrayList<String> autArt;
+    private Object[][] dataRes = new Object[10][3]; //Reservation
     
    /**
     * Creates new form MyPageBorrowerGui
@@ -32,6 +43,33 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
       this.user = user;
       this.homePage = homePage;
    }
+   
+   private void initTableReservation() {  
+        String[] columnNames = {"Title", "Author/Artist", "Date"};
+        DefaultTableModel tblModel = new DefaultTableModel(this.dataRes, columnNames);
+        tblReservation.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tblReservation.setModel(tblModel);
+        tblReservation.setShowGrid(true);
+    }
+   
+   public void loadTableDataRes() {
+        int rows = this.title.size();
+        //håller data i en 2d array 
+        //initierar storleken med rader & kolumner
+        this.dataRes = new Object[rows][6];
+        //läs in data från ArrayList till data arrayen
+        int row = 0;
+        for (int i=0; i<title.size(); i++) {
+            
+            dataRes[row][0] = title.get(i); //fyller på title           
+            dataRes[row][1] = date.get(i);
+            dataRes[row][2] = autArt.get(i);
+            row++;
+        }
+        
+        this.initTableReservation();
+
+    }
 
    /**
     * This method is called from within the constructor to initialize the form.
@@ -54,6 +92,13 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaMyPersonalData = new javax.swing.JTextArea();
+        scrollMyLoans = new javax.swing.JScrollBar();
+        scrollMyReservations = new javax.swing.JScrollBar();
+        btnEraseMyAcount = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblReservation = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblLoan = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstMyLoans = new javax.swing.JList<>();
         scrollMyLoans = new javax.swing.JScrollBar();
@@ -71,8 +116,10 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
 
         jButton1.setText("jButton1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(663, 437));
+      setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+      setPreferredSize(new java.awt.Dimension(663, 437));
 
         btnSignOut.setText("Sign out");
         btnSignOut.addActionListener(new java.awt.event.ActionListener() {
@@ -120,6 +167,12 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
             public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane2.setViewportView(lstMyLoans);
+        btnEraseMyAcount.setText("Erase my acount");
+        btnEraseMyAcount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEraseMyAcountActionPerformed(evt);
+            }
+        });
 
         lstMyReservations.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -127,6 +180,18 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
             public String getElementAt(int i) { return strings[i]; }
         });
         jScrollPane3.setViewportView(lstMyReservations);
+        tblReservation.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(tblReservation);
 
         btnEraseMyAcount.setText("Erase my acount");
         btnEraseMyAcount.addActionListener(new java.awt.event.ActionListener() {
@@ -134,6 +199,18 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
                 btnEraseMyAcountActionPerformed(evt);
             }
         });
+        tblLoan.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(tblLoan);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -210,6 +287,72 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSignOut, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnUpdatePersonalData, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                            .addComponent(btnEraseMyAcount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel4))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollMyLoans, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(scrollMyReservations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(709, 709, 709))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnHomePage, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(111, 111, 111)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnHomePage)))
+                .addGap(29, 29, 29)
+                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnUpdatePersonalData)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEraseMyAcount)
+                        .addGap(40, 40, 40)
+                        .addComponent(btnSignOut)
+                        .addGap(24, 24, 24))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(scrollMyLoans, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(scrollMyReservations, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 43, Short.MAX_VALUE))))
         );
 
         pack();
@@ -305,13 +448,10 @@ public class MyPageBorrowerGui extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private java.awt.List list1;
-    private javax.swing.JList<String> lstMyLoans;
-    private javax.swing.JList<String> lstMyReservations;
     private javax.swing.JScrollBar scrollMyLoans;
     private javax.swing.JScrollBar scrollMyReservations;
-    private javax.swing.JTextArea txtAreaMyPersonalData;
-    // End of variables declaration//GEN-END:variables
-}
+    private javax.swing.JTable tblLoan;
+    private javax.swing.JTable tblReservation;
