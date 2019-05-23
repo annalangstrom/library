@@ -290,30 +290,22 @@ public class CreateObjectGui extends javax.swing.JFrame {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         JFrame frame = new JFrame();
         try {
-            // TODO add your handling code here:
             ObjectControl control = new ObjectControl();
             if(cmbCategory.getSelectedItem().equals("Book"))
                 control.addBookToDB(txtIsbn.getText(), txtPublisher.getText(), txtTitle.getText(),
                         Integer.parseInt(txtPubYear.getText()), txtLocation.getText(), addKeys.getThings(),
                         addGenres.getThings(), addAutArts.getThings());
-            /*String isbn, String publisher, String title, 
-            int publishYear, String location, ArrayList<String> keywords, 
-            ArrayList<String> genres, ArrayList<String> authorArtist*/
+            
             else if(cmbCategory.getSelectedItem().equals("Movie"))
                 control.addMovieToDB(Integer.parseInt(txtAgeLimit.getText()), txtPCountry.getText(), 
                         txtTitle.getText(), Integer.parseInt(txtPubYear.getText()), txtLocation.getText(), 
                         addKeys.getThings(), addGenres.getThings(), addAutArts.getThings());
-            /*int ageLimit, String pCountry, String title, 
-            int publishYear, String location, ArrayList<String> keywords, 
-            ArrayList<String> genres, ArrayList<String> authorArtist*/
-           
+            
             else if(cmbCategory.getSelectedItem().equals("Magazine"))
                 control.addMagazineToDB(txtPublisher.getText(), txtTitle.getText(), 
                         Integer.parseInt(txtPubYear.getText()), txtLocation.getText(), 
                         addKeys.getThings(), addGenres.getThings(), addAutArts.getThings());
-            /*String publisher, String title, int publishYear, 
-            String location, ArrayList<String> keywords, ArrayList<String> genres, 
-            ArrayList<String> authorArtist*/
+            
             control.confirmSaving();
             
         } catch (ClassNotFoundException | SQLException ex) {
@@ -323,45 +315,8 @@ public class CreateObjectGui extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveActionPerformed
 
    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-      // TODO add your handling code here:
       super.dispose();
    }//GEN-LAST:event_btnCancelActionPerformed
-
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(CreateObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(CreateObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(CreateObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(CreateObjectGui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new CreateObjectGui().setVisible(true);
-//            }
-//        });
-//    }
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
    private javax.swing.JButton addAutArt;

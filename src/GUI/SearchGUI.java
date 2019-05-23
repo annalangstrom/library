@@ -28,14 +28,14 @@ public class SearchGUI extends javax.swing.JFrame {
 
     private List<Item> itemList;
     private Object[][] data = new Object[10][6];
-    private User user;
-    private HomePageGui homePage;
+    private final User user;
+    private final HomePageGui homePage;
 
     /**
      * Creates new form Search
      */
 
-    private void initTable() { //author artist -> en kolumn, + typ av item? 
+    private void initTable() { 
         String[] columnNames = {"Title", "Author/Artist", "ISBN", "Publisher", "Publish Year", "Genre"};
         DefaultTableModel tblModel = new DefaultTableModel(this.data, columnNames);
         tblSearch.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -45,10 +45,7 @@ public class SearchGUI extends javax.swing.JFrame {
 
     public void loadTableData() {
         int rows = this.itemList.size();
-        //håller data i en 2d array 
-        //initierar storleken med rader & kolumner
         this.data = new Object[rows][6];
-        //läs in data från ArrayList till data arrayen
         int row = 0;
         for (Item item : this.itemList) {
             data[row][0] = item.getTitle();
@@ -57,8 +54,8 @@ public class SearchGUI extends javax.swing.JFrame {
             data[row][5] = item.getGenres();
             
             Book book = (Book)item;
-            data[row][2] = book.getIsbn(); //ISBN?            
-            data[row][3] = book.getPublisher();  //Publisher?
+            data[row][2] = book.getIsbn();          
+            data[row][3] = book.getPublisher();
             row++;
         }
         this.initTable();
@@ -70,17 +67,8 @@ public class SearchGUI extends javax.swing.JFrame {
         initTable();
         this.user = user;
         this.homePage = homePage;
-        try {
-            Search controlSearch = new Search(this);
-            itemList = new ArrayList<>();
-        } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(rootPane, ex);
-            Logger.getLogger(SearchGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public List<Item> getItemList() {
-        return itemList;
+        itemList = new ArrayList<>();
+        
     }
 
     public void setItemList(List<Item> itemList) {
@@ -231,70 +219,29 @@ public class SearchGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnSearchReserveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchReserveActionPerformed
-      if((user instanceof Borrower) && (user.getSignedIn() == true)) {  
-       try {
-            ReservationControl control = new ReservationControl();
-            Reservation reservation = new Reservation(user.getId(),
-                    itemList.get(tblSearch.getSelectedRow()).getItemNo());
+        if((user instanceof Borrower) && (user.getSignedIn() == true)) {  
+            try {
+                ReservationControl control = new ReservationControl();
+                Reservation reservation = new Reservation(user.getId(),
+                        itemList.get(tblSearch.getSelectedRow()).getItemNo());
             
-            control.createNewReservation(reservation.getBorrower(), 
-                    reservation.getItem(), reservation.getDate());
-            panelSearchConfirm.setVisible(true);
-            JOptionPane.showMessageDialog(rootPane, "Reservation created!");
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(SearchGUI.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+                control.createNewReservation(reservation.getBorrower(), 
+                        reservation.getItem(), reservation.getDate());
+                panelSearchConfirm.setVisible(true);
+                JOptionPane.showMessageDialog(rootPane, "Reservation created!");
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(SearchGUI.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "You have to be signed in as a borrower to reserve an item.");
         }
-      } else {
-         JOptionPane.showMessageDialog(this, "You have to be signed in as a borrower to reserve an item.");
-      }
     }//GEN-LAST:event_btnSearchReserveActionPerformed
 
    private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
-      // TODO add your handling code here:
       homePage.setVisible(true);
       super.dispose();
    }//GEN-LAST:event_btnHomePageActionPerformed
-
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(SearchGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(SearchGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(SearchGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(SearchGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                try {
-//                    new SearchGUI().setVisible(true);
-//                } catch (SQLException ex) {
-//                    Logger.getLogger(SearchGUI.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        });
-//    }
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
    private javax.swing.JButton btnHomePage;
