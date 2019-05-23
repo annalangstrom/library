@@ -186,25 +186,26 @@ public class SignInGui extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
-       if(txtUserAccount.getText().length() < 10) {
-          try {
-              SignInStaffControl control = new SignInStaffControl(homePage);
-              control.signIn(txtUserAccount.getText(), txtPassword.getText());
-              homePage.setVisible(true);
-              super.dispose();
-          } catch (ClassNotFoundException | SQLException ex) {
-              Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
-          }
-       } else {
+//       if(txtUserAccount.getText().length() < 10) {
+//          try {
+//              SignInStaffControl control = new SignInStaffControl(homePage);
+//              control.signIn(txtUserAccount.getText(), txtPassword.getText());
+//              homePage.setVisible(true);
+//              super.dispose();
+//          } catch (ClassNotFoundException | SQLException ex) {
+//              Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
+//          }
+//       } else {
+         int idLenght = txtUserAccount.getText().length();
          try {
-              SignInControl control = new SignInControl(homePage);
+              SignInControl control = new SignInControl(homePage, idLenght);
               control.signIn(txtUserAccount.getText(), txtPassword.getText());
               homePage.setVisible(true);
               super.dispose();
           } catch (ClassNotFoundException | SQLException ex) {
               Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
           }
-       }
+//       }
     }//GEN-LAST:event_btnSignInActionPerformed
 
 //    /**
