@@ -5,18 +5,36 @@
  */
 package controlClasses;
 
-/**
- *
- * @author annalangstrom
- */
+import JDBCconnection.JDBCconnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+
+
 public class ReturnLoanItemControl {
    
+   private final String RETURN_ITEM = "UPDATE LoanItem SET actualReturnDate = ? WHERE barcodeNo = ? AND actualReturnDate IS NULL";
+
+   private final PreparedStatement checkInlog;
+   private final JDBCconnection connection = new JDBCconnection();
+   private Connection con = null;
+   
+   
+   public ReturnLoanItemControl()throws ClassNotFoundException, 
+            SQLException {
+      con = connection.connectToDb(con);
+      checkInlog = con.prepareStatement(RETURN_ITEM);
+   }
 
    //Ta barcoden på återlämnat item
-   //Skicka in statement i databasen som säger åt den att:
-   // - sätta dagens datum på actualReturnDate
-   // - där barcoden = barcode & actualReturnDate = null
-    public void cancelLoanItem(int barcode){
+   //Hämta dagens datum och sätt in i statement
+   //Sätt in barcode från textruta i statement
+   //Skicka in i databas
+   //Om det lycktas - skriv ut meddelande
+   //Annars - skriv ut felmeddelande
+   
+    public void cancelLoanItem(int barcode) throws ClassNotFoundException {
         
     }
     
