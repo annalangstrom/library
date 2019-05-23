@@ -74,7 +74,7 @@ public class Search {
         psSearchKeywordGenre.setString(5, string);
         psSearchKeywordGenre.setString(6, string);
         searchResults = psSearchKeywordGenre.executeQuery();
-        psSearchKeywordGenre.close();
+
         
         while (searchResults.next()) {
             genres.add(searchResults.getString("genre"));
@@ -93,7 +93,7 @@ public class Search {
         psSearchAutArt.setString(1, "%" + string + "%");
         psSearchAutArt.setString(2, "%" + string + "%");
         searchResults = psSearchAutArt.executeQuery();
-        psSearchAutArt.close();
+
         
         while(searchResults.next()){
             String fname = searchResults.getString("fName");
@@ -123,7 +123,7 @@ public class Search {
         
         psSearchAutArtItemNo.setInt(1, itemNo);
         searchResults = psSearchAutArtItemNo.executeQuery();
-        psSearchAutArtItemNo.close();
+
 
         while (searchResults.next()) {
 
@@ -160,7 +160,6 @@ public class Search {
         
         psSearchKeyGenItemNo.setInt(1, itemNo);
         searchResults = psSearchKeyGenItemNo.executeQuery();
-        psSearchKeyGenItemNo.close();
 
         while (searchResults.next()) {
             isbn = searchResults.getString("isbn");
