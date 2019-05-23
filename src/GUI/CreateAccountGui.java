@@ -328,7 +328,7 @@ public class CreateAccountGui extends javax.swing.JFrame {
             SignInControl control = new SignInControl(homePage, inputSsn);
             control.signIn(txtSsn.getText(), txtPassword.getText());
         } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CreateAccountGui.class.getName()).log(Level.SEVERE, null, ex);
         }
         super.dispose();
             

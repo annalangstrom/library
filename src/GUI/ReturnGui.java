@@ -6,6 +6,11 @@
 package GUI;
 
 import controlClasses.ReturnLoanItemControl;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 public class ReturnGui extends javax.swing.JFrame {
@@ -114,9 +119,15 @@ public class ReturnGui extends javax.swing.JFrame {
    }//GEN-LAST:event_btnHomePageActionPerformed
 
    private void btnReturnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnActionPerformed
-      ReturnLoanItemControl returnLoanItem = new ReturnLoanItemControl();
-      int inputBarcode = Integer.parseInt(txtEnterBarcode.getText());
-      returnLoanItem.cancelLoanItem(inputBarcode);
+      try {
+         ReturnLoanItemControl returnLoanItem = new ReturnLoanItemControl();
+         int inputBarcode = Integer.parseInt(txtEnterBarcode.getText());
+         returnLoanItem.cancelLoanItem(inputBarcode);
+         JFrame frame = new JFrame();
+         JOptionPane.showMessageDialog(frame, "The item has been returned.");
+      } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ReturnGui.class.getName()).log(Level.SEVERE, null, ex);
+      }
    }//GEN-LAST:event_btnReturnActionPerformed
 
 //   /**
