@@ -190,6 +190,7 @@ public class SignInGui extends javax.swing.JFrame {
           try {
               SignInStaffControl control = new SignInStaffControl(homePage);
               control.signIn(txtUserAccount.getText(), txtPassword.getText());
+              homePage.setVisible(true);
               super.dispose();
           } catch (ClassNotFoundException | SQLException ex) {
               Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
@@ -198,6 +199,7 @@ public class SignInGui extends javax.swing.JFrame {
          try {
               SignInControl control = new SignInControl(homePage);
               control.signIn(txtUserAccount.getText(), txtPassword.getText());
+              homePage.setVisible(true);
               super.dispose();
           } catch (ClassNotFoundException | SQLException ex) {
               Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
