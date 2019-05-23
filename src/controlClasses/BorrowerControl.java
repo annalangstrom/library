@@ -38,6 +38,8 @@ public class BorrowerControl {
     private final PreparedStatement borrowerShowResItem; //show reservation
     ResultSet reservationResults;
 
+    private final String STAFF_SELECT = "SELECT * FROM Staff WHERE StaffID = ?";
+    
     private final PreparedStatement insertBorrower;
     private final PreparedStatement setBorrowerInactive;
     private final PreparedStatement updateBorrower;
@@ -48,10 +50,11 @@ public class BorrowerControl {
     ArrayList<String> title = new ArrayList<>(); //andra query ska visas
     ArrayList<String> autArt = new ArrayList<>(); //andra query ska visas
     
-    private final String STAFF_SELECT = "SELECT * FROM Staff WHERE StaffID = ?";
+  
     private final PreparedStatement selectStaff;
 
 
+   
     
     JDBCconnection connection = new JDBCconnection();
     private Connection con = null;
@@ -191,4 +194,6 @@ public class BorrowerControl {
         //String fname, String sname, String category, String password
         return staff;
     }
+    
+   
 }
