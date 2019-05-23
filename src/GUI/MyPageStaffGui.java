@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import controlClasses.BorrowerControl;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,16 +18,37 @@ import persons.*;
  */
 public class MyPageStaffGui extends javax.swing.JFrame {
    
-   private User user;
-   private HomePageGui homePage;
+   private final User user;
+   private final HomePageGui homePage;
 
    /**
     * Creates new form MyPageStaffGui
+     * @param user
+     * @param homePage
     */
    public MyPageStaffGui(User user, HomePageGui homePage) {
       initComponents();
       this.user = user;
       this.homePage = homePage;
+       try {
+           setTextInFields();
+       } catch (ClassNotFoundException | SQLException ex) {
+           Logger.getLogger(MyPageStaffGui.class.getName()).log(Level.SEVERE, null, ex);
+       }
+   }
+   
+   private void setTextInFields() throws ClassNotFoundException, SQLException{
+       BorrowerControl control = new BorrowerControl();
+       
+       Staff staff = control.getStaffFromDB(user.getId());
+       txtFname.setText(staff.getFname());
+       txtFname.setEditable(false);
+       txtSname.setText(staff.getSname());
+       txtSname.setEditable(false);
+       txtCategory.setText(staff.getCategory());
+       txtCategory.setEditable(false);
+       txtStaffID.setText(Integer.toString(user.getId()));
+       txtStaffID.setEditable(false);
    }
 
    /**
@@ -38,8 +60,7 @@ public class MyPageStaffGui extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtAreaMyPersonalData = new javax.swing.JTextArea();
+        jFrame1 = new javax.swing.JFrame();
         btnAddNewItem = new javax.swing.JButton();
         btnSignOut = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -48,16 +69,27 @@ public class MyPageStaffGui extends javax.swing.JFrame {
         btnUpdateItem = new javax.swing.JButton();
         btnShowLateObjects = new javax.swing.JToggleButton();
         btnAddCopy = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        txtStaffID = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtCategory = new javax.swing.JTextField();
+        txtFname = new javax.swing.JTextField();
+        txtSname = new javax.swing.JTextField();
 
-      setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
+        jFrame1.getContentPane().setLayout(jFrame1Layout);
+        jFrame1Layout.setHorizontalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jFrame1Layout.setVerticalGroup(
+            jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
-        txtAreaMyPersonalData.setColumns(20);
-        txtAreaMyPersonalData.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
-        txtAreaMyPersonalData.setRows(11);
-        txtAreaMyPersonalData.setTabSize(5);
-        txtAreaMyPersonalData.setText("Borrower ID:\t987654\nCategory:\tLibrarian\nFirst name:\tAgneta\nSurname:\tAndersson\nPassword:\t********");
-        jScrollPane1.setViewportView(txtAreaMyPersonalData);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnAddNewItem.setText("Add new item");
         btnAddNewItem.addActionListener(new java.awt.event.ActionListener() {
@@ -66,12 +98,12 @@ public class MyPageStaffGui extends javax.swing.JFrame {
             }
         });
 
-      btnSignOut.setText("Sign out");
-      btnSignOut.addActionListener(new java.awt.event.ActionListener() {
-         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btnSignOutActionPerformed(evt);
-         }
-      });
+        btnSignOut.setText("Sign out");
+        btnSignOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignOutActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("My staff page");
@@ -94,6 +126,11 @@ public class MyPageStaffGui extends javax.swing.JFrame {
         });
 
         btnShowLateObjects.setText("Show late objects");
+        btnShowLateObjects.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowLateObjectsActionPerformed(evt);
+            }
+        });
 
         btnAddCopy.setText("Add or remove copy");
         btnAddCopy.addActionListener(new java.awt.event.ActionListener() {
@@ -101,6 +138,22 @@ public class MyPageStaffGui extends javax.swing.JFrame {
                 btnAddCopyActionPerformed(evt);
             }
         });
+
+        jLabel3.setText("Staff ID:");
+
+        txtStaffID.setText("example");
+
+        jLabel4.setText("Category:");
+
+        jLabel5.setText("First name:");
+
+        jLabel6.setText("Surname:");
+
+        txtCategory.setText("Example");
+
+        txtFname.setText("First name");
+
+        txtSname.setText("Surname");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,20 +164,31 @@ public class MyPageStaffGui extends javax.swing.JFrame {
                 .addComponent(btnHomePage, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(68, 68, 68)
                 .addComponent(jLabel1)
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addContainerGap(187, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnSignOut, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtStaffID)
+                            .addComponent(txtCategory)
+                            .addComponent(txtFname, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                            .addComponent(txtSname))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAddNewItem, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
-                    .addComponent(btnUpdateItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnShowLateObjects, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAddCopy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAddCopy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAddNewItem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdateItem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnShowLateObjects, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(40, 40, 40))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,22 +200,34 @@ public class MyPageStaffGui extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnAddNewItem, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(txtStaffID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAddCopy)
+                            .addComponent(jLabel4)
+                            .addComponent(txtCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnUpdateItem, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtFname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnShowLateObjects)
+                            .addComponent(jLabel6)
+                            .addComponent(txtSname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnAddNewItem, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAddCopy)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnUpdateItem, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnShowLateObjects)
-                        .addGap(201, 201, 201))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(102, 102, 102)
+                        .addGap(251, 251, 251)
                         .addComponent(btnSignOut)
                         .addGap(34, 34, 34))))
         );
@@ -159,11 +235,12 @@ public class MyPageStaffGui extends javax.swing.JFrame {
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnAddNewItem, btnUpdateItem});
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
    private void btnAddNewItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewItemActionPerformed
-      // TODO add your handling code here:
-      //Test2
+      CreateObjectGui gui = new CreateObjectGui();
+      gui.setVisible(true);
    }//GEN-LAST:event_btnAddNewItemActionPerformed
 
    private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
@@ -199,6 +276,11 @@ public class MyPageStaffGui extends javax.swing.JFrame {
       homePage.setVisible(true);
       super.dispose();
    }//GEN-LAST:event_btnSignOutActionPerformed
+
+    private void btnShowLateObjectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowLateObjectsActionPerformed
+        ShowLateGUI gui = new ShowLateGUI();
+        gui.setVisible(true);
+    }//GEN-LAST:event_btnShowLateObjectsActionPerformed
 
 //   /**
 //    * @param args the command line arguments
@@ -242,9 +324,16 @@ public class MyPageStaffGui extends javax.swing.JFrame {
     private javax.swing.JToggleButton btnShowLateObjects;
     private javax.swing.JButton btnSignOut;
     private javax.swing.JButton btnUpdateItem;
+    private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea txtAreaMyPersonalData;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JTextField txtCategory;
+    private javax.swing.JTextField txtFname;
+    private javax.swing.JTextField txtSname;
+    private javax.swing.JTextField txtStaffID;
     // End of variables declaration//GEN-END:variables
 }

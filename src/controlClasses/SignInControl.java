@@ -25,6 +25,7 @@ import javax.swing.JOptionPane;
 public class SignInControl {
     
     private String CHECK_INLOG = "SELECT * FROM Borrower WHERE ssn = ? AND password = ?";
+    private String CHECK_INLOG_STAFF = "SELECT * FROM Staff WHERE staffID = ? AND password = ?";
     
     private final PreparedStatement checkInlog;
     JDBCconnection connection = new JDBCconnection();
@@ -32,21 +33,22 @@ public class SignInControl {
 
     private User user;
     private HomePageGui homePage;
+    private int idLenght;
 //    List<Message> lstMessages; 
     
+
     //Konstruktor
-    public SignInControl(HomePageGui homePage) throws ClassNotFoundException, 
+    public SignInControl(HomePageGui homePage, int idLenght) throws ClassNotFoundException, 
             SQLException{
-        this();
-        this.homePage = homePage;
-        
-    }
-    //Konstruktor
-    public SignInControl() throws ClassNotFoundException, 
-            SQLException{
+       this.homePage = homePage;
+       this.idLenght = idLenght;
        //Koppla upp
-       con = connection.connectToDb(con); 
-       checkInlog = con.prepareStatement(CHECK_INLOG);
+       con = connection.connectToDb(con);
+       if(idLenght < 10) {
+          checkInlog = con.prepareStatement(CHECK_INLOG_STAFF);
+       } else {
+          checkInlog = con.prepareStatement(CHECK_INLOG);
+       } 
     }
     
     
@@ -60,7 +62,11 @@ public class SignInControl {
             rs = checkValidInlog(user, password, rs);
             int id = printSignInResult(rs);
             
-            this.user = new Borrower(id);
+            if(idLenght < 10) {
+               this.user = new Staff(id);
+            } else {
+               this.user = new Borrower(id);
+            }
             // Add Observer
             this.user.addObserver(homePage);
             homePage.setUser(this.user);
@@ -80,7 +86,11 @@ public class SignInControl {
         if (rs!=null){
             while (rs.next()){
                 fullname = rs.getString("fName") + " " + rs.getString("sName");
-                id = rs.getInt("borrowerID");
+                if(idLenght < 10) {
+                  id = rs.getInt("staffID"); 
+                } else {
+                  id = rs.getInt("borrowerID");
+                }
             }
             
             if (fullname.equals(""))

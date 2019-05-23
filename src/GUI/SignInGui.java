@@ -47,7 +47,7 @@ public class SignInGui extends javax.swing.JFrame {
       btnCancel = new javax.swing.JButton();
       txtPassword = new javax.swing.JPasswordField();
 
-      setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+      setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
       jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
       jLabel1.setText("Sign in");
@@ -185,14 +185,16 @@ public class SignInGui extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCancelActionPerformed
 
     private void btnSignInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignInActionPerformed
-        try {
-            // TODO add your handling code here:
-            SignInControl control = new SignInControl(homePage);
-            control.signIn(txtUserAccount.getText(), txtPassword.getText());
-            super.dispose();
-        } catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+      int idLenght = txtUserAccount.getText().length();
+      try {
+         SignInControl control = new SignInControl(homePage, idLenght);
+         control.signIn(txtUserAccount.getText(), txtPassword.getText());
+         homePage.setVisible(true);
+         super.dispose();
+      } catch (ClassNotFoundException | SQLException ex) {
+         Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
+      }
     }//GEN-LAST:event_btnSignInActionPerformed
 
 //    /**

@@ -21,13 +21,23 @@ public class AddKeywordsGui extends javax.swing.JFrame {
         return things;
     }
 
-    public void setThings(ArrayList<String> things) {
+    private void setThings(ArrayList<String> things) {
         this.things = things;
     }
     
     /**
      * Creates new form AddKeywords
+     * @param thing
      */
+    public AddKeywordsGui(ArrayList<String> thing) {
+        super("Add keywords");
+        model = new DefaultListModel();
+        things = new ArrayList<>();
+        setThings(thing);
+        initComponents();
+        initList();
+    }
+    
     public AddKeywordsGui() {
         super("Add keywords");
         model = new DefaultListModel();
@@ -44,11 +54,6 @@ public class AddKeywordsGui extends javax.swing.JFrame {
         }
     }
     
-    public void addThingsInList(){
-        for (int i = 0; i < things.size(); i++) {
-        model.addElement(things.get(i));
-        }
-    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,7 +68,7 @@ public class AddKeywordsGui extends javax.swing.JFrame {
         btnRemove = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstThings = new javax.swing.JList<>();
-        btnSave = new javax.swing.JButton();
+        btnDone = new javax.swing.JButton();
         txtAdd = new javax.swing.JTextField();
         btnCancel = new javax.swing.JButton();
 
@@ -85,10 +90,10 @@ public class AddKeywordsGui extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(lstThings);
 
-        btnSave.setText("Save");
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
+        btnDone.setText("Done");
+        btnDone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
+                btnDoneActionPerformed(evt);
             }
         });
 
@@ -107,7 +112,7 @@ public class AddKeywordsGui extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnSave)
+                        .addComponent(btnDone)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCancel))
                     .addComponent(txtAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -116,7 +121,7 @@ public class AddKeywordsGui extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRemove))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,7 +136,7 @@ public class AddKeywordsGui extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave)
+                    .addComponent(btnDone)
                     .addComponent(btnCancel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -153,12 +158,14 @@ public class AddKeywordsGui extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        things.clear();
+        model.clear();
         super.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+    private void btnDoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoneActionPerformed
         super.dispose();
-    }//GEN-LAST:event_btnSaveActionPerformed
+    }//GEN-LAST:event_btnDoneActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,8 +203,8 @@ public class AddKeywordsGui extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnDone;
     private javax.swing.JButton btnRemove;
-    private javax.swing.JButton btnSave;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> lstThings;
     private javax.swing.JTextField txtAdd;

@@ -187,7 +187,7 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
    }//GEN-LAST:event_btnLoanItemActionPerformed
 
    private void btnReturnItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnItemActionPerformed
-      ReturnGui returnItem = new ReturnGui();
+      ReturnGui returnItem = new ReturnGui(this);
       returnItem.setVisible(true);
       this.setVisible(false);
    }//GEN-LAST:event_btnReturnItemActionPerformed
@@ -195,8 +195,9 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         try {
             //Dirigera om till Söksidan:
-            SearchGUI search = new SearchGUI();
+            SearchGUI search = new SearchGUI(user, this);
             search.setVisible(true);
+            this.setVisible(false);
             //Ta text från textrutan & Stoppa in i sökmetod
             Search input = new Search();
             input.searchItem(txtSearch.getText());

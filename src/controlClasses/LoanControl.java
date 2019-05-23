@@ -5,6 +5,7 @@
  */
 package controlClasses;
 
+import GUI.PrintLoanReceiptGUI;
 import JDBCconnection.JDBCconnection;
 import item.Copy;
 import java.sql.Connection;
@@ -14,6 +15,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import loan.Loan;
 import loan.LoanItem;
 import persons.*;
@@ -29,23 +33,18 @@ public class LoanControl {
     //private int borrower = 3;
     private User user;
     private final ArrayList<LoanItem> loanItems = new ArrayList<>();
+    private final ArrayList<String> title_returndate = new ArrayList<>();
     Loan loan = null;
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setBorrower(User user) {
-        this.user = user;
-    }
-    
     private final String COPY_SELECT = "SELECT * FROM Copy WHERE barcodeNo = ?";
     private final String LOAN_INSERT = "INSERT INTO Loan (borrowerID, startDate) VALUES (?, ?)";
     private final String LOANITEM_INSERT = "INSERT INTO LoanItem (barcodeNo, loanNo) VALUES (?, ?)";
+    private final String LOANITEM_SELECT = "SELECT * FROM LoanItem WHERE LoanItemNo = ?";
     
     private final PreparedStatement selectCopy;
     private final PreparedStatement insertLoan;
     private final PreparedStatement insertLoanItem;
+    private final PreparedStatement selectLoanItem;
     
     JDBCconnection connection = new JDBCconnection();
     private Connection con = null;
@@ -61,6 +60,19 @@ public class LoanControl {
        selectCopy = con.prepareStatement(COPY_SELECT);
        insertLoan = con.prepareStatement(LOAN_INSERT, Statement.RETURN_GENERATED_KEYS);
        insertLoanItem = con.prepareStatement(LOANITEM_INSERT, Statement.RETURN_GENERATED_KEYS);
+       selectLoanItem = con.prepareStatement(LOANITEM_SELECT);
+    }
+    
+    public User getUser() {
+        return user;
+    }
+
+    public void setBorrower(User user) {
+        this.user = user;
+    }
+
+    public ArrayList<String> getTitle_returndate() {
+        return title_returndate;
     }
     
     public void createLoan() throws SQLException{
@@ -95,11 +107,15 @@ public class LoanControl {
                 throw new SQLException("Creating item failed, no ID obtained.");
             }
         }
+        
+        selectLoanItem.setInt(1, loanItem.getLoanItemNo());
+        ResultSet rs = selectLoanItem.executeQuery();
+        while(rs.next())
+            loanItem.setLastReturnDate(rs.getDate("lastReturnDate"));
+        
+        title_returndate.add(copy.getTitle() + ", " + loanItem.getLastReturnDate());
     }
     
-    public void printReceipt(){
-    
-    }
     
     public Copy getCopyFromDB(int barcode) throws SQLException{
         int item = 0;

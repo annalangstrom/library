@@ -165,4 +165,24 @@ public class BorrowerControl {
 
         return borrower;
     }
+    
+    public Staff getStaffFromDB(int staffID) throws SQLException{
+        String fname = null;
+        String sname = null;
+        String category = null;
+        String password = null;
+        
+        selectStaff.setInt(1, staffID);
+        ResultSet rs = selectStaff.executeQuery();
+        while(rs.next()){
+            fname = rs.getString("fName");
+            sname = rs.getString("sName");
+            category = rs.getString("category");
+            password = rs.getString("password");
+        }
+        
+        Staff staff = new Staff(fname, sname, category, password);
+        //String fname, String sname, String category, String password
+        return staff;
+    }
 }

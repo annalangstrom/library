@@ -8,7 +8,6 @@
 package GUI;
 
 import controlClasses.BorrowerControl;
-import controlClasses.CreateAccountControl;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -76,7 +75,7 @@ public class ChangeAccountGui extends javax.swing.JFrame {
       txtMail = new javax.swing.JTextField();
       jLabel8 = new javax.swing.JLabel();
       txtPhoneNumber = new javax.swing.JTextField();
-      btnCreateAccount = new javax.swing.JButton();
+      btnSaveChanges = new javax.swing.JButton();
       btnCancel = new javax.swing.JButton();
       jLabel9 = new javax.swing.JLabel();
       txtStreet = new javax.swing.JTextField();
@@ -126,10 +125,10 @@ public class ChangeAccountGui extends javax.swing.JFrame {
 
       jLabel8.setText("Phone number:");
 
-      btnCreateAccount.setText("Save changes");
-      btnCreateAccount.addActionListener(new java.awt.event.ActionListener() {
+      btnSaveChanges.setText("Save changes");
+      btnSaveChanges.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btnCreateAccountActionPerformed(evt);
+            btnSaveChangesActionPerformed(evt);
          }
       });
 
@@ -200,7 +199,7 @@ public class ChangeAccountGui extends javax.swing.JFrame {
                               .addComponent(jLabel10)))
                         .addComponent(txtCity)
                         .addComponent(jLabel11))
-                     .addComponent(btnCreateAccount))
+                     .addComponent(btnSaveChanges))
                   .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                   .addComponent(btnCancel)))
             .addContainerGap())
@@ -257,7 +256,7 @@ public class ChangeAccountGui extends javax.swing.JFrame {
                .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGap(40, 40, 40)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-               .addComponent(btnCreateAccount)
+               .addComponent(btnSaveChanges)
                .addComponent(btnCancel))
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
       );
@@ -270,7 +269,7 @@ public class ChangeAccountGui extends javax.swing.JFrame {
         super.dispose();
     }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
+    private void btnSaveChangesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveChangesActionPerformed
         try {
             BorrowerControl control = new BorrowerControl();
             
@@ -280,11 +279,12 @@ public class ChangeAccountGui extends javax.swing.JFrame {
                     cmbCategory.getSelectedIndex());
             
             JOptionPane.showMessageDialog(rootPane, "Update completed!");
+            super.dispose();
             
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ChangeAccountGui.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btnCreateAccountActionPerformed
+    }//GEN-LAST:event_btnSaveChangesActionPerformed
 
     private void txtSsnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSsnActionPerformed
         // TODO add your handling code here:
@@ -353,7 +353,7 @@ public class ChangeAccountGui extends javax.swing.JFrame {
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
    private javax.swing.JButton btnCancel;
-   private javax.swing.JButton btnCreateAccount;
+   private javax.swing.JButton btnSaveChanges;
    private javax.swing.JComboBox<String> cmbCategory;
    private javax.swing.JLabel jLabel1;
    private javax.swing.JLabel jLabel10;

@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author annalangstrom
  */
-public class CreateCopiesControl {
+public class CopyControl {
     private final String COPY_INSERT = "INSERT INTO Copy (barcodeNo, itemNo, lcNo, loanStatus, item_condition) "
             + "VALUES (?, ?, ?, ?, ?)";
     private final String COPY_SELECT = "SELECT * FROM Copy WHERE itemNo = ? ORDER BY copyNo DESC";
@@ -35,14 +35,14 @@ public class CreateCopiesControl {
     private AddCopyGui addCopy = null;
     
     //Konstruktor
-    public CreateCopiesControl(AddCopyGui addCopy) throws ClassNotFoundException, 
+    public CopyControl(AddCopyGui addCopy) throws ClassNotFoundException, 
             SQLException{
         this();
         this.addCopy = addCopy;
         
     }
     //Konstruktor
-    public CreateCopiesControl() throws ClassNotFoundException, 
+    public CopyControl() throws ClassNotFoundException, 
             SQLException{
         connection = new JDBCconnection();
         

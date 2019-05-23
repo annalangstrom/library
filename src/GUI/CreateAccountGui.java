@@ -6,7 +6,6 @@
 package GUI;
 
 import controlClasses.BorrowerControl;
-import controlClasses.CreateAccountControl;
 import controlClasses.SignInControl;
 import java.awt.Color;
 import java.sql.SQLException;
@@ -69,7 +68,7 @@ public class CreateAccountGui extends javax.swing.JFrame {
       btnSignIn = new javax.swing.JButton();
       txtPassword = new javax.swing.JPasswordField();
 
-      setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+      setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
       jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
       jLabel1.setText("Create account");
@@ -327,8 +326,8 @@ public class CreateAccountGui extends javax.swing.JFrame {
         }
         //Logga in den nyskapade användaren
         try {
-            // TODO add your handling code here:
-            SignInControl control = new SignInControl(homePage);
+            int inputSsn = Integer.parseInt(txtSsn.getText());
+            SignInControl control = new SignInControl(homePage, inputSsn);
             control.signIn(txtSsn.getText(), txtPassword.getText());
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(SignInGui.class.getName()).log(Level.SEVERE, null, ex);
