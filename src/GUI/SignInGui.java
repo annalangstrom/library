@@ -47,7 +47,7 @@ public class SignInGui extends javax.swing.JFrame {
       btnCancel = new javax.swing.JButton();
       txtPassword = new javax.swing.JPasswordField();
 
-      setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+      setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
       jLabel1.setFont(new java.awt.Font("Lucida Grande", 0, 24)); // NOI18N
       jLabel1.setText("Sign in");
