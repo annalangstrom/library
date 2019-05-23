@@ -184,7 +184,7 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
    }//GEN-LAST:event_btnLoanItemActionPerformed
 
    private void btnReturnItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnItemActionPerformed
-        ReturnGui returnItem = new ReturnGui();
+        ReturnGui returnItem = new ReturnGui(this);
         returnItem.setVisible(true);
         this.setVisible(false);
    }//GEN-LAST:event_btnReturnItemActionPerformed
