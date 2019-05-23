@@ -195,8 +195,9 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         try {
             //Dirigera om till Söksidan:
-            SearchGUI search = new SearchGUI();
+            SearchGUI search = new SearchGUI(user, this);
             search.setVisible(true);
+            this.setVisible(false);
             //Ta text från textrutan & Stoppa in i sökmetod
             Search input = new Search();
             input.searchItem(txtSearch.getText());
