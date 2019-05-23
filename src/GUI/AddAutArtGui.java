@@ -19,25 +19,41 @@ import javax.swing.DefaultListModel;
  */
 public class AddAutArtGui extends javax.swing.JFrame {
 
-    private DefaultListModel model = null;
-    private ArrayList<String> things = new ArrayList<>();
+    private DefaultListModel model;
+    private ArrayList<String> things;
 
     public ArrayList<String> getThings() {
         return things;
     }
 
-    public void setThings(ArrayList<String> things) {
+    private void setThings(ArrayList<String> things) {
         this.things = things;
     }
      
     
     /**
      * Creates new form AddAutArt
+     * @param thing
      */
+    public AddAutArtGui(ArrayList<String> thing) {
+        super("Add author or artist");
+        try {
+            model = new DefaultListModel();
+            things = new ArrayList<>();
+            setThings(thing);
+            initComponents();
+            initList();
+            fillCombo();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(AddAutArtGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public AddAutArtGui() {
         super("Add author or artist");
         try {
             model = new DefaultListModel();
+            things = new ArrayList<>();
             initComponents();
             initList();
             fillCombo();
@@ -48,8 +64,18 @@ public class AddAutArtGui extends javax.swing.JFrame {
 
     private void initList(){
         lstThings.setModel(model);
+        for(String string : things)
+            model.addElement(string);
     }
     
+    private void fillCombo() throws ClassNotFoundException, SQLException{
+        ObjectControl control = new ObjectControl();
+        ResultSet rs = control.getAAfromDB();
+        while(rs.next()){
+            String name = rs.getString("fName") + " " + rs.getString("sName");
+            cmbAA.addItem(name);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -186,14 +212,7 @@ public class AddAutArtGui extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbAAActionPerformed
 
-    private void fillCombo() throws ClassNotFoundException, SQLException{
-        ObjectControl control = new ObjectControl();
-        ResultSet rs = control.getAAfromDB();
-        while(rs.next()){
-            String name = rs.getString("fName") + " " + rs.getString("sName");
-            cmbAA.addItem(name);
-        }
-    }
+    
     /**
      * @param args the command line arguments
      */

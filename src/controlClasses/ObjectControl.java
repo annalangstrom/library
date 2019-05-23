@@ -287,12 +287,12 @@ public class ObjectControl {
     }
     
     public ResultSet getAAfromDB() throws SQLException{
-        ResultSet rs = selectAutArt.executeQuery();
+        ResultSet rs = selectAllAutArt.executeQuery();
         return rs;
     }
     
     public void updateInfo(Item item) throws SQLException{
-    updateItem.setString(1, item.getTitle());
+        updateItem.setString(1, item.getTitle());
     }
     
     public Item getItemFromDB(int itemNo) throws SQLException, ClassNotFoundException{

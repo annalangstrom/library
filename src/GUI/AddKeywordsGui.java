@@ -21,13 +21,23 @@ public class AddKeywordsGui extends javax.swing.JFrame {
         return things;
     }
 
-    public void setThings(ArrayList<String> things) {
+    private void setThings(ArrayList<String> things) {
         this.things = things;
     }
     
     /**
      * Creates new form AddKeywords
+     * @param thing
      */
+    public AddKeywordsGui(ArrayList<String> thing) {
+        super("Add keywords");
+        model = new DefaultListModel();
+        things = new ArrayList<>();
+        setThings(thing);
+        initComponents();
+        initList();
+    }
+    
     public AddKeywordsGui() {
         super("Add keywords");
         model = new DefaultListModel();
@@ -44,11 +54,6 @@ public class AddKeywordsGui extends javax.swing.JFrame {
         }
     }
     
-    public void addThingsInList(){
-        for (int i = 0; i < things.size(); i++) {
-        model.addElement(things.get(i));
-        }
-    }
     
     /**
      * This method is called from within the constructor to initialize the form.
