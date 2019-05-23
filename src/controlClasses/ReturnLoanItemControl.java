@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.sql.Date;
 
 
@@ -18,7 +17,8 @@ import java.sql.Date;
 
 public class ReturnLoanItemControl {
    
-   private final String RETURN_ITEM = "UPDATE LoanItem SET actualReturnDate = ? WHERE barcodeNo = ? AND actualReturnDate IS NULL";
+   private final String RETURN_ITEM = "UPDATE LoanItem SET actualReturnDate = ? "
+           + "WHERE barcodeNo = ? AND actualReturnDate IS NULL";
 
    private final PreparedStatement returnItem;
    
