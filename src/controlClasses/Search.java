@@ -38,11 +38,11 @@ public class Search {
     private final PreparedStatement psSearchAutArt;
     private final PreparedStatement psSearchAutArtItemNo;
     
-    JDBCconnection connection;
+    private JDBCconnection connection;
     private Connection con = null;
     private SearchGUI sGUI = null;
-    ResultSet searchResults = null;
-    List<Item> items = new ArrayList<>();
+    private ResultSet searchResults = null;
+    private final List<Item> items = new ArrayList<>();
 
     
     public Search(SearchGUI sGUI) throws SQLException, ClassNotFoundException{

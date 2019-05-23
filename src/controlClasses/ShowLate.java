@@ -38,15 +38,12 @@ public class ShowLate {
     
     private final PreparedStatement selectLateItems;
     
-    JDBCconnection connection;
+    private JDBCconnection connection;
     private Connection con = null;
     private ShowLateGUI sGUI = null;
-    ResultSet searchResults = null;
-    List<Item> items = new ArrayList<>();
 
     
     public ShowLate(ShowLateGUI sGUI) throws SQLException, ClassNotFoundException{
-        //koppling till SearchGUI
         this();
         this.sGUI = sGUI;
     }

@@ -8,7 +8,6 @@ package controlClasses;
 import JDBCconnection.JDBCconnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -36,7 +35,6 @@ public class ReturnLoanItemControl {
     public void cancelLoanItem(int barcode) throws ClassNotFoundException, 
             SQLException {
       
-       DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
        LocalDate localDate = LocalDate.now();
      
        returnItem.setDate(1, Date.valueOf(localDate));
