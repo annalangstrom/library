@@ -48,6 +48,11 @@ public class BorrowerControl {
     ArrayList<String> title = new ArrayList<>(); //andra query ska visas
     ArrayList<String> autArt = new ArrayList<>(); //andra query ska visas
     
+    private final String STAFF_SELECT = "SELECT * FROM Staff WHERE StaffID = ?";
+    private final PreparedStatement selectStaff;
+
+
+    
     JDBCconnection connection = new JDBCconnection();
     private Connection con = null;
 
@@ -64,6 +69,7 @@ public class BorrowerControl {
 
         borrowerShowResRes = con.prepareStatement(BORROWER_SHOW_RESERVATIONS_RES); //visa reserv
         borrowerShowResItem = con.prepareCall(BORROWER_SHOW_RESERVATIONS_ITEM); //visa reserv
+        selectStaff = con.prepareStatement(STAFF_SELECT);
     }
 
     public void getReservations(int borrowerID) throws SQLException { //får id från inlogg
