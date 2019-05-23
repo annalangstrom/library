@@ -35,10 +35,6 @@ public class SearchGUI extends javax.swing.JFrame {
      * Creates new form Search
      */
 
-//    public void setControlSearch(controlClasses.Search controlSearch) {
-//        this.controlSearch = controlSearch;
-//    }
-
     private void initTable() { //author artist -> en kolumn, + typ av item? 
         String[] columnNames = {"Title", "Author/Artist", "ISBN", "Publisher", "Publish Year", "Genre"};
         DefaultTableModel tblModel = new DefaultTableModel(this.data, columnNames);
