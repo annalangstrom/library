@@ -298,16 +298,18 @@ public class CreateAccountGui extends javax.swing.JFrame {
     private void btnCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAccountActionPerformed
         JFrame frame = new JFrame();
         
-        if(!luhn(txtSsn.getText())){
-            JOptionPane.showMessageDialog(frame, "Invalid social security number.");
-            return;
-        }
-        if(!passwordCheck(txtPassword.getText())){
-            return;
-        }
+        
         
         try {
             BorrowerControl control = new BorrowerControl();
+            
+            if(!control.luhn(txtSsn.getText())){
+            JOptionPane.showMessageDialog(frame, "Invalid social security number.");
+                return;
+            }
+            if(!control.passwordCheck(txtPassword.getText())){
+                return;
+            }
             
             control.createBorrower(txtSsn.getText(), cmbCategory.getSelectedIndex(),
                     txtFirstName.getText(), txtLastName.getText(), txtPassword.getText(),
@@ -330,7 +332,6 @@ public class CreateAccountGui extends javax.swing.JFrame {
         }
         super.dispose();
             
-        
     }//GEN-LAST:event_btnCreateAccountActionPerformed
 
     private void txtSsnFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSsnFocusGained
@@ -348,58 +349,6 @@ public class CreateAccountGui extends javax.swing.JFrame {
         txtMail.setForeground(Color.black);
     }//GEN-LAST:event_txtMailFocusGained
 
-    
-    private boolean luhn(String pnr){
-        JFrame frame = new JFrame();
-        //ifall angivet personnummer är längre än 10 anges antalet extrasiffror i "extra"
-        int extra = pnr.length() - 10; 
-
-        //ifall extrasiffrorna är färre än noll så innebär det att personnumret var 
-        //färre än 10 siffror, vilket ett giltigt persnr måste vara, därför skrivs
-        //ett felmeddelande ut och resultatet blir false och går tillbaka till "fillPnr"-metoden
-        if (extra < 0) {
-            JOptionPane.showMessageDialog(frame, "Social security number needs to contain of at least 10 numbers.");
-            
-            return false;
-        }
-
-        pnr = pnr.substring(extra, 10 + extra);
-        int sum = 0;
-
-        for (int i = 0; i < pnr.length(); i++){
-
-            char c = pnr.charAt(i); 
-
-            int num = c - '0'; 
-
-            int product;
-            if (i % 2 != 0){
-                product = num * 1;
-            }else{
-                product = num * 2;
-            }
-
-            if (product > 9){
-            product -= 9;
-            }
-            sum += product;              
-        }
-    
-        //metoden returnerar sant ifall att "remaindern" av 10 är 0, 
-        //alltså att summan gick att dela med 10 utan rester, i annat fall returneras false
-        return (sum % 10 == 0);
-    }
-    
-    private boolean passwordCheck(String password){
-        if (password.length() < 6){
-            JFrame frame = new JFrame();
-            JOptionPane.showMessageDialog(frame, "Password is too short, need to be at least 6 characters.");
-            return false;
-        }
-        else 
-            return true;
-    }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnCreateAccount;
