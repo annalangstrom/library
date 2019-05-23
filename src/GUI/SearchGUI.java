@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import controlClasses.CreateReservation;
+import controlClasses.ReservationControl;
 import controlClasses.Search;
 import item.Book;
 import item.Item;
@@ -233,7 +233,7 @@ public class SearchGUI extends javax.swing.JFrame {
     private void btnSearchReserveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchReserveActionPerformed
       if((user instanceof Borrower) && (user.getSignedIn() == true)) {  
        try {
-            CreateReservation control = new CreateReservation();
+            ReservationControl control = new ReservationControl();
             Reservation reservation = new Reservation(user.getId(),
                     itemList.get(tblSearch.getSelectedRow()).getItemNo());
             
