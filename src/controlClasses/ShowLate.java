@@ -69,7 +69,7 @@ public class ShowLate {
             info[5] = rs.getString("barcodeNo");
             DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
             String strDate = dateFormat.format(rs.getDate("lastReturnDate"));  
-            info[6] = strDate;
+            info[6] = rs.getDate("lastReturnDate").toString();
             infoList.add(info);
         }
         return infoList;
