@@ -13,10 +13,10 @@ import java.sql.*;
  */
 public final class JDBCconnection {
     
-    //static final String DBURL = "jdbc:mysql://localhost:3306/library?zeroDateTimeBehavior=convertToNull&useSSL=false"; //Carolines
-    static final String DBURL = "jdbc:mysql://localhost:3306/library?autoReconnect=true&useSSL=false"; //Annas
+    static final String DBURL = "jdbc:mysql://localhost:3306/library?zeroDateTimeBehavior=convertToNull&useSSL=false"; //Carolines
+    //static final String DBURL = "jdbc:mysql://localhost:3306/library?autoReconnect=true&useSSL=false"; //Annas
     static final String USER = "root";
-    static final String PWD = "annasvea";
+    static final String PWD = "Databas2018";
     
     private Connection con = null; //Hanterar uppkoppling
     
