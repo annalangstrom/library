@@ -196,7 +196,7 @@ public class HomePageGui extends javax.swing.JFrame implements Observer  {
             search.setVisible(true);
             this.setVisible(false);
             //Ta text från textrutan & Stoppa in i sökmetod
-            Search input = new Search();
+            Search input = new Search(search);
             input.searchItem(txtSearch.getText());
             input.loadCopies();
         } catch (SQLException | ClassNotFoundException ex) {

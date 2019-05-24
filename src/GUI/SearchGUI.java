@@ -53,6 +53,7 @@ public class SearchGUI extends javax.swing.JFrame {
     }
 
     public void loadTableData() {
+        Book book;
         int rows = this.itemList.size();
         this.data = new Object[rows][6];
         int row = 0;
@@ -62,9 +63,11 @@ public class SearchGUI extends javax.swing.JFrame {
             data[row][4] = item.getPublishYear();
             data[row][5] = item.getGenres();
             
-            Book book = (Book)item;
-            data[row][2] = book.getIsbn();          
-            data[row][3] = book.getPublisher();
+            if(item instanceof Book){
+                book = (Book)item;
+                data[row][2] = book.getIsbn();          
+                data[row][3] = book.getPublisher();
+            }
             row++;
         }
         this.initTable();
