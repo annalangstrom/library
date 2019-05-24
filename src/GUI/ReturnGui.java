@@ -55,7 +55,7 @@ public class ReturnGui extends javax.swing.JFrame {
         });
 
         txtEnterBarcode.setForeground(new java.awt.Color(153, 153, 153));
-        txtEnterBarcode.setText("enter barcode...");
+        txtEnterBarcode.setText("Enter barcode...");
         txtEnterBarcode.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 txtEnterBarcodeFocusGained(evt);
@@ -117,6 +117,7 @@ public class ReturnGui extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
    private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
